@@ -12,23 +12,34 @@ export default class Profile extends Component {
         }
     }
 
-    get_info() {
-        axios.get("localhost:5000/users")
-        .then(response => {
-            // this.setState({
-            //     users: response.data
-            // })
-            console.log(response.data)
-        })
-        .catch(err => console.log("error mio", err))
-    }
+    // get_info() {
+    //     axios.get("localhost:5000/users")
+    //     .then(response => {
+    //         // this.setState({
+    //         //     users: response.data
+    //         // })
+    //         console.log(response.data)
+    //     })
+    //     .catch(err => console.log("error mio", err))
+    // }
 
     render() {
         return(
             <div>
                 <Header />
                 <div>You are in the profile page</div>
-                {this.get_info()}
+                <div className="personal-info-wrapper">
+                    <div className="name">
+                        Name goes here
+                    </div>
+                    <div className="email">
+                        Email goes here
+                    </div>
+                    <div className="address">
+                        Optionally adress goes here
+                    </div>
+                </div>
+                {/* {this.get_info()} */}
                 <Footer />
             </div>
         )

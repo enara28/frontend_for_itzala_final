@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import ModalBase from "./modal-base"
 
 import Pedido from "./pedido"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 export default class Buttons extends Component {
     
