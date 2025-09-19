@@ -1,0 +1,13 @@
+.buttons-container-wrapper {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $shade-four;
+    
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+}
