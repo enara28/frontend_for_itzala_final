@@ -10,7 +10,7 @@ export default class Profile extends Component {
         super()
         this.state = {
             users: [],
-            user: [],
+            singleUser: [],
             user_id: 2
         }
     }
@@ -30,7 +30,7 @@ export default class Profile extends Component {
         axios.get(`http://localhost:5000/user/${this.state.user_id}`)
         .then(response => {
             this.setState({
-                users: response.data
+                singleUser: response.data
             }), console.log(response.data)
         })
         .catch(err => console.log("error mio", err))
@@ -38,14 +38,19 @@ export default class Profile extends Component {
 
     componentDidMount() {
         this.get_all_users()
+        this.get_user_profile()
     }
 
-    userInfo() {
-    return this.state.users.map(user => {
-      return <User key={user.id} user={user} />;
+    usersInfo() {
+        return this.state.users.map(user => {
+            return <User key={user.id} user={user} />;
     });
-  }
+    }
 
+    singleUserInfo() {
+        return <User user={this.state.singleUser} />;
+    }
+    // Insertar lógica que distinga entre administrador y cliente para mostrar el perfil personal o todos.
     render() {
         return(
             <div>
@@ -53,8 +58,9 @@ export default class Profile extends Component {
                 <div className="general-body">
                     <div className="personal-info-wrapper">
                         <div className="user-info">
-                            {this.userInfo()}
-                        </div>
+                            {this.usersInfo()}
+                            {this.singleUserInfo()}
+                        </div> 
                     </div>
                 </div>
                 <Footer />
