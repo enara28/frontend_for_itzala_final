@@ -6,6 +6,9 @@ import About from './about';
 import Profile from './profile';
 import LogIn from './log-in';
 import Pedido from './pedido';
+import SignIn from './sign-in';
+
+// Añadir lógica que te lleve a Log in
 
 
 
@@ -19,6 +22,7 @@ export default class App extends Component {
               <Route path="/profile" element={<Profile/>} />
               <Route path="/log-in" element={<LogIn/>} />
               <Route path="/pedido" element={<Pedido/>} />
+              <Route path="/sign-in" element={<SignIn/>} />
             </Routes>
       </div>
     );

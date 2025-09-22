@@ -9,3 +9,11 @@
 .app-wrapper {
     margin: -8px;
 }
+
+.general-body {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $shade-four;
+}

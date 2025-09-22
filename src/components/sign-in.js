@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import { Link } from "react-router";
 
 import Header from './header';
 import Footer from "./footer";
-import SignIn from "./sign-in";
+import { Link } from "react-router";
 
-export default class LogIn extends Component {
+export default class SignIn extends Component {
     constructor() {
         super()
 
@@ -27,18 +26,17 @@ export default class LogIn extends Component {
             <div>
                 <Header />
                 <div className="general-body">
-                    <div>Enter your username and password</div>
+                    <div>Enter a username, an email and a password</div>
                     <form>
                         <input placeholder="username" />
+                        <input type="email" placeholder="email" />
                         <input type="password" placeholder="password" />
                     </form>
-                    <button onClick={() => this.handleSubmitClick()}>Log-in</button>
-
-                    <Link to="/sign-in">Create an account</Link>
+                    <button onClick={() => this.handleSubmitClick()}>Sign-in</button>
+                    <Link to="/log-in">Log-in to an existing account</Link>
                 </div>
                 <Footer />
             </div>
         )
     }
-
 }

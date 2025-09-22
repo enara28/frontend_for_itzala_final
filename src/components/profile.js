@@ -8,38 +8,58 @@ export default class Profile extends Component {
     constructor() {
         super()
         this.state = {
-            users: {}
+            users: {},
+            user: {},
+            user_id: 2
         }
     }
 
-    // get_info() {
-    //     axios.get("localhost:5000/users")
-    //     .then(response => {
-    //         // this.setState({
-    //         //     users: response.data
-    //         // })
-    //         console.log(response.data)
-    //     })
-    //     .catch(err => console.log("error mio", err))
-    // }
+
+    get_all_users() {
+        axios.get(`http://localhost:5000/users`)
+        .then(response => {
+            this.setState({
+                users: response.data
+            }), console.log(response.data)
+        })
+        .catch(err => console.log("error mio", err))
+    }
+
+    get_user_profile() {
+        axios.get(`http://localhost:5000/user/${this.state.user_id}`)
+        .then(response => {
+            this.setState({
+                userr: response.data
+            }), console.log(response.data)
+        })
+        .catch(err => console.log("error mio", err))
+    }
+
+    componentDidMount() {
+        this.get_all_users()
+    }
 
     render() {
+        
+        // let username, email, password = this.state.users
+
         return(
             <div>
                 <Header />
-                <div>You are in the profile page</div>
-                <div className="personal-info-wrapper">
-                    <div className="name">
-                        Name goes here
-                    </div>
-                    <div className="email">
-                        Email goes here
-                    </div>
-                    <div className="address">
-                        Optionally adress goes here
+                <div className="general-body">
+                    <div>You are in the profile page</div>
+                    <div className="personal-info-wrapper">
+                        <div className="name">
+                            Username: {this.state.users.username}
+                        </div>
+                        <div className="email">
+                            Email: {this.state.users.email}
+                        </div>
+                        <div className="address">
+                            Optionally adress goes here
+                        </div>
                     </div>
                 </div>
-                {/* {this.get_info()} */}
                 <Footer />
             </div>
         )

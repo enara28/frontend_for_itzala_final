@@ -54,6 +54,9 @@ export default class Buttons extends Component {
                             <Link to="/pedido">Realizar pedido</Link>
                         </div>
                     </div>
+                    <div className="log-in-message">
+                        <Link to="/log-in">Inicie sesión para reservar mesa o hacer tu pedido</Link>    
+                    </div> 
                 </div>
             </div>
         )

@@ -12,7 +12,9 @@ export default class Pedido extends Component {
         return(
             <div>
                 <Header />
-                <div>Realiza aquí tu pedido</div>
+                <div className="general-body">
+                    <div>Realiza aquí tu pedido</div>
+                </div>
                 <Footer />
             </div>
         )

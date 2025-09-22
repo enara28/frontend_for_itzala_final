@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function() {
     return(
@@ -31,6 +32,9 @@ export default function() {
                         <li>Sorvete de mandarina</li>
                         <li>Tarta de manzana</li>
                     </ul>
+                </div>
+                <div className="log-in-message">
+                    <Link to="/log-in">Inicie sesión para reservar mesa o hacer tu pedido</Link>
                 </div>
             </div>
 
