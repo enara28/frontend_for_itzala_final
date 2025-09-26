@@ -1,35 +1,88 @@
-import React from "react";
+import React, {Component} from "react";
+import axios from "axios";
 
-export default function() {
-    return(
-        <div className="reservation-container">
-            This is the reservation modal
-            <form>
-                <select className="day-selecction">
-                    <option>
-                        Lunes   
-                    </option>
-                    <option>
-                        Martes   
-                    </option>  
-                    <option>
-                        Miércoles   
-                    </option>  
-                    <option>
-                        Jueves  
-                    </option>  
-                    <option>
-                        Viernes   
-                    </option>
-                    <option>
-                        Sábado   
-                    </option>
-                    <option>
-                        Domingo  
-                    </option>    
-                </select>
-                <input placeholder="¿Cuántas personas seréis?"/> 
-            </form> 
-        </div>
-    )
+export default class Reservation extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            día: "Lunes",
+            cantidad: "",
+            comentario: ""
+        }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit(event) {
+        axios.post("http://localhost:5000/reserva", {
+            "día": this.state.día,
+            "cantidad": this.state.cantidad,
+            "comentario": this.state.comentario
+        }).then(response => console.log(response))
+        .catch(error => console.log(error))
+        event.preventDefault();
+    }
+
+    render() {
+        return(
+            <div className="reservation-container">
+                This is the reservation modal
+                <form onSubmit={this.handleSubmit}>
+                    <select className="day-selecction"
+                        type="text"
+                        name="día"
+                        value={this.state.día}
+                        onChange={this.handleChange}
+                        autoComplete="on"
+                    >
+                        <option>
+                            Lunes   
+                        </option>
+                        <option>
+                            Martes   
+                        </option>  
+                        <option>
+                            Miércoles   
+                        </option>  
+                        <option>
+                            Jueves  
+                        </option>  
+                        <option>
+                            Viernes   
+                        </option>
+                        <option>
+                            Sábado   
+                        </option>
+                        <option>
+                            Domingo  
+                        </option>    
+                    </select>
+                    <input
+                        type="number"
+                        name="cantidad"
+                        placeholder="¿Cuántas personas seréis?"
+                        value={this.state.cantidad}
+                        onChange={this.handleChange}
+                        autoComplete="on"
+                    />
+                    <textarea
+                        type="text"
+                        name="comentario"
+                        placeholder="Añade alergias u otros comentarios"
+                        value={this.state.comentario}
+                        onChange={this.handleChange}
+                        autoComplete="on"
+                    />
+                    <button type="submit">Reservar</button>
+                </form> 
+            </div>
+        )
+    }
 }

@@ -17,6 +17,9 @@ export default class Header extends Component {
                 <div className="log-in-wrapper">
                     <Link to="/log-in">Log in</Link>
                 </div>
+                <div className="admin-wrapper">
+                    <Link to="/admin">Admin</Link>
+                </div>
             </div>
         )
     }

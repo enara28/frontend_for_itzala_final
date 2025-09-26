@@ -9,25 +9,16 @@ export default class Profile extends Component {
     constructor() {
         super()
         this.state = {
-            users: [],
             singleUser: [],
             user_id: 2
         }
     }
 
 
-    get_all_users() {
-        axios.get(`http://localhost:5000/users`)
-        .then(response => {
-            this.setState({
-                users: response.data
-            }), console.log(response.data)
-        })
-        .catch(err => console.log("error mio", err))
-    }
+    
 
     get_user_profile() {
-        axios.get(`http://localhost:5000/user/${this.state.user_id}`)
+        axios.get(`http://localhost:5000/usuario/${this.state.user_id}`, {withCredentials: true})
         .then(response => {
             this.setState({
                 singleUser: response.data
@@ -37,14 +28,7 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
-        this.get_all_users()
         this.get_user_profile()
-    }
-
-    usersInfo() {
-        return this.state.users.map(user => {
-            return <User key={user.id} user={user} />;
-    });
     }
 
     singleUserInfo() {
@@ -58,7 +42,6 @@ export default class Profile extends Component {
                 <div className="general-body">
                     <div className="personal-info-wrapper">
                         <div className="user-info">
-                            {this.usersInfo()}
                             {this.singleUserInfo()}
                         </div> 
                     </div>

@@ -1,39 +1,95 @@
 import React, {Component} from "react";
 import { Link } from "react-router";
+import Axios from "axios";
 
 import Header from './header';
 import Footer from "./footer";
-import SignIn from "./sign-in";
 
 export default class LogIn extends Component {
-    constructor() {
-        super()
+  constructor(props) {
+    super(props);
 
-        // this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleSubmitClick = this.handleSubmitClick.bind(this)
-    }
+    this.state = {
+      email: "",
+      contraseña: "",
+      errorText: "",
+      usuarioId: "",
+      accessToken: "",
+      status: ""
+    };
 
-    // handleSubmit(){
-    //     console.log("for submit")
-    // }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    handleSubmitClick() {
-        // this.handleSubmit()
-        console.log("click")
-    }
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+      errorText: ""
+    });
+  }
+
+  handleSubmit(event) {
+     Axios.post(
+         "http://localhost:5000/login",
+         {
+           "email": this.state.email,
+           "contraseña": this.state.contraseña
+         },
+         {withCredentials: true}
+       )
+       .then(response => {
+           this.setState({
+             usuarioId: response.data.usuario_id,
+             accessToken: response.data.access_token,
+             status: response.data.status
+           });
+           this.props.handleSuccessfullLogin(response.data);
+           console.log(response, "success")
+       })
+       .catch(error => {
+         this.setState({
+           errorText: "An error occurred"
+         });
+         console.log(error, "error")
+       });
+    event.preventDefault();
+  }
 
     render() {
         return(
             <div>
                 <Header />
                 <div className="general-body">
-                    <div>Enter your username and password</div>
-                    <form>
-                        <input placeholder="username" />
-                        <input type="password" placeholder="password" />
+                    <div>Introduce tu email y tu contraseña</div>
+                    {/* <div>{this.state.errorText}</div> */}
+                    <form onSubmit={this.handleSubmit} className="form-group-wrapper">
+                        <div className="form-group">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                                autoComplete="on"
+                            />
+                        </div>
+                    
+                        <div className="form-group">
+                            <input
+                                  type="contraseña"
+                                  name="contraseña"
+                                  placeholder="Constraseña"
+                                  value={this.state.contraseña}
+                                  onChange={this.handleChange}
+                                  autoComplete="on"
+                            />
+                        </div>
+                    
+                        <div>
+                            <button type="submit" className="btn">Login</button>
+                        </div>
                     </form>
-                    <button onClick={() => this.handleSubmitClick()}>Log-in</button>
-
                     <Link to="/sign-in">Create an account</Link>
                 </div>
                 <Footer />

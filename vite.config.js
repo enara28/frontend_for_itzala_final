@@ -1,5 +1,6 @@
 import { defineConfig, transformWithEsbuild } from 'vite'
 import react from '@vitejs/plugin-react'
+// import cors from "cors"
 
 export default defineConfig( {
   plugins: [
@@ -25,9 +26,6 @@ export default defineConfig( {
     },
   },
   server: {
-    port: 3000,
-    // proxy: {
-    //   "/foo": "http://localhost:5000"
-    // }
-  },
+    port: 3000
+  }
 } );

@@ -8,21 +8,17 @@ export default class User extends Component {
 
     render() {
         
-        const {username, email} = this.props.user
+        const {usuario, email} = this.props.user
 
         return(          
             <div>
                 <div className="username">
-                    Username: {username}
+                    Usuario: {usuario}
                 </div>
                 <div className="email">
                     Email: {email}
                 </div>
-                <div className="address">
-                    Optionally adress goes here
-                </div>
             </div>
         )
     }
-
 }
