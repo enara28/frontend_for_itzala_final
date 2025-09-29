@@ -1,6 +1,5 @@
 import { defineConfig, transformWithEsbuild } from 'vite'
 import react from '@vitejs/plugin-react'
-// import cors from "cors"
 
 export default defineConfig( {
   plugins: [

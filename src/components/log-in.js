@@ -1,11 +1,12 @@
 import React, {Component} from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Axios from "axios";
+import withNavigation from "./withNavigation";
 
 import Header from './header';
 import Footer from "./footer";
 
-export default class LogIn extends Component {
+class LogIn extends Component {
   constructor(props) {
     super(props);
 
@@ -14,8 +15,8 @@ export default class LogIn extends Component {
       contraseña: "",
       errorText: "",
       usuarioId: "",
-      accessToken: "",
-      status: ""
+      status: "",
+      loggedIn: "NO_LOGGED_IN"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,11 +42,12 @@ export default class LogIn extends Component {
        .then(response => {
            this.setState({
              usuarioId: response.data.usuario_id,
-             accessToken: response.data.access_token,
-             status: response.data.status
+             status: response.data.status,
+             loggedIn: response.data.logged_in
            });
            this.props.handleSuccessfullLogin(response.data);
-           console.log(response, "success")
+           console.log(response, "success");
+           this.props.navigation("/")
        })
        .catch(error => {
          this.setState({
@@ -96,5 +98,6 @@ export default class LogIn extends Component {
             </div>
         )
     }
-
 }
+
+export default withNavigation(LogIn)

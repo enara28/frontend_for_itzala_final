@@ -6,19 +6,15 @@ import Footer from "./footer";
 import User from "./user";
 
 export default class Profile extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            singleUser: [],
-            user_id: 2
+            singleUser: []
         }
     }
 
-
-    
-
     get_user_profile() {
-        axios.get(`http://localhost:5000/usuario/${this.state.user_id}`, {withCredentials: true})
+        axios.get(`http://localhost:5000/usuario/${this.props.usuarioId}`, {withCredentials: true})
         .then(response => {
             this.setState({
                 singleUser: response.data
@@ -28,13 +24,14 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
-        this.get_user_profile()
+        if (this.props.status == "usuario"){
+            this.get_user_profile()
+        }
     }
 
     singleUserInfo() {
         return <User user={this.state.singleUser} />;
     }
-    // Insertar lógica que distinga entre administrador y cliente para mostrar el perfil personal o todos.
     render() {
         return(
             <div>
