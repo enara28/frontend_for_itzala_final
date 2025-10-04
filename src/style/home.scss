@@ -20,14 +20,12 @@
         padding: 20px 40px;
         transition: ease-in-out 0.5s;
         cursor: pointer;
+        font-size: 1.3em;
+        font-weight: 600;
 
         &:hover {
             background-color: $shade-three;
             color: $shade-four;
-        }
-        a {
-            font-size: 1.3em;
-            font-weight: 600;
         }
     }
 

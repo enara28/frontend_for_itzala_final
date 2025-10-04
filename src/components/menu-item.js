@@ -13,9 +13,13 @@ export default class MenuItem extends Component {
             editProducto: "",
             editTiempo: "",
             editPrecio: "",
+            editId: "",
         };
 
         this.eliminar_producto = this.eliminar_producto.bind(this);
+        this.editarProducto = this.editarProducto.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     eliminar_producto(id) {
@@ -37,6 +41,7 @@ export default class MenuItem extends Component {
                     editProducto: response.data.producto,
                     editPrecio: response.data.precio,
                     editTiempo: response.data.tiempo,
+                    editId: response.data.id,
                 });
                 console.log(response);
             });
@@ -45,6 +50,24 @@ export default class MenuItem extends Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
+    }
+    handleSubmit(event) {
+        axios
+            .patch(
+                `http://localhost:5000/${this.state.editId}`,
+                {
+                    producto: this.state.editProducto,
+                    tiempo: this.state.editTiempo,
+                    precio: this.state.editPrecio,
+                },
+                { withCredentials: true }
+            )
+            .then(
+                (response) => console.log(response),
+                this.setState({ editMode: false })
+            )
+            .catch((err) => console.log(err));
+        event.preventDefault();
     }
 
     render() {

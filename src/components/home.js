@@ -44,8 +44,10 @@ export default class Home extends Component {
                 <Header status={this.props.status} />
                 <div className="general">
                     <div className="home-container">
-                        <div className="menu">
-                            <a onClick={this.handleModalMenu}>Menu</a>
+                        <div className="menu-container">
+                            <a onClick={this.handleModalMenu}>
+                                <div className="menu">Menu</div>
+                            </a>
 
                             <ModalBase
                                 isOpen={this.state.isOpen}

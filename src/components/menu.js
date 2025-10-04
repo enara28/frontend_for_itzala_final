@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export default class Menu extends Component {
+import withNavigation from "./withNavigation";
+
+class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +14,7 @@ export default class Menu extends Component {
             segundos: [],
             postres: [],
             cargando: true,
-            cantidad: "",
+            cantidad: [],
             pedido: [],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -51,8 +53,9 @@ export default class Menu extends Component {
                 ...prevState.pedido,
                 { [event.target.name]: event.target.value },
             ],
+            cantidad: event.target.value,
         }));
-        this.generarTotal();
+        // this.generarTotal();
     }
     // Ejemplo para poder multiplicar un string
     //     const mood = "Happy! ";
@@ -67,15 +70,15 @@ export default class Menu extends Component {
                 return ` ${key}: ${value}`;
             }
         });
-        let calculo = this.state.pedido.map((el) => {
-            for (const [key, value] of Object.entries(el)) {
-                return [
-                    this.state.menuCompleto.producto == key,
-                    parseFloat(value),
-                ];
-            }
-        });
-        calculo = this.state.menuCompleto.map((el) => {});
+        // let calculo = this.state.pedido.map((el) => {
+        //     for (const [key, value] of Object.entries(el)) {
+        //         return [
+        //             this.state.menuCompleto.producto == key,
+        //             parseFloat(value),
+        //         ];
+        //     }
+        // });
+        // calculo = this.state.menuCompleto.map((el) => {});
         if (confirm("¿Está tu pedido listo?")) {
             axios
                 .post(
@@ -88,6 +91,7 @@ export default class Menu extends Component {
                 )
                 .then((response) => {
                     console.log(response);
+                    this.props.navigation("/");
                 })
                 .catch((error) => console.log(error));
         }
@@ -97,16 +101,16 @@ export default class Menu extends Component {
         this.get_menu();
     }
 
-    generarTotal() {
-        return this.state.pedido.map((el) => {
-            for (const [key, value] of Object.entries(el)) {
-                return key;
-            }
-            this.setState((prevState) => ({
-                total: [...prevState.total, key],
-            }));
-        });
-    }
+    // generarTotal() {
+    //     return this.state.pedido.map((el) => {
+    //         for (const [key, value] of Object.entries(el)) {
+    //             return key;
+    //         }
+    //         this.setState((prevState) => ({
+    //             total: [...prevState.total, key],
+    //         }));
+    //     });
+    // }
 
     render() {
         let entrada = this.state.entrantes.map((item) => {
@@ -125,7 +129,7 @@ export default class Menu extends Component {
                             name={item.producto}
                             type="number"
                             form="formulario"
-                            value={this.state.cantidad}
+                            value={this.state.cantidad[item.producto]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -148,7 +152,7 @@ export default class Menu extends Component {
                             name={item.producto}
                             type="number"
                             form="formulario"
-                            value={this.state.cantidad}
+                            value={this.state.cantidad[item.producto]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -172,7 +176,7 @@ export default class Menu extends Component {
                                 name={item.producto}
                                 type="number"
                                 form="formulario"
-                                value={this.state.cantidad}
+                                value={this.state.cantidad[item.producto]}
                                 onChange={this.handleChange}
                             />
                         </label>
@@ -211,3 +215,5 @@ export default class Menu extends Component {
         );
     }
 }
+
+export default withNavigation(Menu);
