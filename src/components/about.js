@@ -1,11 +1,11 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 
-import Header from './header';
+import Header from "./header";
 import Footer from "./footer";
 
 export default class About extends Component {
     render() {
-        return(
+        return (
             <div>
                 <Header />
                 <div className="general-body">
@@ -13,6 +13,6 @@ export default class About extends Component {
                 </div>
                 <Footer />
             </div>
-        )
+        );
     }
 }

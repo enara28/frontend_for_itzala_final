@@ -1,47 +1,64 @@
-import React, { Component } from "react"
-import Modal from "react-modal"
+import React, { Component } from "react";
+import Modal from "react-modal";
+import { Link } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-import Menu from "./menu"
-import Reservation from "./reservation"
+import Menu from "./menu";
+import Reservation from "./reservation";
 
-Modal.setAppElement(".app-wrapper")
+Modal.setAppElement(".app-wrapper");
 
 export default class ModalBase extends Component {
-    
     constructor(props) {
-        super(props)
+        super(props);
 
-        this.handleClose = this.handleClose.bind(this)
+        this.handleClose = this.handleClose.bind(this);
     }
 
     handleClose() {
-        this.props.handleModalClose()
+        this.props.handleModalClose();
     }
 
     render() {
         const customStyles = {
             content: {
                 width: "80%",
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)'
-            }
-        }
-        return(
+                top: "50%",
+                left: "50%",
+                right: "auto",
+                bottom: "auto",
+                marginRight: "-50%",
+                transform: "translate(-50%, -50%)",
+            },
+        };
+        return (
             <div>
-                <Modal 
-                isOpen={this.props.isOpen}
-                onRequestClose={this.handleClose}
-                style={customStyles}>
-                    <a onClick={this.handleClose}>Close</a>
-                    {this.props.modalType == "menu" ? <Menu /> : <Reservation />}
+                <Modal
+                    isOpen={this.props.isOpen}
+                    onRequestClose={this.handleClose}
+                    style={customStyles}
+                >
+                    <a onClick={this.handleClose}>
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                    </a>
+                    {this.props.modalType == "menu" ? (
+                        <div className="modal-wrapper">
+                            <Menu lugar={"modal"} />
+                        </div>
+                    ) : (
+                        <Reservation />
+                    )}
+                    {this.props.loggedIn == "NO_LOGGED_IN" ? (
+                        <div className="log-in-message">
+                            <Link to="/log-in">
+                                Inicia sesión para reservar mesa o hacer tu
+                                pedido
+                            </Link>
+                        </div>
+                    ) : null}
                 </Modal>
-                {/* Meter lógica para distinguir qué modal abirir */}
-
             </div>
-        )
+        );
     }
 }

@@ -1,4 +1,11 @@
-.menu-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.modal-wrapper {
+    .menu-container {
+        .menu-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            li {
+                list-style-type: none;
+            }
+        }
+    }
 }

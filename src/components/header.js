@@ -1,12 +1,12 @@
-import React, { Component } from "react"
-import { Link } from "react-router"
-import logo from "../assets/logo/logo-512x512.png"
+import React, { Component } from "react";
+import { Link } from "react-router";
+import logo from "../assets/logo/logo-512x512.png";
 
 export default class Header extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
-    
+
     render() {
         return (
             <div className="header-container-wrapper">
@@ -15,18 +15,20 @@ export default class Header extends Component {
                         <img src={logo} />
                     </Link>
                 </div>
-                {this.props.status && this.props.status == "usuario" ?
-                <div className="profile-wrapper"><Link to="/profile">Profile</Link></div>
-                : null}
-                <div className="log-in-wrapper">
-                    <Link to="/log-in">Log in</Link>
+                <div className="links-container">
+                    <div className="profile-wrapper">
+                        {this.props.status && this.props.status == "usuario" ? (
+                            <Link to="/profile">Profile</Link>
+                        ) : this.props.status &&
+                          this.props.status == "admin" ? (
+                            <Link to="/admin">Admin</Link>
+                        ) : null}
+                    </div>
+                    <div className="log-in-wrapper">
+                        <Link to="/log-in">Iniciar sesión</Link>
+                    </div>
                 </div>
-                {this.props.status && this.props.status == "admin" ?
-                <div className="admin-wrapper">
-                    <Link to="/admin">Admin</Link>
-                </div>
-                : null}
             </div>
-        )
+        );
     }
 }

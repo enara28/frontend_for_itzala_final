@@ -1,68 +1,61 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
 export default class Reservation extends Component {
     constructor() {
-        super()
+        super();
 
         this.state = {
             día: "Lunes",
             cantidad: "",
-            comentario: ""
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+            comentario: "",
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
-        })
+            [event.target.name]: event.target.value,
+        });
     }
 
     handleSubmit(event) {
-        axios.post("http://localhost:5000/reserva", {
-            "día": this.state.día,
-            "cantidad": this.state.cantidad,
-            "comentario": this.state.comentario
-        }).then(response => console.log(response))
-        .catch(error => console.log(error))
+        axios
+            .post(
+                "http://localhost:5000/reserva",
+                {
+                    día: this.state.día,
+                    cantidad: this.state.cantidad,
+                    comentario: this.state.comentario,
+                },
+                { withCredentials: true }
+            )
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
         event.preventDefault();
     }
 
     render() {
-        return(
+        return (
             <div className="reservation-container">
                 This is the reservation modal
                 <form onSubmit={this.handleSubmit}>
-                    <select className="day-selecction"
+                    <select
+                        className="day-selecction"
                         type="text"
                         name="día"
                         value={this.state.día}
                         onChange={this.handleChange}
                         autoComplete="on"
                     >
-                        <option>
-                            Lunes   
-                        </option>
-                        <option>
-                            Martes   
-                        </option>  
-                        <option>
-                            Miércoles   
-                        </option>  
-                        <option>
-                            Jueves  
-                        </option>  
-                        <option>
-                            Viernes   
-                        </option>
-                        <option>
-                            Sábado   
-                        </option>
-                        <option>
-                            Domingo  
-                        </option>    
+                        <option>Lunes</option>
+                        <option>Martes</option>
+                        <option>Miércoles</option>
+                        <option>Jueves</option>
+                        <option>Viernes</option>
+                        <option>Sábado</option>
+                        <option>Domingo</option>
                     </select>
                     <input
                         type="number"
@@ -81,8 +74,8 @@ export default class Reservation extends Component {
                         autoComplete="on"
                     />
                     <button type="submit">Reservar</button>
-                </form> 
+                </form>
             </div>
-        )
+        );
     }
 }

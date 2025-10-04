@@ -1,14 +1,14 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-import Header from './header';
+import Header from "./header";
 import Footer from "./footer";
 import User from "./user";
 import MenuItem from "./menu-item";
 
 export default class Admin extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             producto: "",
@@ -16,115 +16,116 @@ export default class Admin extends Component {
             precio: "",
             errorText: "",
             users: [],
-            menu: []
-        }
+            menu: [],
+        };
 
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
-            errorText: ""
-    });
+            errorText: "",
+        });
     }
 
     handleSubmit(event) {
-        axios.post("http://localhost:5000/menu-item", {
-            "producto": this.state.producto,
-            "tiempo": this.state.tiempo,
-            "precio": this.state.precio
-        }, {withCredentials: true}).then(response => console.log(response)).catch(error => console.log(error))
+        axios
+            .post(
+                "http://localhost:5000/menu-item",
+                {
+                    producto: this.state.producto,
+                    tiempo: this.state.tiempo,
+                    precio: this.state.precio,
+                },
+                { withCredentials: true }
+            )
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
         event.preventDefault();
     }
 
     get_all_users() {
-            axios.get(`http://localhost:5000/usuarios`, {withCredentials: true})
-            .then(response => {
+        axios
+            .get(`http://localhost:5000/usuarios`, { withCredentials: true })
+            .then((response) => {
                 this.setState({
-                    users: response.data.result
-                })
+                    users: response.data.result,
+                });
             })
-            .catch(err => console.log("error mio", err))
-        }
+            .catch((err) => console.log("error mio", err));
+    }
 
     get_menu_items() {
-        axios.get(`http://localhost:5000/menu-item`, {withCredentials: true}).then(
-            response => {
+        axios
+            .get(`http://localhost:5000/menu-item`, { withCredentials: true })
+            .then((response) => {
                 this.setState({
-                    menu: response.data
-                })
-        }
-        )
+                    menu: response.data,
+                });
+            });
     }
-    
+
     componentDidMount() {
-        if (this.props.status == "admin"){
-            this.get_all_users()    
-            this.get_menu_items()      
+        if (this.props.status == "admin") {
+            this.get_all_users();
+            this.get_menu_items();
         }
     }
 
     menuItems() {
-        return this.state.menu.map(item => {
-            return <MenuItem key={item.id} item={item} />
-        })
+        return this.state.menu.map((item) => {
+            return <MenuItem key={item.id} item={item} />;
+        });
     }
 
     usersInfo() {
-        return this.state.users.map(user => {
-                return <User key={user.id} user={user} />;
+        return this.state.users.map((user) => {
+            return <User key={user.id} user={user} />;
         });
     }
 
     render() {
-        return(
+        return (
             <div>
-                <Header/>
+                <Header />
                 <div className="general-body">
-                    <div>Admin page</div>
-                    <div>{this.usersInfo()}</div>
-                    <div>{this.menuItems()}</div>
-                    <form onSubmit={this.handleSubmit}>
-                        <input 
-                            type="text"
-                            name="producto"
-                            placeholder="Producto"
-                            value={this.state.producto}
-                            onChange={this.handleChange}
-                            autoComplete="on"
-                        />
-                        <input 
-                            type="number"
-                            name="tiempo"
-                            placeholder="Tiempo(1, 2 o 3)"
-                            value={this.state.tiempo}
-                            onChange={this.handleChange}
-                            autoComplete="on"
-                        />
-                        {/* <select 
-                            value={this.state.tiempo}
-                            onChange={this.handleChange}
-                            name="tiempo"
-                        >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select> */}
-                        <input 
-                            type="number"
-                            name="precio"
-                            placeholder="Precio"
-                            value={this.state.precio}
-                            onChange={this.handleChange}
-                            autoComplete="on"
-                        />
-                        <button type="submit">Submit</button>
-                    </form>
+                    <div className="admin-content-wrapper">
+                        <div>Admin page</div>
+                        <div>{this.usersInfo()}</div>
+                        <div>{this.menuItems()}</div>
+                        <form onSubmit={this.handleSubmit}>
+                            <input
+                                type="text"
+                                name="producto"
+                                placeholder="Producto"
+                                value={this.state.producto}
+                                onChange={this.handleChange}
+                                autoComplete="on"
+                            />
+                            <input
+                                type="number"
+                                name="tiempo"
+                                placeholder="Tiempo(1, 2 o 3)"
+                                value={this.state.tiempo}
+                                onChange={this.handleChange}
+                                autoComplete="on"
+                            />
+                            <input
+                                type="number"
+                                name="precio"
+                                placeholder="Precio"
+                                value={this.state.precio}
+                                onChange={this.handleChange}
+                                autoComplete="on"
+                            />
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
-        )
+        );
     }
 }

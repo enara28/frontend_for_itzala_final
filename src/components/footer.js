@@ -1,10 +1,10 @@
-import React from "react"
+import React from "react";
 
-import logo from "../assets/logo/logo-512x512.png"
-import { Link } from "react-router"
+import logo from "../assets/logo/logo-512x512.png";
+import { Link } from "react-router";
 
-export default function() {
-    return(
+export default function () {
+    return (
         <div className="footer-container-wrapper">
             <div className="footer-address">Address goes here</div>
             <div className="footer-logo">
@@ -14,5 +14,5 @@ export default function() {
                 <Link to="/about">Contact info goes here</Link>
             </div>
         </div>
-    )
+    );
 }

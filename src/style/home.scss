@@ -1,0 +1,59 @@
+.general {
+    height: 70vh;
+    width: 100%;
+    background-color: $shade-four;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    align-items: center;
+    justify-items: center;
+
+    .menu {
+        border: 4px solid $shade-three;
+        color: $shade-three;
+        border-radius: 5px;
+        padding: 20px 40px;
+        transition: ease-in-out 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $shade-three;
+            color: $shade-four;
+        }
+        a {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+
+        .book-table,
+        .food-delivery {
+            cursor: pointer;
+            color: $shade-three;
+            font-weight: 800;
+            padding: 3px;
+            border-bottom: 3px solid transparent;
+            border-radius: 4px;
+            transition: ease-in-out 0.5s;
+            a {
+                color: $shade-three;
+                font-weight: 800;
+            }
+
+            &:hover {
+                border-bottom: 3px solid $shade-three;
+                border-radius: 4px;
+            }
+        }
+    }
+}

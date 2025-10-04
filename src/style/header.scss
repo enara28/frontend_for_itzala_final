@@ -1,12 +1,35 @@
 .header-container-wrapper {
     width: 100%;
-    height: 10vh;
-    display: flex;
-    justify-content: space-between;
+    height: 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     background-color: $shade-three;
     img {
-        width: 10%;
+        width: 43px;
+        padding: 10px;
+    }
+    .links-container {
+        .profile-wrapper,
+        .log-in-wrapper {
+            padding: 0px 20px;
+        }
+        a {
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            border-radius: 4px;
+            color: $shade-four;
+            padding: 5px;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: ease-in-out 0.5s;
+
+            &:hover {
+                border-bottom: 3px solid $shade-four;
+                border-radius: 4px;
+            }
+        }
+        display: flex;
+        justify-content: space-between;
     }
 }
-

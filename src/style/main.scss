@@ -5,15 +5,26 @@
 @import "./buttons.scss";
 @import "./menu-modal.scss";
 @import "./reservation.scss";
+@import "./menu-item.scss";
+@import "./admin.scss";
 
 .app-wrapper {
     margin: -8px;
+    font-family: "Numans", sans-serif;
+    a {
+        text-decoration: none;
+    }
 }
 
 .general-body {
-    height: 70vh;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: $shade-four;
+}
+.pedidos {
+    .general-body {
+        height: 100%;
+    }
 }
