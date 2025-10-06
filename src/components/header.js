@@ -7,11 +7,16 @@ export default class Header extends Component {
         super(props);
     }
 
+    cerrarSesion() {
+        // lógica para cerrar sesión
+        cookieStore.delete(access_token_cookie);
+    }
+
     render() {
         return (
             <div className="header-container-wrapper">
                 <div className="logo-wrapper">
-                    <Link to="/">
+                    <Link title="Inicio" to="/">
                         <img src={logo} />
                     </Link>
                 </div>
@@ -25,7 +30,13 @@ export default class Header extends Component {
                         ) : null}
                     </div>
                     <div className="log-in-wrapper">
-                        <Link to="/log-in">Iniciar sesión</Link>
+                        {this.props.loggedIn == "NO_LOGGED_IN" ? (
+                            <Link to="/log-in">Iniciar sesión</Link>
+                        ) : (
+                            <Link to="/" onClick={() => this.cerrarSesion()}>
+                                Cerrar sesión
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

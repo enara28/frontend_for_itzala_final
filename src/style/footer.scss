@@ -1,11 +1,12 @@
 .footer-container-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-content: center;
+    align-items: center;
     justify-items: center;
     background-color: $shade-three;
-    height: 20vh;
+    height: 17vh;
     color: $shade-four;
+    box-shadow: -2px -5px 38px 9px rgba(0, 0, 0, 0.3);
 
     .footer-adress {
         width: 100%; // zeozer jartzeatik
@@ -16,7 +17,12 @@
         display: flex;
         justify-content: center;
         img {
-            width: 20%;
+            width: 80px;
+        }
+    }
+    .footer-contact {
+        a {
+            color: $shade-four;
         }
     }
 }

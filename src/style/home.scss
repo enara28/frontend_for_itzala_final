@@ -1,5 +1,5 @@
 .general {
-    height: 70vh;
+    height: 73vh;
     width: 100%;
     background-color: $shade-four;
     display: flex;
@@ -52,6 +52,24 @@
                 border-bottom: 3px solid $shade-three;
                 border-radius: 4px;
             }
+        }
+    }
+    .log-in-message {
+        cursor: pointer;
+        color: $shade-three;
+        font-weight: 800;
+        padding: 3px;
+        border-bottom: 3px solid transparent;
+        border-radius: 4px;
+        transition: ease-in-out 0.5s;
+        a {
+            color: $shade-three;
+            font-weight: 800;
+        }
+
+        &:hover {
+            border-bottom: 3px solid $shade-three;
+            border-radius: 4px;
         }
     }
 }

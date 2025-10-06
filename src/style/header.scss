@@ -1,13 +1,16 @@
 .header-container-wrapper {
+    position: relative;
     width: 100%;
     height: 10vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     background-color: $shade-three;
+    box-shadow: -2px -5px 38px 9px rgba(0, 0, 0, 0.3);
     img {
         width: 43px;
         padding: 10px;
+        margin-left: 10px;
     }
     .links-container {
         .profile-wrapper,
@@ -21,7 +24,7 @@
             color: $shade-four;
             padding: 5px;
             font-size: 1.1em;
-            font-weight: 700;
+            font-weight: 500;
             transition: ease-in-out 0.5s;
 
             &:hover {

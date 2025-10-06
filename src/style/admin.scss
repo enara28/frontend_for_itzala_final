@@ -1,5 +1,105 @@
-.admin-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 50px;
+.admin-container {
+    .general-body {
+        height: 100%;
+        .admin-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            //grid-gap: 50px;
+            width: 50%;
+
+            .admin-menu {
+                .menu-item-container {
+                    width: 80%;
+                    .menu-item {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 10px;
+                        border: 2px solid $shade-five;
+                        width: 100%;
+                        margin-left: 0px;
+
+                        .product-icons {
+                            svg {
+                                color: black;
+                                font-size: 1.2em;
+                                padding: 15px 20px;
+                                cursor: pointer;
+                                transition: ease-in-out 0.5s;
+
+                                &:hover {
+                                    color: darkred;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .user-info {
+                .user-title {
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+
+                .user-content {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .admin-titulo {
+                color: $shade-three;
+                font-size: 1.1em;
+                font-weight: 600;
+                margin-bottom: 20px;
+                margin-top: 50px;
+            }
+
+            .create-new-product {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 5px;
+
+                input {
+                    font-size: 1em;
+                    background-color: $shade-four;
+                    border: 2px solid $shade-five;
+                    border-radius: 5px;
+                    padding: 5px;
+                    color: $shade-three;
+                    transition: 0.5s;
+
+                    &::placeholder {
+                        color: $shade-three;
+                        font-family: "Numans", sans-serif;
+                    }
+                    &:focus {
+                        outline: none;
+                        border: 2px solid $shade-three;
+                        border-radius: 5px;
+                        box-shadow: 10px 10px 33px -5px rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                .btn {
+                    font-size: 1em;
+                    font-family: "Numans", sans-serif;
+                    background-color: $shade-four;
+                    padding: 10px 20px;
+                    border: 2px solid $shade-three;
+                    border-radius: 5px;
+                    color: $shade-three;
+                    cursor: pointer;
+                    transition: 0.5s ease-in-out;
+                    margin-bottom: 50px;
+                    margin-top: 10px;
+
+                    &:hover {
+                        background-color: $shade-three;
+                        color: $shade-four;
+                    }
+                }
+            }
+        }
+    }
 }

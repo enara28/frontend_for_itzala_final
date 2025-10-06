@@ -1,11 +1,69 @@
+// .icon a {
+//     .svg-inline--fa {
+//         color: darkred;
+//         font-size: 2em;
+//     }
+// }
+
+.ReactModal__Content {
+    .modal-wrapper-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        a {
+            svg {
+                color: darkred;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+                cursor: pointer;
+                transition: ease-in-out 0.5s;
+
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+    }
+}
+
 .modal-wrapper {
+    font-family: "Numans", sans-serif;
     .menu-container {
         .menu-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            .menu-titulo {
+                color: $shade-three;
+                font-size: 1.1em;
+                font-weight: 600;
+            }
             li {
                 list-style-type: none;
+                margin-left: -40px;
+                margin-bottom: 5px;
             }
+        }
+    }
+}
+
+.log-in-message {
+    padding: 0px 20px;
+    a {
+        font-family: "Numans", sans-serif;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 4px;
+        color: $shade-three;
+        padding: 5px;
+        font-size: 1em;
+        font-weight: 500;
+        transition: ease-in-out 0.5s;
+
+        &:hover {
+            border-bottom: 2px solid $shade-three;
+            border-radius: 4px;
         }
     }
 }

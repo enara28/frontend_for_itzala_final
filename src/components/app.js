@@ -99,7 +99,13 @@ export default class App extends Component {
                     )}
                     <Route
                         path="/pedido"
-                        element={<Pedido usuarioId={this.state.usuarioId} />}
+                        element={
+                            <Pedido
+                                usuarioId={this.state.usuarioId}
+                                status={this.state.status}
+                                loggedIn={this.state.loggedIn}
+                            />
+                        }
                     />
                 </Routes>
             </div>

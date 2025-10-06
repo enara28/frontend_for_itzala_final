@@ -41,7 +41,10 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home-container-wrapper">
-                <Header status={this.props.status} />
+                <Header
+                    status={this.props.status}
+                    loggedIn={this.props.loggedIn}
+                />
                 <div className="general">
                     <div className="home-container">
                         <div className="menu-container">

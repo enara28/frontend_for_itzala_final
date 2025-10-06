@@ -63,41 +63,45 @@ class LogIn extends Component {
             <div className="gen">
                 <Header />
                 <div className="general-body">
-                    <div>Introduce tu email y tu contraseña</div>
-                    {/* <div>{this.state.errorText}</div> */}
-                    <form
-                        onSubmit={this.handleSubmit}
-                        className="form-group-wrapper"
-                    >
-                        <div className="form-group">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
+                    <div className="login-container">
+                        <div className="log-sign-in-title">
+                            Introduce tu email y tu contraseña
                         </div>
+                        {/* <div>{this.state.errorText}</div> */}
+                        <form
+                            onSubmit={this.handleSubmit}
+                            className="form-group-wrapper"
+                        >
+                            <div className="form-group">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                    autoComplete="on"
+                                />
 
-                        <div className="form-group">
-                            <input
-                                type="contraseña"
-                                name="contraseña"
-                                placeholder="Constraseña"
-                                value={this.state.contraseña}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                        </div>
+                                <input
+                                    type="contraseña"
+                                    name="contraseña"
+                                    placeholder="Constraseña"
+                                    value={this.state.contraseña}
+                                    onChange={this.handleChange}
+                                    autoComplete="on"
+                                />
+                            </div>
 
-                        <div>
-                            <button type="submit" className="btn">
-                                Login
-                            </button>
+                            <div>
+                                <button type="submit" className="btn">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                        <div className="sign-log-in-link">
+                            <Link to="/sign-in">Create an account</Link>
                         </div>
-                    </form>
-                    <Link to="/sign-in">Create an account</Link>
+                    </div>
                 </div>
                 <Footer />
             </div>

@@ -7,6 +7,10 @@
 @import "./reservation.scss";
 @import "./menu-item.scss";
 @import "./admin.scss";
+@import "./login.scss";
+@import "./sign-in.scss";
+@import "./perfil.scss";
+@import "./pedido.scss";
 
 .app-wrapper {
     margin: -8px;
@@ -17,7 +21,7 @@
 }
 
 .general-body {
-    height: 70vh;
+    height: 73vh;
     display: flex;
     justify-content: center;
     align-items: center;

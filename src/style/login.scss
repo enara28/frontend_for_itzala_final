@@ -1,0 +1,69 @@
+.login-container,
+.sign-in-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+
+    .log-sign-in-title {
+        font-size: 1.2em;
+        color: $shade-three;
+    }
+
+    .form-group-wrapper {
+        display: grid;
+        gap: 10px;
+        .form-group {
+            display: grid;
+            gap: 8px;
+            input {
+                font-size: 1em;
+                background-color: $shade-four;
+                border: 2px solid $shade-five;
+                border-radius: 5px;
+                padding: 5px;
+                color: $shade-three;
+                transition: 0.5s;
+
+                &::placeholder {
+                    color: $shade-three;
+                    font-family: "Numans", sans-serif;
+                }
+                &:focus {
+                    outline: none;
+                    border: 2px solid $shade-three;
+                    border-radius: 5px;
+                    box-shadow: 10px 10px 33px -5px rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+        .btn {
+            font-size: 1em;
+            font-family: "Numans", sans-serif;
+            background-color: $shade-four;
+            padding: 10px 20px;
+            border: 2px solid $shade-three;
+            border-radius: 5px;
+            color: $shade-three;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+
+            &:hover {
+                background-color: $shade-three;
+                color: $shade-four;
+            }
+        }
+    }
+    .sign-log-in-link {
+        a {
+            color: $shade-three;
+            padding: 5px;
+            border-bottom: 3px solid transparent;
+            border-radius: 4px;
+            transition: ease-in-out 0.5s;
+            &:hover {
+                border-bottom: 3px solid $shade-three;
+                border-radius: 4px;
+            }
+        }
+    }
+}

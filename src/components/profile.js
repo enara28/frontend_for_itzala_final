@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./header";
 import Footer from "./footer";
 import User from "./user";
+import PedidoUsuario from "./pedido-usuario";
 
 export default class Profile extends Component {
     constructor(props) {
@@ -50,24 +51,21 @@ export default class Profile extends Component {
     singleUserInfo() {
         return <User user={this.state.singleUser} />;
     }
+
     render() {
-        let pedido = this.state.pedidos.map((el) => (
-            <div key={el.id}>
-                Pedido nº{el.id}: {el.pedido}
-            </div>
-        ));
         return (
-            <div>
+            <div className="perfil-container-wrapper">
                 <Header />
-                <div className="general-body">
+                <div className="perfil-container">
                     <div className="personal-info-wrapper">
-                        <div className="user-info">{this.singleUserInfo()}</div>
-                        <div>
-                            {/* {this.state.pedidos.map((el) => {
-                                return `Pedido: 
-                                ${el.pedido}`;
-                            })} */}
-                            {pedido}
+                        <div className="user-info-container">
+                            {this.singleUserInfo()}
+                        </div>
+                        <div className="pedidos-wrapper">
+                            <div className="pedidos-title">
+                                Pedidos realizados:
+                            </div>
+                            <PedidoUsuario pedidos={this.state.pedidos} />
                         </div>
                     </div>
                 </div>

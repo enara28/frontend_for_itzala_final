@@ -55,6 +55,8 @@ class Menu extends Component {
             ],
             cantidad: event.target.value,
         }));
+        console.log(this.state.pedido);
+
         // this.generarTotal();
     }
     // Ejemplo para poder multiplicar un string
@@ -193,20 +195,24 @@ class Menu extends Component {
                 ) : (
                     <div className="menu-wrapper">
                         <div className="entrees">
-                            <div>Entrantes</div>
+                            <div className="menu-titulo">Entrantes</div>
                             <ul>{entrada}</ul>
                         </div>
                         <div className="principales">
-                            <div>Platos principales</div>
+                            <div className="menu-titulo">
+                                Platos principales
+                            </div>
                             <ul>{fuerte}</ul>
                         </div>
                         <div className="postres">
-                            <div>Postres</div>
+                            <div className="menu-titulo">Postres</div>
                             <ul>{final}</ul>
                         </div>
                         {this.props.lugar == "pedido" ? (
                             <form id="formulario" onSubmit={this.handleSubmit}>
-                                <button type="submit">Enviar</button>
+                                <button className="btn" type="submit">
+                                    Enviar
+                                </button>
                             </form>
                         ) : null}
                     </div>

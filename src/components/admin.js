@@ -88,40 +88,57 @@ export default class Admin extends Component {
 
     render() {
         return (
-            <div>
+            <div className="admin-container">
                 <Header />
                 <div className="general-body">
                     <div className="admin-content-wrapper">
-                        <div>Admin page</div>
-                        <div>{this.usersInfo()}</div>
-                        <div>{this.menuItems()}</div>
-                        <form onSubmit={this.handleSubmit}>
-                            <input
-                                type="text"
-                                name="producto"
-                                placeholder="Producto"
-                                value={this.state.producto}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <input
-                                type="number"
-                                name="tiempo"
-                                placeholder="Tiempo(1, 2 o 3)"
-                                value={this.state.tiempo}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <input
-                                type="number"
-                                name="precio"
-                                placeholder="Precio"
-                                value={this.state.precio}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <button type="submit">Submit</button>
-                        </form>
+                        <div className="user-info">
+                            <div className="admin-titulo">
+                                Usuarios registrados:
+                            </div>
+                            {this.usersInfo()}
+                        </div>
+                        <div className="admin-menu">
+                            <div className="admin-titulo">Menú</div>
+                            {this.menuItems()}
+                        </div>
+                        <div>
+                            <div className="admin-titulo">
+                                Añadir nuevo plato al menú
+                            </div>
+                            <form
+                                className="create-new-product"
+                                onSubmit={this.handleSubmit}
+                            >
+                                <input
+                                    type="text"
+                                    name="producto"
+                                    placeholder="Producto"
+                                    value={this.state.producto}
+                                    onChange={this.handleChange}
+                                    autoComplete="on"
+                                />
+                                <input
+                                    type="number"
+                                    name="tiempo"
+                                    placeholder="Tiempo (1, 2 o 3)"
+                                    value={this.state.tiempo}
+                                    onChange={this.handleChange}
+                                    autoComplete="on"
+                                />
+                                <input
+                                    type="number"
+                                    name="precio"
+                                    placeholder="Precio"
+                                    value={this.state.precio}
+                                    onChange={this.handleChange}
+                                    autoComplete="on"
+                                />
+                                <button className="btn" type="submit">
+                                    Guardar
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <Footer />

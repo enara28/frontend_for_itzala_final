@@ -6,12 +6,15 @@ import { Link } from "react-router";
 export default function () {
     return (
         <div className="footer-container-wrapper">
-            <div className="footer-address">Address goes here</div>
+            <div className="footer-address">nº 0, Gipuzkoa</div>
             <div className="footer-logo">
                 <img src={logo} />
             </div>
             <div className="footer-contact">
-                <Link to="/about">Contact info goes here</Link>
+                <Link to="/about" title="Info">
+                    <div className="correo">correo@correo.eus</div>
+                    <div className="telefono">+34-000-000-000</div>
+                </Link>
             </div>
         </div>
     );

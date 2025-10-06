@@ -39,24 +39,26 @@ export default class ModalBase extends Component {
                     onRequestClose={this.handleClose}
                     style={customStyles}
                 >
-                    <a onClick={this.handleClose}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </a>
-                    {this.props.modalType == "menu" ? (
-                        <div className="modal-wrapper">
-                            <Menu lugar={"modal"} />
-                        </div>
-                    ) : (
-                        <Reservation />
-                    )}
-                    {this.props.loggedIn == "NO_LOGGED_IN" ? (
-                        <div className="log-in-message">
-                            <Link to="/log-in">
-                                Inicia sesión para reservar mesa o hacer tu
-                                pedido
-                            </Link>
-                        </div>
-                    ) : null}
+                    <div className="modal-wrapper-container">
+                        <a onClick={this.handleClose} className="icon">
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </a>
+                        {this.props.modalType == "menu" ? (
+                            <div className="modal-wrapper">
+                                <Menu lugar={"modal"} />
+                            </div>
+                        ) : (
+                            <Reservation />
+                        )}
+                        {this.props.loggedIn == "NO_LOGGED_IN" ? (
+                            <div className="log-in-message">
+                                <Link to="/log-in">
+                                    Inicia sesión para reservar mesa o hacer tu
+                                    pedido
+                                </Link>
+                            </div>
+                        ) : null}
+                    </div>
                 </Modal>
             </div>
         );
