@@ -9,6 +9,8 @@ import LogIn from "./log-in";
 import Pedido from "./pedido";
 import SignIn from "./sign-in";
 import Admin from "./admin";
+import Header from "./header";
+import Footer from "./footer";
 
 // Añadir lógica que te lleve a Log in
 
@@ -49,6 +51,12 @@ export default class App extends Component {
         });
     }
 
+    handleSuccessfullLogout() {
+        this.setState({
+            loggedIn: "NO_LOGGED_IN",
+        });
+    }
+
     componentDidMount() {
         this.verifyUser();
     }
@@ -56,6 +64,13 @@ export default class App extends Component {
     render() {
         return (
             <div className="app">
+                <Header
+                    loggedIn={this.state.loggedIn}
+                    status={this.state.status}
+                    handleSuccessfullLogout={() =>
+                        this.handleSuccessfullLogout()
+                    }
+                />
                 <Routes>
                     <Route
                         exact
@@ -67,7 +82,11 @@ export default class App extends Component {
                             />
                         }
                     />
-                    <Route path="/about" element={<About />} />
+                    <Route
+                        path="/about"
+                        element={<About />}
+                        loggedIn={this.state.loggedIn}
+                    />
                     <Route
                         path="/log-in"
                         element={
@@ -78,11 +97,19 @@ export default class App extends Component {
                             />
                         }
                     />
-                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route
+                        path="/sign-in"
+                        element={<SignIn loggedIn={this.state.loggedIn} />}
+                    />
                     {this.state.status == "admin" ? (
                         <Route
                             path="/admin"
-                            element={<Admin status={this.state.status} />}
+                            element={
+                                <Admin
+                                    status={this.state.status}
+                                    loggedIn={this.state.loggedIn}
+                                />
+                            }
                         />
                     ) : this.state.status == "usuario" ? (
                         <Route
@@ -91,6 +118,7 @@ export default class App extends Component {
                                 <Profile
                                     usuarioId={this.state.usuarioId}
                                     status={this.state.status}
+                                    loggedIn={this.state.loggedIn}
                                 />
                             }
                         />
@@ -108,6 +136,7 @@ export default class App extends Component {
                         }
                     />
                 </Routes>
+                <Footer />
             </div>
         );
     }

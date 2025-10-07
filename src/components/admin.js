@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Header from "./header";
-import Footer from "./footer";
 import User from "./user";
 import MenuItem from "./menu-item";
 
@@ -17,6 +15,7 @@ export default class Admin extends Component {
             errorText: "",
             users: [],
             menu: [],
+            newMenuItem: "",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +40,12 @@ export default class Admin extends Component {
                 },
                 { withCredentials: true }
             )
-            .then((response) => console.log(response))
+            .then((response) => {
+                console.log(response),
+                    this.setState({
+                        newMenuItem: response.data,
+                    });
+            })
             .catch((error) => console.log(error));
         event.preventDefault();
     }
@@ -76,7 +80,13 @@ export default class Admin extends Component {
 
     menuItems() {
         return this.state.menu.map((item) => {
-            return <MenuItem key={item.id} item={item} />;
+            return (
+                <MenuItem
+                    key={item.id}
+                    item={item}
+                    newMenuItem={this.state.newMenuItem}
+                />
+            );
         });
     }
 
@@ -89,7 +99,6 @@ export default class Admin extends Component {
     render() {
         return (
             <div className="admin-container">
-                <Header />
                 <div className="general-body">
                     <div className="admin-content-wrapper">
                         <div className="user-info">
@@ -101,6 +110,29 @@ export default class Admin extends Component {
                         <div className="admin-menu">
                             <div className="admin-titulo">Menú</div>
                             {this.menuItems()}
+                            {this.state.newMenuItem != "" ? (
+                                <div className="menu-item-container">
+                                    <div className="menu-item">
+                                        <div className="product-info">
+                                            <div>
+                                                <b>Producto:</b>
+                                                {
+                                                    this.state.newMenuItem
+                                                        .producto
+                                                }
+                                            </div>
+                                            <div>
+                                                <b>Precio:</b>
+                                                {this.state.newMenuItem.precio}
+                                            </div>
+                                            <div>
+                                                <b>Tiempo:</b>
+                                                {this.state.newMenuItem.tiempo}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : null}
                         </div>
                         <div>
                             <div className="admin-titulo">
@@ -141,7 +173,6 @@ export default class Admin extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Header from "./header";
-import Footer from "./footer";
 import User from "./user";
 import PedidoUsuario from "./pedido-usuario";
 
@@ -55,7 +53,6 @@ export default class Profile extends Component {
     render() {
         return (
             <div className="perfil-container-wrapper">
-                <Header />
                 <div className="perfil-container">
                     <div className="personal-info-wrapper">
                         <div className="user-info-container">
@@ -69,7 +66,6 @@ export default class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

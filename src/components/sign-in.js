@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-
-import Header from "./header";
-import Footer from "./footer";
 import { Link } from "react-router";
 import axios from "axios";
 
@@ -40,7 +37,6 @@ export default class SignIn extends Component {
     render() {
         return (
             <div>
-                <Header />
                 <div className="general-body">
                     <div className="sign-in-container">
                         <div className="log-sign-in-title">
@@ -92,7 +88,6 @@ export default class SignIn extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import Header from "./header";
-import Footer from "./footer";
 import Menu from "./menu";
 
 export default class Pedido extends Component {
@@ -12,10 +10,6 @@ export default class Pedido extends Component {
     render() {
         return (
             <div className="pedidos">
-                <Header
-                    status={this.props.status}
-                    loggedIn={this.props.loggedIn}
-                />
                 <div className="general-body">
                     <div className="pedido-wrapper">
                         <div className="pedido-titulo">
@@ -27,7 +21,6 @@ export default class Pedido extends Component {
                         />
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Link, useNavigate } from "react-router";
-import Axios from "axios";
+import axios from "axios";
 import withNavigation from "./withNavigation";
-
-import Header from "./header";
-import Footer from "./footer";
 
 class LogIn extends Component {
     constructor(props) {
@@ -31,14 +28,15 @@ class LogIn extends Component {
     }
 
     handleSubmit(event) {
-        Axios.post(
-            "http://localhost:5000/login",
-            {
-                email: this.state.email,
-                contraseña: this.state.contraseña,
-            },
-            { withCredentials: true }
-        )
+        axios
+            .post(
+                "http://localhost:5000/login",
+                {
+                    email: this.state.email,
+                    contraseña: this.state.contraseña,
+                },
+                { withCredentials: true }
+            )
             .then((response) => {
                 this.setState({
                     usuarioId: response.data.usuario_id,
@@ -51,9 +49,9 @@ class LogIn extends Component {
             })
             .catch((error) => {
                 this.setState({
-                    errorText: "An error occurred",
+                    errorText: error.response.data.msg,
                 });
-                console.log(error, "error");
+                // console.log(error.response.data.msg, "error");
             });
         event.preventDefault();
     }
@@ -61,13 +59,14 @@ class LogIn extends Component {
     render() {
         return (
             <div className="gen">
-                <Header />
                 <div className="general-body">
                     <div className="login-container">
                         <div className="log-sign-in-title">
                             Introduce tu email y tu contraseña
                         </div>
-                        {/* <div>{this.state.errorText}</div> */}
+                        {this.state.errorText != "" ? (
+                            <div>{this.state.errorText}</div>
+                        ) : null}
                         <form
                             onSubmit={this.handleSubmit}
                             className="form-group-wrapper"
@@ -103,7 +102,6 @@ class LogIn extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

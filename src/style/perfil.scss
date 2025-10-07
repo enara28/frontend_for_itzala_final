@@ -1,17 +1,43 @@
 .perfil-container-wrapper {
     .perfil-container {
-        height: 100%;
-        width: 100%;
         background-color: $shade-four;
         display: flex;
         justify-content: center;
 
         .personal-info-wrapper {
-            width: 50%;
+            width: 40%;
             margin: 50px 0px;
 
             .user-info-container {
                 margin-bottom: 25px;
+                .user-title {
+                    color: $shade-three;
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    margin-bottom: 20px;
+                    margin-top: 50px;
+                }
+            }
+        }
+        .pedidos-wrapper {
+            .pedidos-title {
+                color: $shade-three;
+                font-size: 1.1em;
+                font-weight: 600;
+                margin-bottom: 20px;
+                margin-top: 50px;
+            }
+            .titulo-deplegable {
+                cursor: pointer;
+                color: $shade-one;
+                font-weight: 600;
+                font-size: 1em;
+                margin-bottom: 10px;
+                transition: ease-in-out 0.5s;
+
+                &:hover {
+                    color: $shade-three;
+                }
             }
         }
     }

@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import ModalBase from "./modal-base";
 import { Link } from "react-router";
 
-import Header from "./header";
-import Footer from "./footer";
-
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -41,10 +38,6 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home-container-wrapper">
-                <Header
-                    status={this.props.status}
-                    loggedIn={this.props.loggedIn}
-                />
                 <div className="general">
                     <div className="home-container">
                         <div className="menu-container">
@@ -82,7 +75,6 @@ export default class Home extends Component {
                         ) : null}
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }

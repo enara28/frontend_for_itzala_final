@@ -27,7 +27,10 @@ export default class MenuItem extends Component {
             .delete(`http://localhost:5000/menu-item/${id}`, {
                 withCredentials: true,
             })
-            .then(console.log("producto eliminado"))
+            .then(
+                console.log("producto eliminado"),
+                this.setState({ item: "" })
+            )
             .catch((err) => console.log(err));
     }
     editarProducto(id) {
@@ -73,30 +76,38 @@ export default class MenuItem extends Component {
     render() {
         const { precio, producto, tiempo, id } = this.state.item;
         return (
-            <div className="menu-item-container">
+            <div>
                 {this.state.editMode == false ? (
-                    <div className="menu-item">
-                        <div className="product-info">
-                            <div>
-                                <b>Producto:</b> {producto}
+                    <div className="menu-item-container">
+                        {this.state.item == "" ? (
+                            <div>Porducto eliminado</div>
+                        ) : (
+                            <div className="menu-item">
+                                <div className="product-info">
+                                    <div>
+                                        <b>Producto:</b> {producto}
+                                    </div>
+                                    <div>
+                                        <b>Precio:</b> {precio}
+                                    </div>
+                                    <div>
+                                        <b>Tiempo:</b> {tiempo}
+                                    </div>
+                                </div>
+                                <div className="product-icons">
+                                    <FontAwesomeIcon
+                                        icon={faTrash}
+                                        onClick={() =>
+                                            this.eliminar_producto(id)
+                                        }
+                                    />
+                                    <FontAwesomeIcon
+                                        icon={faPenToSquare}
+                                        onClick={() => this.editarProducto(id)}
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <b>Precio:</b> {precio}
-                            </div>
-                            <div>
-                                <b>Tiempo:</b> {tiempo}
-                            </div>
-                        </div>
-                        <div className="product-icons">
-                            <FontAwesomeIcon
-                                icon={faTrash}
-                                onClick={() => this.eliminar_producto(id)}
-                            />
-                            <FontAwesomeIcon
-                                icon={faPenToSquare}
-                                onClick={() => this.editarProducto(id)}
-                            />
-                        </div>
+                        )}
                     </div>
                 ) : (
                     <form onSubmit={this.handleSubmit}>
