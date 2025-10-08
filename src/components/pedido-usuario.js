@@ -12,12 +12,12 @@ export default class PedidoUsuario extends Component {
         this.cerrar = this.cerrar.bind(this);
     }
     recortarPedidos() {
-        return this.props.pedidos.map((p) => {
-            let pedido_recortado = p.pedido.split(",");
-            return pedido_recortado.map((el) => (
-                <div className="elemento-pedido">{el}</div>
-            ));
-        });
+        let pedido_recortado = this.props.pedido.pedido.split(",");
+        return pedido_recortado.map((el, idx) => (
+            <div key={idx} className="elemento-pedido">
+                {el}
+            </div>
+        ));
     }
     // ver cómo desplegar uno por uno
     deplegar() {
@@ -26,35 +26,31 @@ export default class PedidoUsuario extends Component {
         });
     }
 
-    cerrar(id) {
+    cerrar() {
         this.setState({
             desplegado: false,
         });
     }
 
-    generarLista() {
-        return this.props.pedidos.map((p) => {
-            return (
-                <div>
-                    <div
-                        className="titulo-deplegable"
-                        onClick={
-                            this.state.desplegado == false
-                                ? () => this.deplegar(p.id)
-                                : () => this.cerrar(p.id)
-                        }
-                        // onMouseLeave={() => this.cerrar()}
-                    >
-                        Pedido nº {p.id}:
-                    </div>
+    render() {
+        return (
+            <div className="cada-pedido">
+                <div
+                    className="titulo-deplegable"
+                    onClick={
+                        this.state.desplegado == false
+                            ? () => this.deplegar()
+                            : () => this.cerrar()
+                    }
+                >
+                    Pedido nº {this.props.pedido.id}:
+                </div>
+                <div className="contenido">
                     {this.state.desplegado == true
                         ? this.recortarPedidos()
                         : null}
                 </div>
-            );
-        });
-    }
-    render() {
-        return <div>{this.generarLista()}</div>;
+            </div>
+        );
     }
 }

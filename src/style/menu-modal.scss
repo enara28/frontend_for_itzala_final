@@ -7,10 +7,10 @@
 
 .ReactModal__Content {
     .modal-wrapper-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        // justify-items: center;
+        // align-items: center;
         a {
             svg {
                 color: darkred;
@@ -35,9 +35,9 @@
             grid-template-columns: 1fr 1fr 1fr;
             gap: 50px;
             .menu-titulo {
-                color: $shade-three;
-                font-size: 1.1em;
-                font-weight: 600;
+                @include titulo-general;
+                margin-top: 20px;
+                margin-bottom: 8px;
             }
             li {
                 list-style-type: none;

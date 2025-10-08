@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 import logo from "../assets/logo/logo-512x512.png";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowRightToBracket,
+    faArrowRightFromBracket,
+    faUser,
+    faHammer,
+} from "@fortawesome/free-solid-svg-icons";
+
 import withNavigation from "./withNavigation";
 
 class Header extends Component {
@@ -37,19 +45,53 @@ class Header extends Component {
                         {this.props.loggedIn == "LOGGED_IN" &&
                         this.props.status &&
                         this.props.status == "usuario" ? (
-                            <Link to="/profile">Profile</Link>
+                            <Link to="/perfil-usuario">
+                                <div className="header-buttons">
+                                    <div className="big-screen">Perfil</div>
+                                    <div className="small-screen">
+                                        <FontAwesomeIcon icon={faUser} />
+                                    </div>
+                                </div>
+                            </Link>
                         ) : this.props.loggedIn == "LOGGED_IN" &&
                           this.props.status &&
                           this.props.status == "admin" ? (
-                            <Link to="/admin">Admin</Link>
+                            <Link to="/admin">
+                                <div className="header-buttons">
+                                    <div className="big-screen">Admin</div>
+                                    <div className="small-screen">
+                                        <FontAwesomeIcon icon={faHammer} />
+                                    </div>
+                                </div>
+                            </Link>
                         ) : null}
                     </div>
                     <div className="log-in-wrapper">
                         {this.props.loggedIn == "NO_LOGGED_IN" ? (
-                            <Link to="/log-in">Iniciar sesión</Link>
+                            <Link to="/log-in">
+                                <div className="header-buttons">
+                                    <div className="big-screen">
+                                        Iniciar sesión
+                                    </div>
+                                    <div className="small-screen">
+                                        <FontAwesomeIcon
+                                            icon={faArrowRightToBracket}
+                                        />
+                                    </div>
+                                </div>
+                            </Link>
                         ) : this.props.loggedIn == "LOGGED_IN" ? (
                             <Link to="/" onClick={() => this.cerrarSesion()}>
-                                Cerrar sesión
+                                <div className="header-buttons">
+                                    <div className="big-screen">
+                                        Cerrar sesión
+                                    </div>
+                                    <div className="small-screen">
+                                        <FontAwesomeIcon
+                                            icon={faArrowRightFromBracket}
+                                        />
+                                    </div>
+                                </div>
                             </Link>
                         ) : null}
                     </div>

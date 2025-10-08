@@ -18,18 +18,18 @@
             padding: 0px 20px;
         }
         a {
-            text-decoration: none;
-            border-bottom: 3px solid transparent;
-            border-radius: 4px;
-            color: $shade-four;
-            padding: 5px;
-            font-size: 1.1em;
-            font-weight: 500;
-            transition: ease-in-out 0.5s;
+            .header-buttons {
+                display: flex;
+                @include enlaces-general;
 
-            &:hover {
-                border-bottom: 3px solid $shade-four;
-                border-radius: 4px;
+                .big-screen {
+                    margin-right: 5px;
+                }
+                .small-screen {
+                    svg {
+                        font-size: 1.1em;
+                    }
+                }
             }
         }
         display: flex;

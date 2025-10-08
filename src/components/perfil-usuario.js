@@ -4,7 +4,7 @@ import axios from "axios";
 import User from "./user";
 import PedidoUsuario from "./pedido-usuario";
 
-export default class Profile extends Component {
+export default class PerfilUsuario extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,7 @@ export default class Profile extends Component {
         };
     }
 
-    get_user_profile() {
+    obtenerPerfil() {
         axios
             .get(`http://localhost:5000/usuario/${this.props.usuarioId}`, {
                 withCredentials: true,
@@ -27,7 +27,7 @@ export default class Profile extends Component {
             .catch((err) => console.log("error mio", err));
     }
 
-    get_pedidos() {
+    obtenerPedidos() {
         axios
             .get(`http://localhost:5000/pedido/${this.props.usuarioId}`)
             .then((response) => {
@@ -41,28 +41,32 @@ export default class Profile extends Component {
 
     componentDidMount() {
         if (this.props.status == "usuario") {
-            this.get_user_profile();
-            this.get_pedidos();
+            this.obtenerPerfil();
+            this.obtenerPedidos();
         }
     }
 
-    singleUserInfo() {
-        return <User user={this.state.singleUser} />;
+    mostrarPedidos() {
+        return this.state.pedidos.map((pedido) => {
+            return <PedidoUsuario key={pedido.id} pedido={pedido} />;
+        });
     }
 
     render() {
         return (
-            <div className="perfil-container-wrapper">
-                <div className="perfil-container">
+            <div className="profile-container-wrapper">
+                <div className="profile-container">
                     <div className="personal-info-wrapper">
                         <div className="user-info-container">
-                            {this.singleUserInfo()}
+                            <User user={this.state.singleUser} />
                         </div>
                         <div className="pedidos-wrapper">
                             <div className="pedidos-title">
                                 Pedidos realizados:
                             </div>
-                            <PedidoUsuario pedidos={this.state.pedidos} />
+                            <div className="pedidos-content">
+                                {this.mostrarPedidos()}
+                            </div>
                         </div>
                     </div>
                 </div>

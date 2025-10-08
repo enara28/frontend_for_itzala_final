@@ -1,0 +1,72 @@
+@media screen and (max-width: 685px) {
+    .footer-container-wrapper {
+        padding: 24px 0px;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        height: 100%;
+        img {
+            display: none;
+        }
+    }
+    .log-in-wrapper,
+    .profile-wrapper {
+        a {
+            .big-screen {
+                display: none;
+            }
+        }
+    }
+    .modal-wrapper {
+        .menu-container {
+            .menu-wrapper {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+        }
+    }
+    .pedido-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        li {
+            display: grid;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+    }
+    .log-in-message {
+        font-size: 1em;
+        span {
+            display: none;
+        }
+    }
+
+    .profile-container-wrapper .profile-container .personal-info-wrapper {
+        width: 90%;
+        margin: 10px;
+    }
+    .admin-container .general-body .admin-content-wrapper {
+        width: 90%;
+        .admin-menu .menu-item-container {
+            width: 100%;
+        }
+    }
+    .sign-in-container {
+        margin: 0px 10px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 685px) {
+    // body {
+    //     font-size: 1.5em;
+    // }
+    .modal-wrapper {
+        .menu-container {
+            .menu-wrapper {
+                height: 100%;
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

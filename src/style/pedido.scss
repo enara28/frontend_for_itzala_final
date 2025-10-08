@@ -1,10 +1,6 @@
 .pedido-wrapper {
     .pedido-titulo {
-        font-size: 1.2em;
-        font-weight: 600;
-        color: $shade-three;
-        margin-top: 50px;
-        margin-bottom: 30px;
+        @include titulo-general;
     }
 }
 
@@ -20,42 +16,12 @@
             font: 1em;
         }
         input {
-            font-size: 0.8em;
-            background-color: $shade-four;
-            border: 2px solid $shade-five;
-            border-radius: 5px;
-            padding: 2px;
-            color: $shade-three;
-            transition: 0.5s;
-
-            &::placeholder {
-                color: $shade-three;
-                font-family: "Numans", sans-serif;
-            }
-            &:focus {
-                outline: none;
-                border: 2px solid $shade-three;
-                border-radius: 5px;
-                box-shadow: 10px 10px 33px -5px rgba(0, 0, 0, 0.1);
-            }
+            @include input-general;
         }
 
         .btn {
-            font-size: 1em;
-            font-family: "Numans", sans-serif;
-            background-color: $shade-four;
-            padding: 10px 20px;
-            border: 2px solid $shade-three;
-            border-radius: 5px;
-            color: $shade-three;
-            cursor: pointer;
-            transition: 0.5s ease-in-out;
             margin-bottom: 50px;
-
-            &:hover {
-                background-color: $shade-three;
-                color: $shade-four;
-            }
+            @include btn;
         }
     }
 }

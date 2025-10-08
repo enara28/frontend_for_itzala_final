@@ -1,4 +1,23 @@
-.day-selecction {
-    width: 100px;
-    padding: 5px 10px;
+// .day-selecction {
+//     width: 100px;
+//     padding: 5px 10px;
+// }
+.reservation-container {
+    width: 100%;
+    .reservation-title {
+        @include titulo-general;
+        font-size: 0.9em;
+    }
+    .reservation-inputs {
+        display: grid;
+        input,
+        textarea,
+        select {
+            @include input-general;
+            margin: 5px 10px;
+        }
+        .btn {
+            @include btn;
+        }
+    }
 }

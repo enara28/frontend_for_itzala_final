@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import User from "./user";
 import MenuItem from "./menu-item";
@@ -16,6 +18,7 @@ export default class Admin extends Component {
             users: [],
             menu: [],
             newMenuItem: "",
+            cargando: true,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,6 +79,7 @@ export default class Admin extends Component {
             this.get_all_users();
             this.get_menu_items();
         }
+        this.setState({ cargando: false });
     }
 
     menuItems() {
@@ -100,78 +104,90 @@ export default class Admin extends Component {
         return (
             <div className="admin-container">
                 <div className="general-body">
-                    <div className="admin-content-wrapper">
-                        <div className="user-info">
-                            <div className="admin-titulo">
-                                Usuarios registrados:
-                            </div>
-                            {this.usersInfo()}
+                    {this.state.cargando == true ? (
+                        <div>
+                            <FontAwesomeIcon icon={faSpinner} spin />
                         </div>
-                        <div className="admin-menu">
-                            <div className="admin-titulo">Menú</div>
-                            {this.menuItems()}
-                            {this.state.newMenuItem != "" ? (
-                                <div className="menu-item-container">
-                                    <div className="menu-item">
-                                        <div className="product-info">
-                                            <div>
-                                                <b>Producto:</b>
-                                                {
-                                                    this.state.newMenuItem
-                                                        .producto
-                                                }
-                                            </div>
-                                            <div>
-                                                <b>Precio:</b>
-                                                {this.state.newMenuItem.precio}
-                                            </div>
-                                            <div>
-                                                <b>Tiempo:</b>
-                                                {this.state.newMenuItem.tiempo}
+                    ) : (
+                        <div className="admin-content-wrapper">
+                            <div className="user-info">
+                                <div className="admin-titulo">
+                                    Usuarios registrados:
+                                </div>
+                                {this.usersInfo()}
+                            </div>
+                            <div className="admin-menu">
+                                <div className="admin-titulo">Menú</div>
+                                {this.menuItems()}
+                                {this.state.newMenuItem != "" ? (
+                                    <div className="menu-item-container">
+                                        <div className="menu-item">
+                                            <div className="product-info">
+                                                <div>
+                                                    <b>Producto:</b>
+                                                    {
+                                                        this.state.newMenuItem
+                                                            .producto
+                                                    }
+                                                </div>
+                                                <div>
+                                                    <b>Precio:</b>
+                                                    {
+                                                        this.state.newMenuItem
+                                                            .precio
+                                                    }
+                                                </div>
+                                                <div>
+                                                    <b>Tiempo:</b>
+                                                    {
+                                                        this.state.newMenuItem
+                                                            .tiempo
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <div className="admin-titulo">
-                                Añadir nuevo plato al menú
+                                ) : null}
                             </div>
-                            <form
-                                className="create-new-product"
-                                onSubmit={this.handleSubmit}
-                            >
-                                <input
-                                    type="text"
-                                    name="producto"
-                                    placeholder="Producto"
-                                    value={this.state.producto}
-                                    onChange={this.handleChange}
-                                    autoComplete="on"
-                                />
-                                <input
-                                    type="number"
-                                    name="tiempo"
-                                    placeholder="Tiempo (1, 2 o 3)"
-                                    value={this.state.tiempo}
-                                    onChange={this.handleChange}
-                                    autoComplete="on"
-                                />
-                                <input
-                                    type="number"
-                                    name="precio"
-                                    placeholder="Precio"
-                                    value={this.state.precio}
-                                    onChange={this.handleChange}
-                                    autoComplete="on"
-                                />
-                                <button className="btn" type="submit">
-                                    Guardar
-                                </button>
-                            </form>
+                            <div>
+                                <div className="admin-titulo">
+                                    Añadir nuevo plato al menú
+                                </div>
+                                <form
+                                    className="create-new-product"
+                                    onSubmit={this.handleSubmit}
+                                >
+                                    <input
+                                        type="text"
+                                        name="producto"
+                                        placeholder="Producto"
+                                        value={this.state.producto}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <input
+                                        type="number"
+                                        name="tiempo"
+                                        placeholder="Tiempo (1, 2 o 3)"
+                                        value={this.state.tiempo}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <input
+                                        type="number"
+                                        name="precio"
+                                        placeholder="Precio"
+                                        value={this.state.precio}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <button className="btn" type="submit">
+                                        Guardar
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         );

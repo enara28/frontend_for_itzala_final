@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Home from "./home";
 import About from "./about";
-import Profile from "./profile";
+import PerfilUsuario from "./perfil-usuario";
 import LogIn from "./log-in";
 import Pedido from "./pedido";
 import SignIn from "./sign-in";
@@ -113,9 +113,9 @@ export default class App extends Component {
                         />
                     ) : this.state.status == "usuario" ? (
                         <Route
-                            path="/profile"
+                            path="/perfil-usuario"
                             element={
-                                <Profile
+                                <PerfilUsuario
                                     usuarioId={this.state.usuarioId}
                                     status={this.state.status}
                                     loggedIn={this.state.loggedIn}

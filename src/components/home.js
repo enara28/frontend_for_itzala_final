@@ -68,8 +68,10 @@ export default class Home extends Component {
                         {this.props.loggedIn == "NO_LOGGED_IN" ? (
                             <div className="log-in-message">
                                 <Link to="/log-in">
-                                    Inicie sesión para reservar mesa o hacer tu
-                                    pedido
+                                    Inicia sesión{" "}
+                                    <span>
+                                        para reservar mesa o hacer tu pedido
+                                    </span>
                                 </Link>
                             </div>
                         ) : null}

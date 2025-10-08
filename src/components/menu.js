@@ -15,7 +15,6 @@ class Menu extends Component {
             postres: [],
             cargando: true,
             cantidad: [],
-            pedido: [],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,52 +41,42 @@ class Menu extends Component {
                 segundos: segundo,
                 postres: postre,
                 cargando: false,
-                total: [],
             });
         });
     }
-
     handleChange(event) {
-        this.setState((prevState) => ({
-            pedido: [
-                ...prevState.pedido,
-                { [event.target.name]: event.target.value },
-            ],
-            cantidad: event.target.value,
-        }));
-        console.log(this.state.pedido);
-
-        // this.generarTotal();
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
     }
-    // Ejemplo para poder multiplicar un string
-    //     const mood = "Happy! ";
-
-    // console.log(`I feel ${mood.repeat(3)}`);
-    // Expected output: "I feel Happy! Happy! Happy! "
 
     handleSubmit(event) {
         event.preventDefault();
-        let coment = this.state.pedido.map((el) => {
-            for (const [key, value] of Object.entries(el)) {
-                return ` ${key}: ${value}`;
+        let cadena = Object.keys(this.state);
+        let coment = cadena.filter((el) => {
+            if (
+                el !== "menuCompleto" &&
+                el !== "entrantes" &&
+                el !== "segundos" &&
+                el !== "postres" &&
+                el !== "cargando" &&
+                el !== "cantidad"
+            ) {
+                return el;
             }
         });
-        // let calculo = this.state.pedido.map((el) => {
-        //     for (const [key, value] of Object.entries(el)) {
-        //         return [
-        //             this.state.menuCompleto.producto == key,
-        //             parseFloat(value),
-        //         ];
-        //     }
-        // });
-        // calculo = this.state.menuCompleto.map((el) => {});
+
+        let nuevo_pedido = coment.map((el) => {
+            return `${el}: ${this.state[el]}`;
+        });
+
         if (confirm("¿Está tu pedido listo?")) {
             axios
                 .post(
                     "http://localhost:5000/pedido",
                     {
                         usuario: this.props.usuarioId,
-                        pedido: coment.toString(),
+                        pedido: nuevo_pedido.toString(),
                     },
                     { withCredentials: true }
                 )
@@ -171,17 +160,15 @@ class Menu extends Component {
             } else {
                 return (
                     <li key={item.id}>
-                        <label>
-                            {item.producto}: <span>{item.precio} €</span>{" "}
-                            <input
-                                placeholder="Cantidad"
-                                name={item.producto}
-                                type="number"
-                                form="formulario"
-                                value={this.state.cantidad[item.producto]}
-                                onChange={this.handleChange}
-                            />
-                        </label>
+                        {item.producto}: <span>{item.precio} €</span>{" "}
+                        <input
+                            placeholder="Cantidad"
+                            name={item.producto}
+                            type="number"
+                            form="formulario"
+                            value={this.state.cantidad[item.producto]}
+                            onChange={this.handleChange}
+                        />
                     </li>
                 );
             }

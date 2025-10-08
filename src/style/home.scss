@@ -1,7 +1,7 @@
 .general {
     height: 73vh;
     width: 100%;
-    background-color: $shade-four;
+    @include background;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,40 +36,25 @@
 
         .book-table,
         .food-delivery {
-            cursor: pointer;
-            color: $shade-three;
-            font-weight: 800;
-            padding: 3px;
-            border-bottom: 3px solid transparent;
-            border-radius: 4px;
-            transition: ease-in-out 0.5s;
             a {
+                @include enlaces-general;
+                cursor: pointer;
                 color: $shade-three;
-                font-weight: 800;
-            }
-
-            &:hover {
-                border-bottom: 3px solid $shade-three;
-                border-radius: 4px;
+                font-size: 1em;
+                &:hover {
+                    border-bottom: 3px solid $shade-three;
+                }
             }
         }
     }
     .log-in-message {
-        cursor: pointer;
-        color: $shade-three;
-        font-weight: 800;
-        padding: 3px;
-        border-bottom: 3px solid transparent;
-        border-radius: 4px;
-        transition: ease-in-out 0.5s;
         a {
+            @include enlaces-general;
             color: $shade-three;
-            font-weight: 800;
-        }
 
-        &:hover {
-            border-bottom: 3px solid $shade-three;
-            border-radius: 4px;
+            &:hover {
+                border-bottom: 3px solid $shade-three;
+            }
         }
     }
 }

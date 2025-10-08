@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class Reservation extends Component {
+export default class Reserva extends Component {
     constructor() {
         super();
 
@@ -39,8 +39,13 @@ export default class Reservation extends Component {
     render() {
         return (
             <div className="reservation-container">
-                This is the reservation modal
-                <form onSubmit={this.handleSubmit}>
+                <div className="reservation-title">
+                    Selecciona el día de la reserva y indica cuántos seréis
+                </div>
+                <form
+                    className="reservation-inputs"
+                    onSubmit={this.handleSubmit}
+                >
                     <select
                         className="day-selecction"
                         type="text"
@@ -73,7 +78,9 @@ export default class Reservation extends Component {
                         onChange={this.handleChange}
                         autoComplete="on"
                     />
-                    <button type="submit">Reservar</button>
+                    <button className="btn" type="submit">
+                        Reservar
+                    </button>
                 </form>
             </div>
         );

@@ -57,7 +57,7 @@ export default class MenuItem extends Component {
     handleSubmit(event) {
         axios
             .patch(
-                `http://localhost:5000/${this.state.editId}`,
+                `http://localhost:5000/menu-item/${this.state.editId}`,
                 {
                     producto: this.state.editProducto,
                     tiempo: this.state.editTiempo,
@@ -110,7 +110,7 @@ export default class MenuItem extends Component {
                         )}
                     </div>
                 ) : (
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className="edit-item">
                         <input
                             type="text"
                             name="editProducto"
@@ -135,7 +135,9 @@ export default class MenuItem extends Component {
                             onChange={this.handleChange}
                             autoComplete="on"
                         />
-                        <button type="submit">Submit</button>
+                        <button className="btn" type="submit">
+                            Guardar
+                        </button>
                     </form>
                 )}
             </div>

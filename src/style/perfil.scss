@@ -1,6 +1,6 @@
-.perfil-container-wrapper {
-    .perfil-container {
-        background-color: $shade-four;
+.profile-container-wrapper {
+    .profile-container {
+        @include background;
         display: flex;
         justify-content: center;
 
@@ -11,32 +11,34 @@
             .user-info-container {
                 margin-bottom: 25px;
                 .user-title {
-                    color: $shade-three;
-                    font-size: 1.1em;
-                    font-weight: 600;
-                    margin-bottom: 20px;
-                    margin-top: 50px;
+                    @include titulo-general;
                 }
             }
         }
         .pedidos-wrapper {
             .pedidos-title {
-                color: $shade-three;
-                font-size: 1.1em;
-                font-weight: 600;
-                margin-bottom: 20px;
-                margin-top: 50px;
+                @include titulo-general;
             }
-            .titulo-deplegable {
-                cursor: pointer;
-                color: $shade-one;
-                font-weight: 600;
-                font-size: 1em;
-                margin-bottom: 10px;
-                transition: ease-in-out 0.5s;
+            .cada-pedido {
+                padding: 15px;
+                border: 2px solid $shade-five;
+                margin: 10px 0px;
+                .titulo-deplegable {
+                    cursor: pointer;
+                    color: $shade-one;
+                    font-weight: 600;
+                    font-size: 1em;
+                    margin-bottom: 10px;
+                    transition: ease-in-out 0.5s;
 
-                &:hover {
-                    color: $shade-three;
+                    &:hover {
+                        color: $shade-three;
+                    }
+                }
+                .contenido {
+                    .elemento-pedido {
+                        padding: 3px 0px;
+                    }
                 }
             }
         }
