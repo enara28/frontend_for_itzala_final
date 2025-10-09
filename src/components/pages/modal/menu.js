@@ -9,7 +9,7 @@ class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            menuCompleto: [],
+            fullMenu: [],
             entrantes: [],
             segundos: [],
             postres: [],
@@ -20,7 +20,7 @@ class Menu extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    get_menu() {
+    getMenu() {
         axios.get("http://localhost:5000/menu-item").then((response) => {
             console.log(response.data);
             let entrante = [];
@@ -36,7 +36,7 @@ class Menu extends Component {
                 }
             });
             this.setState({
-                menuCompleto: response.data,
+                fullMenu: response.data,
                 entrantes: entrante,
                 segundos: segundo,
                 postres: postre,
@@ -55,7 +55,7 @@ class Menu extends Component {
         let cadena = Object.keys(this.state);
         let coment = cadena.filter((el) => {
             if (
-                el !== "menuCompleto" &&
+                el !== "fullMenu" &&
                 el !== "entrantes" &&
                 el !== "segundos" &&
                 el !== "postres" &&
@@ -66,7 +66,7 @@ class Menu extends Component {
             }
         });
 
-        let nuevo_pedido = coment.map((el) => {
+        let newOrder = coment.map((el) => {
             return `${el}: ${this.state[el]}`;
         });
 
@@ -76,7 +76,7 @@ class Menu extends Component {
                     "http://localhost:5000/pedido",
                     {
                         usuario: this.props.usuarioId,
-                        pedido: nuevo_pedido.toString(),
+                        pedido: newOrder.toString(),
                     },
                     { withCredentials: true }
                 )
@@ -89,7 +89,7 @@ class Menu extends Component {
     }
 
     componentDidMount() {
-        this.get_menu();
+        this.getMenu();
     }
 
     render() {
@@ -103,7 +103,7 @@ class Menu extends Component {
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: <span>{item.precio} €</span>{" "}
+                        {item.producto}: {item.precio} €
                         <input
                             placeholder="Cantidad"
                             name={item.producto}
@@ -126,7 +126,7 @@ class Menu extends Component {
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: <span>{item.precio} €</span>{" "}
+                        {item.producto}: {item.precio} €
                         <input
                             placeholder="Cantidad"
                             name={item.producto}
@@ -149,7 +149,7 @@ class Menu extends Component {
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: <span>{item.precio} €</span>{" "}
+                        {item.producto}: {item.precio} €
                         <input
                             placeholder="Cantidad"
                             name={item.producto}
@@ -165,23 +165,21 @@ class Menu extends Component {
         return (
             <div className="menu-container">
                 {this.state.cargando == true ? (
-                    <div>
+                    <div className="loading-icon">
                         <FontAwesomeIcon icon={faSpinner} spin />
                     </div>
                 ) : (
                     <div className="menu-wrapper">
                         <div className="entrees">
-                            <div className="menu-titulo">Entrantes</div>
+                            <div className="menu-title">Entrantes</div>
                             <ul>{entrada}</ul>
                         </div>
-                        <div className="principales">
-                            <div className="menu-titulo">
-                                Platos principales
-                            </div>
+                        <div className="mains">
+                            <div className="menu-title">Platos principales</div>
                             <ul>{fuerte}</ul>
                         </div>
-                        <div className="postres">
-                            <div className="menu-titulo">Postres</div>
+                        <div className="desserts">
+                            <div className="menu-title">Postres</div>
                             <ul>{final}</ul>
                         </div>
                         {this.props.location == "order" ? (

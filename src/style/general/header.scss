@@ -1,3 +1,4 @@
+// revisado
 .header-container-wrapper {
     position: relative;
     width: 100%;
@@ -7,32 +8,38 @@
     align-items: center;
     background-color: $shade-three;
     box-shadow: -2px -5px 38px 9px rgba(0, 0, 0, 0.3);
-    img {
-        width: 43px;
-        padding: 10px;
-        margin-left: 10px;
-    }
-    .links-container {
-        .profile-wrapper,
-        .log-in-wrapper {
-            padding: 0px 20px;
-        }
-        a {
-            .header-buttons {
-                display: flex;
-                @include enlaces-general;
 
-                .big-screen {
-                    margin-right: 5px;
-                }
-                .small-screen {
-                    svg {
-                        font-size: 1.1em;
+    .logo-wrapper {
+        img {
+            width: 43px;
+            padding: 10px;
+            margin-left: 10px;
+        }
+    }
+
+    .header-links-container {
+        display: flex;
+        justify-content: space-between;
+
+        .header-profile-admin-link,
+        .header-log-in-out-wrapper {
+            padding: 0px 20px;
+
+            a {
+                .header-buttons {
+                    display: flex;
+                    @include enlaces-general;
+
+                    .big-screen {
+                        margin-right: 5px;
+                    }
+                    .small-screen {
+                        svg {
+                            font-size: 1.1em;
+                        }
                     }
                 }
             }
         }
-        display: flex;
-        justify-content: space-between;
     }
 }

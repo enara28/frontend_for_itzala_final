@@ -16,13 +16,13 @@ export default class MenuItem extends Component {
             editId: "",
         };
 
-        this.eliminar_producto = this.eliminar_producto.bind(this);
-        this.editarProducto = this.editarProducto.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+        this.editProduct = this.editProduct.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    eliminar_producto(id) {
+    deleteProduct(id) {
         axios
             .delete(`http://localhost:5000/menu-item/${id}`, {
                 withCredentials: true,
@@ -33,7 +33,7 @@ export default class MenuItem extends Component {
             )
             .catch((err) => console.log(err));
     }
-    editarProducto(id) {
+    editProduct(id) {
         axios
             .get(`http://localhost:5000/menu-item/${id}`, {
                 withCredentials: true,
@@ -94,7 +94,7 @@ export default class MenuItem extends Component {
                                         <b>Producto:</b> {producto}
                                     </div>
                                     <div>
-                                        <b>Precio:</b> {precio}
+                                        <b>Precio:</b> {precio} €
                                     </div>
                                     <div>
                                         <b>Tiempo:</b> {tiempo}
@@ -103,13 +103,11 @@ export default class MenuItem extends Component {
                                 <div className="menu-item-icons">
                                     <FontAwesomeIcon
                                         icon={faTrash}
-                                        onClick={() =>
-                                            this.eliminar_producto(id)
-                                        }
+                                        onClick={() => this.deleteProduct(id)}
                                     />
                                     <FontAwesomeIcon
                                         icon={faPenToSquare}
-                                        onClick={() => this.editarProducto(id)}
+                                        onClick={() => this.editProduct(id)}
                                     />
                                 </div>
                             </div>

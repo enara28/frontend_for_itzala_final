@@ -8,10 +8,11 @@ export default class PedidoUsuario extends Component {
             desplegado: false,
         };
 
-        this.deplegar = this.deplegar.bind(this);
-        this.cerrar = this.cerrar.bind(this);
+        this.openDropDown = this.openDropDown.bind(this);
+        this.closeDropDown = this.closeDropDown.bind(this);
     }
-    recortarPedidos() {
+
+    trimOrders() {
         let pedido_recortado = this.props.pedido.pedido.split(",");
         return pedido_recortado.map((el, idx) => (
             <div key={idx} className="single-order-element">
@@ -20,13 +21,13 @@ export default class PedidoUsuario extends Component {
         ));
     }
     // ver cómo desplegar uno por uno
-    deplegar() {
+    openDropDown() {
         this.setState({
             desplegado: true,
         });
     }
 
-    cerrar() {
+    closeDropDown() {
         this.setState({
             desplegado: false,
         });
@@ -39,16 +40,14 @@ export default class PedidoUsuario extends Component {
                     className="single-order-title"
                     onClick={
                         this.state.desplegado == false
-                            ? () => this.deplegar()
-                            : () => this.cerrar()
+                            ? () => this.openDropDown()
+                            : () => this.closeDropDown()
                     }
                 >
                     Pedido nº {this.props.pedido.id}:
                 </div>
                 <div className="single-order-content">
-                    {this.state.desplegado == true
-                        ? this.recortarPedidos()
-                        : null}
+                    {this.state.desplegado == true ? this.trimOrders() : null}
                 </div>
             </div>
         );

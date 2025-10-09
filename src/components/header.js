@@ -18,10 +18,10 @@ class Header extends Component {
         // this.state = {
         //     loggedIn: this.props.loggedIn,
         // };
-        this.cerrarSesion = this.cerrarSesion.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
 
-    cerrarSesion() {
+    logOut() {
         axios
             .post("http://localhost:5000/logout", {}, { withCredentials: true })
             .then(
@@ -40,8 +40,8 @@ class Header extends Component {
                         <img src={logo} />
                     </Link>
                 </div>
-                <div className="links-container">
-                    <div className="profile-wrapper">
+                <div className="header-links-container">
+                    <div className="header-profile-admin-link">
                         {this.props.loggedIn == "LOGGED_IN" &&
                         this.props.status &&
                         this.props.status == "usuario" ? (
@@ -66,7 +66,7 @@ class Header extends Component {
                             </Link>
                         ) : null}
                     </div>
-                    <div className="log-in-wrapper">
+                    <div className="header-log-in-out-wrapper">
                         {this.props.loggedIn == "NO_LOGGED_IN" ? (
                             <Link to="/log-in">
                                 <div className="header-buttons">
@@ -81,7 +81,7 @@ class Header extends Component {
                                 </div>
                             </Link>
                         ) : this.props.loggedIn == "LOGGED_IN" ? (
-                            <Link to="/" onClick={() => this.cerrarSesion()}>
+                            <Link to="/" onClick={() => this.logOut()}>
                                 <div className="header-buttons">
                                     <div className="big-screen">
                                         Cerrar sesión

@@ -15,7 +15,7 @@ export default class PerfilUsuario extends Component {
         };
     }
 
-    obtenerPerfil() {
+    getProfile() {
         axios
             .get(`http://localhost:5000/usuario/${this.props.usuarioId}`, {
                 withCredentials: true,
@@ -29,7 +29,7 @@ export default class PerfilUsuario extends Component {
             .catch((err) => console.log("error mio", err));
     }
 
-    obtenerPedidos() {
+    getOrders() {
         axios
             .get(`http://localhost:5000/pedido/${this.props.usuarioId}`)
             .then((response) => {
@@ -41,7 +41,7 @@ export default class PerfilUsuario extends Component {
             .catch((err) => console.log("error mio", err));
     }
 
-    obtenerReservations() {
+    getReservations() {
         axios
             .get(`http://localhost:5000/reservation/${this.props.usuarioId}`)
             .then((response) => {
@@ -55,13 +55,13 @@ export default class PerfilUsuario extends Component {
 
     componentDidMount() {
         if (this.props.status == "usuario") {
-            this.obtenerPerfil();
-            this.obtenerPedidos();
-            this.obtenerReservations();
+            this.getProfile();
+            this.getOrders();
+            this.getReservations();
         }
     }
 
-    mostrarPedidos() {
+    showOrders() {
         return this.state.pedidos.map((pedido) => {
             return <PedidoUsuario key={pedido.id} pedido={pedido} />;
         });
@@ -88,7 +88,7 @@ export default class PerfilUsuario extends Component {
                     <div className="pedidos-info-container">
                         <div className="pedidos-title">Pedidos realizados:</div>
                         <div className="pedidos-content">
-                            {this.mostrarPedidos()}
+                            {this.showOrders()}
                         </div>
                     </div>
                     <div className="pedidos-info-container">

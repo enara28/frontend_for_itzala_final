@@ -1,10 +1,4 @@
-// .icon a {
-//     .svg-inline--fa {
-//         color: darkred;
-//         font-size: 2em;
-//     }
-// }
-
+// para mañana ordenar con cada documento
 .ReactModal__Content {
     .modal-wrapper-container {
         display: grid;
@@ -31,11 +25,20 @@
 .modal-wrapper {
     font-family: "Numans", sans-serif;
     .menu-container {
+        .loading-icon {
+            display: flex;
+            justify-content: center;
+
+            svg {
+                color: $shade-three;
+                font-size: 3em;
+            }
+        }
         .menu-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 50px;
-            .menu-titulo {
+            .menu-title {
                 @include titulo-general;
                 margin-top: 20px;
                 margin-bottom: 8px;

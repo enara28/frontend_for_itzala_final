@@ -1,3 +1,4 @@
+// revisado
 .admin-container-wrapper {
     @include general-body;
 
@@ -15,10 +16,12 @@
                 .single-user-reservations-title {
                     font-weight: 600;
                     margin-bottom: 5px;
+                    font-size: 1em;
                 }
 
                 .single-user-reservations-content {
                     margin-bottom: 10px;
+                    font-size: 0.9em;
                 }
             }
         }

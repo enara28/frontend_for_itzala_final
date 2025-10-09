@@ -1,15 +1,15 @@
+// revisado
 .profile-container-wrapper {
     @include general-body;
 
     .profile-container {
         width: 40%;
+        margin-bottom: 50px;
         .user-info-container {
             .single-user-reservations-container {
                 margin-bottom: 25px;
                 .single-user-reservations-title {
                     @include titulo-general;
-                }
-                .single-user-reservations-content {
                 }
             }
         }

@@ -11,6 +11,7 @@ export default class Reservation extends Component {
             comentario: "",
             madeReservation: false,
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -94,10 +95,22 @@ export default class Reservation extends Component {
                         </form>
                     </div>
                 ) : (
-                    <div>
-                        Tu reserva se ha gestionado con éxito: Día{" "}
-                        {this.state.día} Grupo: {this.state.cantidad} personas
-                        Comentarios:{this.state.comentario}
+                    <div className="reservation-success-message">
+                        <div className="reservation-success-message-title">
+                            Tu reserva se ha gestionado con éxito:
+                        </div>
+                        <div className="reservation-success-message-content">
+                            <div>
+                                <b>Día:</b> {this.state.día}
+                            </div>
+                            <div>
+                                <b>Grupo:</b> {this.state.cantidad} personas
+                            </div>
+                            <div>
+                                <b>Comentarios:</b>
+                                {this.state.comentario}
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

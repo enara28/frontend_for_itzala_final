@@ -1,10 +1,20 @@
+// revisado
 .about-container-wrapper {
     @include general-body;
 
-    .text-container {
+    .about-container {
         width: 50%;
-        p {
-            margin-bottom: 10px;
+        display: grid;
+        justify-items: center;
+
+        .about-title-container {
+            @include titulo-general;
+        }
+
+        .about-text-container {
+            p {
+                margin-bottom: 10px;
+            }
         }
     }
 }

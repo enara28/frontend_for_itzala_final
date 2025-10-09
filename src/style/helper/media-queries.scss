@@ -11,8 +11,8 @@
     }
 
     // header.scss
-    .log-in-wrapper,
-    .profile-wrapper {
+    .header-profile-admin-link,
+    .header-log-in-out-wrapper {
         a {
             .big-screen {
                 display: none;
@@ -41,6 +41,16 @@
             display: grid;
             gap: 5px;
             margin-bottom: 5px;
+        }
+    }
+
+    .order-container-wrapper .order-container {
+        width: 90%;
+        input {
+            width: 40px;
+            &::placeholder {
+                color: transparent;
+            }
         }
     }
 
@@ -102,6 +112,14 @@
     .welcome-comment {
         span {
             display: none;
+        }
+    }
+
+    .order-container-wrapper .order-container {
+        font: 0.9em;
+        width: 80%;
+        input {
+            width: 80px;
         }
     }
 }

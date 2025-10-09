@@ -40,7 +40,7 @@ export default class Home extends Component {
         return (
             <div className="home-container-wrapper">
                 <div className="home-container">
-                    <div className="welcome-comment">
+                    <div className="home-welcome-comment">
                         <em>
                             ¡Bienvenidas al Itzala!{" "}
                             <span>

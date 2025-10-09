@@ -1,23 +1,37 @@
-// .day-selecction {
-//     width: 100px;
-//     padding: 5px 10px;
-// }
+// revisado
 .reservation-container {
     width: 100%;
     .reservation-title {
         @include titulo-general;
-        font-size: 0.9em;
+
+        justify-self: center;
     }
     .reservation-inputs {
         display: grid;
+        justify-items: center;
+        align-items: center;
         input,
         textarea,
         select {
             @include input-general;
             margin: 5px 10px;
+            width: 40%;
         }
         .btn {
             @include btn;
+            width: 40%;
+        }
+    }
+
+    .reservation-success-message {
+        justify-items: center;
+        .reservation-success-message-title {
+            @include titulo-general;
+            margin-top: 0px;
+        }
+        .reservation-success-message-content {
+            font-family: "Numans", sans-serif;
+            font-size: 1em;
         }
     }
 }
