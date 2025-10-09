@@ -1,0 +1,92 @@
+.admin-container-wrapper {
+    @include general-body;
+
+    .admin-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 50%;
+        margin-bottom: 50px;
+
+        .admin-users-reservations-info {
+            .admin-users-reservations-info-title {
+                @include titulo-general;
+            }
+            .single-user-reservations-container {
+                .single-user-reservations-title {
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+
+                .single-user-reservations-content {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .admin-menu {
+            .admin-menu-title {
+                @include titulo-general;
+            }
+            .admin-menu-item-container {
+                width: 92%;
+                .admin-menu-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                    border: 2px solid $shade-five;
+                    width: 100%;
+                    margin-left: 0px;
+
+                    .menu-item-icons {
+                        svg {
+                            color: black;
+                            font-size: 1.2em;
+                            margin-right: 10px;
+                            cursor: pointer;
+                            transition: ease-in-out 0.5s;
+
+                            &:hover {
+                                color: darkred;
+                            }
+                        }
+                    }
+                }
+            }
+            .edit-item {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 5px;
+
+                input {
+                    @include input-general;
+                }
+
+                .btn {
+                    margin-top: 10px;
+                    @include btn;
+                }
+            }
+        }
+        .create-new-product-container {
+            .create-new-product-title {
+                @include titulo-general;
+            }
+            .create-new-product-form {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 5px;
+
+                input {
+                    @include input-general;
+                }
+
+                .btn {
+                    margin-top: 10px;
+                    @include btn;
+                }
+            }
+        }
+    }
+}

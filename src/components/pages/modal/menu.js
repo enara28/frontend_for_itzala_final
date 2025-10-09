@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import withNavigation from "./withNavigation";
+import withNavigation from "../../helpers/withNavigation";
 
 class Menu extends Component {
     constructor(props) {
@@ -92,20 +92,9 @@ class Menu extends Component {
         this.get_menu();
     }
 
-    // generarTotal() {
-    //     return this.state.pedido.map((el) => {
-    //         for (const [key, value] of Object.entries(el)) {
-    //             return key;
-    //         }
-    //         this.setState((prevState) => ({
-    //             total: [...prevState.total, key],
-    //         }));
-    //     });
-    // }
-
     render() {
         let entrada = this.state.entrantes.map((item) => {
-            if (this.props.lugar == "modal") {
+            if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
                         {item.producto}: {item.precio} €
@@ -128,7 +117,7 @@ class Menu extends Component {
             }
         });
         let fuerte = this.state.segundos.map((item) => {
-            if (this.props.lugar == "modal") {
+            if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
                         {item.producto}: {item.precio} €
@@ -151,7 +140,7 @@ class Menu extends Component {
             }
         });
         let final = this.state.postres.map((item) => {
-            if (this.props.lugar == "modal") {
+            if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
                         {item.producto}: {item.precio} €
@@ -195,7 +184,7 @@ class Menu extends Component {
                             <div className="menu-titulo">Postres</div>
                             <ul>{final}</ul>
                         </div>
-                        {this.props.lugar == "pedido" ? (
+                        {this.props.location == "order" ? (
                             <form id="formulario" onSubmit={this.handleSubmit}>
                                 <button className="btn" type="submit">
                                     Enviar

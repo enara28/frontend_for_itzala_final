@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import User from "./user";
+import User from "../admin/user";
 import PedidoUsuario from "./pedido-usuario";
+import SingleReservation from "../admin/single-reservation";
 
 export default class PerfilUsuario extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class PerfilUsuario extends Component {
         this.state = {
             singleUser: [],
             pedidos: [],
+            reservations: [],
         };
     }
 
@@ -39,10 +41,23 @@ export default class PerfilUsuario extends Component {
             .catch((err) => console.log("error mio", err));
     }
 
+    obtenerReservations() {
+        axios
+            .get(`http://localhost:5000/reservation/${this.props.usuarioId}`)
+            .then((response) => {
+                this.setState({
+                    reservations: response.data,
+                }),
+                    console.log(response.data);
+            })
+            .catch((err) => console.log("error mio", err));
+    }
+
     componentDidMount() {
         if (this.props.status == "usuario") {
             this.obtenerPerfil();
             this.obtenerPedidos();
+            this.obtenerReservations();
         }
     }
 
@@ -52,21 +67,36 @@ export default class PerfilUsuario extends Component {
         });
     }
 
+    showReservations() {
+        return this.state.reservations.map((reservation) => {
+            return (
+                <SingleReservation
+                    key={reservation.id}
+                    reservation={reservation}
+                />
+            );
+        });
+    }
+
     render() {
         return (
             <div className="profile-container-wrapper">
                 <div className="profile-container">
-                    <div className="personal-info-wrapper">
-                        <div className="user-info-container">
-                            <User user={this.state.singleUser} />
+                    <div className="user-info-container">
+                        <User user={this.state.singleUser} />
+                    </div>
+                    <div className="pedidos-info-container">
+                        <div className="pedidos-title">Pedidos realizados:</div>
+                        <div className="pedidos-content">
+                            {this.mostrarPedidos()}
                         </div>
-                        <div className="pedidos-wrapper">
-                            <div className="pedidos-title">
-                                Pedidos realizados:
-                            </div>
-                            <div className="pedidos-content">
-                                {this.mostrarPedidos()}
-                            </div>
+                    </div>
+                    <div className="pedidos-info-container">
+                        <div className="pedidos-title">
+                            Reservas realizadas:
+                        </div>
+                        <div className="pedidos-content">
+                            {this.showReservations()}
                         </div>
                     </div>
                 </div>

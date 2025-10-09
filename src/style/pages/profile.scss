@@ -1,0 +1,53 @@
+.profile-container-wrapper {
+    @include general-body;
+
+    .profile-container {
+        width: 40%;
+        .user-info-container {
+            .single-user-reservations-container {
+                margin-bottom: 25px;
+                .single-user-reservations-title {
+                    @include titulo-general;
+                }
+                .single-user-reservations-content {
+                }
+            }
+        }
+        .pedidos-info-container {
+            .pedidos-title {
+                @include titulo-general;
+            }
+            .pedidos-content {
+                .single-order-container,
+                .single-user-reservations-container {
+                    padding: 15px;
+                    border: 2px solid $shade-five;
+                    margin: 10px 0px;
+                    .single-order-title {
+                        cursor: pointer;
+                        color: $shade-one;
+                        font-weight: 600;
+                        font-size: 1em;
+                        margin-bottom: 10px;
+                        transition: ease-in-out 0.5s;
+
+                        &:hover {
+                            color: $shade-three;
+                        }
+                    }
+                    .single-order-content {
+                        .single-order-element {
+                            padding: 3px 0px;
+                        }
+                    }
+                }
+                .single-user-reservations-title {
+                    color: $shade-one;
+                    font-weight: 600;
+                    font-size: 1em;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

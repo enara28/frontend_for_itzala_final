@@ -1,0 +1,32 @@
+.order-container-wrapper {
+    @include general-body;
+
+    .order-container {
+        .order-title {
+            @include titulo-general;
+        }
+
+        // menú dentro de oreder.js
+        .menu-container {
+            .menu-wrapper {
+                .menu-titulo {
+                    font-size: 1.1em;
+                    color: $favicon;
+                }
+                li {
+                    list-style-type: none;
+                    margin-left: -40px;
+                    font-size: 1em;
+                }
+                input {
+                    @include input-general;
+                }
+
+                .btn {
+                    margin-bottom: 50px;
+                    @include btn;
+                }
+            }
+        }
+    }
+}

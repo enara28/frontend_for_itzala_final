@@ -67,7 +67,13 @@ export default class MenuItem extends Component {
             )
             .then(
                 (response) => console.log(response),
-                this.setState({ editMode: false })
+                this.setState({
+                    editMode: false,
+                    editProducto: "",
+                    editPrecio: "",
+                    editTiempo: "",
+                    editId: "",
+                })
             )
             .catch((err) => console.log(err));
         event.preventDefault();
@@ -78,12 +84,12 @@ export default class MenuItem extends Component {
         return (
             <div>
                 {this.state.editMode == false ? (
-                    <div className="menu-item-container">
+                    <div className="admin-menu-item-container">
                         {this.state.item == "" ? (
                             <div>Porducto eliminado</div>
                         ) : (
-                            <div className="menu-item">
-                                <div className="product-info">
+                            <div className="admin-menu-item">
+                                <div className="menu-item-info">
                                     <div>
                                         <b>Producto:</b> {producto}
                                     </div>
@@ -94,7 +100,7 @@ export default class MenuItem extends Component {
                                         <b>Tiempo:</b> {tiempo}
                                     </div>
                                 </div>
-                                <div className="product-icons">
+                                <div className="menu-item-icons">
                                     <FontAwesomeIcon
                                         icon={faTrash}
                                         onClick={() =>

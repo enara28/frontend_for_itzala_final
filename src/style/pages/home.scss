@@ -1,17 +1,17 @@
-.general {
-    height: 73vh;
-    width: 100%;
-    @include background;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.home-container-wrapper {
+    @include general-body;
 }
 .home-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 30px;
+    grid-gap: 40px;
     align-items: center;
     justify-items: center;
+    .welcome-comment {
+        @include titulo-general;
+        margin-top: 0px;
+        margin-bottom: 30px;
+    }
 
     .menu {
         border: 4px solid $shade-three;
@@ -29,13 +29,13 @@
         }
     }
 
-    .buttons {
+    .order-book-buttons {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
 
-        .book-table,
-        .food-delivery {
+        .book-table-link,
+        .make-order-link {
             a {
                 @include enlaces-general;
                 cursor: pointer;

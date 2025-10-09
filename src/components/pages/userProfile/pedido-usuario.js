@@ -14,7 +14,7 @@ export default class PedidoUsuario extends Component {
     recortarPedidos() {
         let pedido_recortado = this.props.pedido.pedido.split(",");
         return pedido_recortado.map((el, idx) => (
-            <div key={idx} className="elemento-pedido">
+            <div key={idx} className="single-order-element">
                 {el}
             </div>
         ));
@@ -34,9 +34,9 @@ export default class PedidoUsuario extends Component {
 
     render() {
         return (
-            <div className="cada-pedido">
+            <div className="single-order-container">
                 <div
-                    className="titulo-deplegable"
+                    className="single-order-title"
                     onClick={
                         this.state.desplegado == false
                             ? () => this.deplegar()
@@ -45,7 +45,7 @@ export default class PedidoUsuario extends Component {
                 >
                     Pedido nº {this.props.pedido.id}:
                 </div>
-                <div className="contenido">
+                <div className="single-order-content">
                     {this.state.desplegado == true
                         ? this.recortarPedidos()
                         : null}

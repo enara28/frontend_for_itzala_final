@@ -10,7 +10,7 @@ import {
     faHammer,
 } from "@fortawesome/free-solid-svg-icons";
 
-import withNavigation from "./withNavigation";
+import withNavigation from "./helpers/withNavigation";
 
 class Header extends Component {
     constructor(props) {

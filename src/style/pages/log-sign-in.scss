@@ -1,0 +1,43 @@
+.log-sign-in-container-wrapper {
+    @include general-body;
+
+    .log-sign-in-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 20px;
+
+        .log-sign-in-title {
+            font-size: 1.2em;
+            color: $shade-three;
+        }
+
+        .form-group-wrapper {
+            display: grid;
+            gap: 10px;
+            .form-group {
+                display: grid;
+                gap: 8px;
+                input {
+                    @include input-general;
+                }
+            }
+            .btn {
+                @include btn;
+            }
+        }
+        .log-sign-in-link {
+            a {
+                color: $shade-three;
+                padding: 5px;
+                border-bottom: 3px solid transparent;
+                border-radius: 4px;
+                transition: ease-in-out 0.5s;
+                &:hover {
+                    border-bottom: 3px solid $shade-three;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}

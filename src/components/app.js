@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router";
 import axios from "axios";
 
-import Home from "./home";
-import About from "./about";
-import PerfilUsuario from "./perfil-usuario";
-import LogIn from "./log-in";
-import Pedido from "./pedido";
-import SignIn from "./sign-in";
-import Admin from "./admin";
+import Home from "./pages/home/home";
+import About from "./pages/about/about";
+import PerfilUsuario from "./pages/userProfile/perfil-usuario";
+import LogIn from "./pages/login/log-in";
+import Order from "./pages/order/order";
+import SignIn from "./pages/signin/sign-in";
+import Admin from "./pages/admin/admin";
 import Header from "./header";
 import Footer from "./footer";
 
@@ -79,6 +79,7 @@ export default class App extends Component {
                             <Home
                                 status={this.state.status}
                                 loggedIn={this.state.loggedIn}
+                                usuarioId={this.state.usuarioId}
                             />
                         }
                     />
@@ -126,9 +127,9 @@ export default class App extends Component {
                         "error"
                     )}
                     <Route
-                        path="/pedido"
+                        path="/order"
                         element={
-                            <Pedido
+                            <Order
                                 usuarioId={this.state.usuarioId}
                                 status={this.state.status}
                                 loggedIn={this.state.loggedIn}

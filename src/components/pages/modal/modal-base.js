@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Menu from "./menu";
-import Reserva from "./reserva";
+import Reservation from "./reservation";
 
 Modal.setAppElement(".app-wrapper");
 
@@ -23,7 +23,7 @@ export default class ModalBase extends Component {
     render() {
         const customStyles = {
             content: {
-                width: "70%",
+                width: "80%",
                 top: "50%",
                 left: "50%",
                 right: "auto",
@@ -45,10 +45,10 @@ export default class ModalBase extends Component {
                         </a>
                         {this.props.modalType == "menu" ? (
                             <div className="modal-wrapper">
-                                <Menu lugar={"modal"} />
+                                <Menu location={"modal"} />
                             </div>
                         ) : (
-                            <Reserva />
+                            <Reservation usuarioId={this.props.usuarioId} />
                         )}
                         {this.props.loggedIn == "NO_LOGGED_IN" ? (
                             <div className="log-in-message">

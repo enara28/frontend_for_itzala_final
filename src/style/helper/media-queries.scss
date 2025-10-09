@@ -1,4 +1,5 @@
-@media screen and (max-width: 685px) {
+@media screen and (max-width: 768px) {
+    // footer.scss
     .footer-container-wrapper {
         padding: 24px 0px;
         grid-template-columns: 1fr;
@@ -8,6 +9,8 @@
             display: none;
         }
     }
+
+    // header.scss
     .log-in-wrapper,
     .profile-wrapper {
         a {
@@ -16,14 +19,19 @@
             }
         }
     }
+
+    // menu-modal.scss
     .modal-wrapper {
         .menu-container {
+            align-items: center;
+            justify-items: center;
             .menu-wrapper {
                 grid-template-columns: 1fr;
                 gap: 5px;
             }
         }
     }
+
     .pedido-wrapper {
         display: flex;
         flex-direction: column;
@@ -35,6 +43,7 @@
             margin-bottom: 5px;
         }
     }
+
     .log-in-message {
         font-size: 1em;
         span {
@@ -42,18 +51,43 @@
         }
     }
 
-    .profile-container-wrapper .profile-container .personal-info-wrapper {
-        width: 90%;
-        margin: 10px;
+    .profile-container-wrapper .profile-container {
+        width: 70%;
     }
-    .admin-container .general-body .admin-content-wrapper {
+    .admin-container-wrapper .admin-container {
         width: 90%;
         .admin-menu .menu-item-container {
             width: 100%;
         }
     }
+
+    .admin-container-wrapper
+        .admin-container
+        .admin-menu
+        .admin-menu-item-container {
+        width: 87%;
+    }
     .sign-in-container {
         margin: 0px 10px;
+    }
+    .welcome-comment {
+        span {
+            display: none;
+        }
+    }
+
+    .ReactModal__Content {
+        width: 80%;
+    }
+
+    .modal-wrapper {
+        .menu-container {
+            .menu-wrapper {
+                height: 100%;
+                grid-template-columns: 1fr;
+                gap: 0px;
+            }
+        }
     }
 }
 
@@ -61,12 +95,13 @@
     // body {
     //     font-size: 1.5em;
     // }
-    .modal-wrapper {
-        .menu-container {
-            .menu-wrapper {
-                height: 100%;
-                grid-template-columns: 1fr;
-            }
+    .profile-container-wrapper .profile-container {
+        width: 70%;
+    }
+
+    .welcome-comment {
+        span {
+            display: none;
         }
     }
 }

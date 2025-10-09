@@ -4,7 +4,7 @@ export default class About extends Component {
     render() {
         return (
             <div>
-                <div className="general-body">
+                <div className="about-container-wrapper">
                     <div className="text-container">
                         <p>
                             Bienvenidos a nuesto rincón en el que podrás
