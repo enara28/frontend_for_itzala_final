@@ -4,9 +4,9 @@
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
-    background-color: $shade-three;
+    background-color: $main-dark;
     height: 17vh;
-    color: $shade-four;
+    color: $main-light;
     box-shadow: -2px -5px 38px 9px rgba(0, 0, 0, 0.3);
 
     .footer-adress {
@@ -23,7 +23,7 @@
     }
     .footer-contact {
         a {
-            color: $shade-four;
+            color: $main-light;
         }
     }
 }

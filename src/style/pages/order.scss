@@ -16,7 +16,7 @@
                 justify-content: center;
 
                 svg {
-                    color: $shade-three;
+                    color: $main-dark;
                     font-size: 3em;
                 }
             }
@@ -27,7 +27,7 @@
                     color: $favicon;
                 }
                 li {
-                    border: 2px solid $shade-five;
+                    border: 2px solid $content-borders;
                     padding: 5px;
                     list-style-type: none;
                     margin-left: -40px;

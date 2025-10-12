@@ -10,14 +10,14 @@ export default class PerfilUsuario extends Component {
         super(props);
         this.state = {
             singleUser: [],
-            pedidos: [],
+            orders: [],
             reservations: [],
         };
     }
 
     getProfile() {
         axios
-            .get(`http://localhost:5000/usuario/${this.props.usuarioId}`, {
+            .get(`http://localhost:5000/usuario/${this.props.userId}`, {
                 withCredentials: true,
             })
             .then((response) => {
@@ -31,10 +31,10 @@ export default class PerfilUsuario extends Component {
 
     getOrders() {
         axios
-            .get(`http://localhost:5000/pedido/${this.props.usuarioId}`)
+            .get(`http://localhost:5000/pedido/${this.props.userId}`)
             .then((response) => {
                 this.setState({
-                    pedidos: response.data,
+                    orders: response.data,
                 }),
                     console.log(response.data);
             })
@@ -43,7 +43,7 @@ export default class PerfilUsuario extends Component {
 
     getReservations() {
         axios
-            .get(`http://localhost:5000/reservation/${this.props.usuarioId}`)
+            .get(`http://localhost:5000/reservation/${this.props.userId}`)
             .then((response) => {
                 this.setState({
                     reservations: response.data,
@@ -62,7 +62,7 @@ export default class PerfilUsuario extends Component {
     }
 
     showOrders() {
-        return this.state.pedidos.map((pedido) => {
+        return this.state.orders.map((pedido) => {
             return <PedidoUsuario key={pedido.id} pedido={pedido} />;
         });
     }
@@ -85,17 +85,19 @@ export default class PerfilUsuario extends Component {
                     <div className="user-info-container">
                         <User user={this.state.singleUser} />
                     </div>
-                    <div className="pedidos-info-container">
-                        <div className="pedidos-title">Pedidos realizados:</div>
-                        <div className="pedidos-content">
+                    <div className="orders-reservations-info-container">
+                        <div className="orders-reservations-title">
+                            Pedidos realizados:
+                        </div>
+                        <div className="orders-reservations-content">
                             {this.showOrders()}
                         </div>
                     </div>
-                    <div className="pedidos-info-container">
-                        <div className="pedidos-title">
+                    <div className="orders-reservations-info-container">
+                        <div className="orders-reservations-title">
                             Reservas realizadas:
                         </div>
-                        <div className="pedidos-content">
+                        <div className="orders-reservations-content">
                             {this.showReservations()}
                         </div>
                     </div>

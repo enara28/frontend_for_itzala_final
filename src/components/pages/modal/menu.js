@@ -10,11 +10,11 @@ class Menu extends Component {
         super(props);
         this.state = {
             fullMenu: [],
-            entrantes: [],
-            segundos: [],
-            postres: [],
-            cargando: true,
-            cantidad: [],
+            entrees: [],
+            mains: [],
+            desserts: [],
+            loading: true,
+            quantity: [],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,24 +23,24 @@ class Menu extends Component {
     getMenu() {
         axios.get("http://localhost:5000/menu-item").then((response) => {
             console.log(response.data);
-            let entrante = [];
-            let segundo = [];
-            let postre = [];
+            let entree = [];
+            let main = [];
+            let dessert = [];
             response.data.forEach((element) => {
                 if (element.tiempo == 1) {
-                    return entrante.push(element);
+                    return entree.push(element);
                 } else if (element.tiempo == 2) {
-                    return segundo.push(element);
+                    return main.push(element);
                 } else {
-                    return postre.push(element);
+                    return dessert.push(element);
                 }
             });
             this.setState({
                 fullMenu: response.data,
-                entrantes: entrante,
-                segundos: segundo,
-                postres: postre,
-                cargando: false,
+                entrees: entree,
+                mains: main,
+                desserts: dessert,
+                loading: false,
             });
         });
     }
@@ -52,31 +52,31 @@ class Menu extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let cadena = Object.keys(this.state);
-        let coment = cadena.filter((el) => {
+        let stateKeys = Object.keys(this.state);
+        let getSelecction = stateKeys.filter((el) => {
             if (
                 el !== "fullMenu" &&
-                el !== "entrantes" &&
-                el !== "segundos" &&
-                el !== "postres" &&
-                el !== "cargando" &&
-                el !== "cantidad"
+                el !== "entrees" &&
+                el !== "mains" &&
+                el !== "desserts" &&
+                el !== "loading" &&
+                el !== "quantity"
             ) {
                 return el;
             }
         });
 
-        let newOrder = coment.map((el) => {
+        let newOrder = getSelecction.map((el) => {
             return `${el}: ${this.state[el]}`;
         });
 
         if (confirm("¿Está tu pedido listo?")) {
             axios
                 .post(
-                    "http://localhost:5000/pedido",
+                    "http://localhost:5000/order",
                     {
-                        usuario: this.props.usuarioId,
-                        pedido: newOrder.toString(),
+                        user: this.props.userId,
+                        order: newOrder.toString(),
                     },
                     { withCredentials: true }
                 )
@@ -93,7 +93,7 @@ class Menu extends Component {
     }
 
     render() {
-        let entrada = this.state.entrantes.map((item) => {
+        let entrada = this.state.entrees.map((item) => {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
@@ -109,14 +109,14 @@ class Menu extends Component {
                             name={item.producto}
                             type="number"
                             form="formulario"
-                            value={this.state.cantidad[item.producto]}
+                            value={this.state.quantity[item.producto]}
                             onChange={this.handleChange}
                         />
                     </li>
                 );
             }
         });
-        let fuerte = this.state.segundos.map((item) => {
+        let fuerte = this.state.mains.map((item) => {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
@@ -132,14 +132,14 @@ class Menu extends Component {
                             name={item.producto}
                             type="number"
                             form="formulario"
-                            value={this.state.cantidad[item.producto]}
+                            value={this.state.quantity[item.producto]}
                             onChange={this.handleChange}
                         />
                     </li>
                 );
             }
         });
-        let final = this.state.postres.map((item) => {
+        let final = this.state.desserts.map((item) => {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
@@ -155,7 +155,7 @@ class Menu extends Component {
                             name={item.producto}
                             type="number"
                             form="formulario"
-                            value={this.state.cantidad[item.producto]}
+                            value={this.state.quantity[item.producto]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -164,7 +164,7 @@ class Menu extends Component {
         });
         return (
             <div className="menu-container">
-                {this.state.cargando == true ? (
+                {this.state.loading == true ? (
                     <div className="loading-icon">
                         <FontAwesomeIcon icon={faSpinner} spin />
                     </div>

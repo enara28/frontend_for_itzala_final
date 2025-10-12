@@ -9,9 +9,9 @@ class LogIn extends Component {
 
         this.state = {
             email: "",
-            contraseña: "",
+            password: "",
             errorText: "",
-            usuarioId: "",
+            userId: "",
             status: "",
             loggedIn: "NO_LOGGED_IN",
         };
@@ -33,17 +33,17 @@ class LogIn extends Component {
                 "http://localhost:5000/login",
                 {
                     email: this.state.email,
-                    contraseña: this.state.contraseña,
+                    password: this.state.password,
                 },
                 { withCredentials: true }
             )
             .then((response) => {
                 this.setState({
-                    usuarioId: response.data.usuario_id,
+                    userId: response.data.usuario_id,
                     status: response.data.status,
                     loggedIn: response.data.logged_in,
                     email: "",
-                    contraseña: "",
+                    password: "",
                 });
                 this.props.handleSuccessfullLogin(response.data);
                 console.log(response, "success");
@@ -83,10 +83,10 @@ class LogIn extends Component {
                             />
 
                             <input
-                                type="contraseña"
-                                name="contraseña"
+                                type="password"
+                                name="password"
                                 placeholder="Constraseña"
-                                value={this.state.contraseña}
+                                value={this.state.password}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             />

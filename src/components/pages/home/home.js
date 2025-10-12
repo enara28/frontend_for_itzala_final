@@ -59,7 +59,7 @@ export default class Home extends Component {
                             modalType={this.state.modalType}
                             handleModalClose={this.handleModalClose}
                             loggedIn={this.props.loggedIn}
-                            usuarioId={this.props.usuarioId}
+                            userId={this.props.userId}
                         />
                     </div>
                     {this.props.loggedIn == "LOGGED_IN" &&

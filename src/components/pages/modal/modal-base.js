@@ -48,7 +48,7 @@ export default class ModalBase extends Component {
                                 <Menu location={"modal"} />
                             </div>
                         ) : (
-                            <Reservation usuarioId={this.props.usuarioId} />
+                            <Reservation userId={this.props.userId} />
                         )}
                         {this.props.loggedIn == "NO_LOGGED_IN" ? (
                             <div className="log-in-message">

@@ -10,7 +10,7 @@
 
         .log-sign-in-title {
             font-size: 1.2em;
-            color: $shade-three;
+            color: $main-dark;
         }
 
         .form-group-wrapper {
@@ -29,13 +29,13 @@
         }
         .log-sign-in-link {
             a {
-                color: $shade-three;
+                color: $main-dark;
                 padding: 5px;
                 border-bottom: 3px solid transparent;
                 border-radius: 4px;
                 transition: ease-in-out 0.5s;
                 &:hover {
-                    border-bottom: 3px solid $shade-three;
+                    border-bottom: 3px solid $main-dark;
                     border-radius: 4px;
                 }
             }

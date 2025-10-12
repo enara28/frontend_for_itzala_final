@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import axios from "axios";
+import withNavigation from "../../helpers/withNavigation";
 
-export default class SignIn extends Component {
+class SignIn extends Component {
     constructor() {
         super();
 
         this.state = {
-            usuario: "",
-            contraseña: "",
+            user: "",
+            password: "",
             email: "",
         };
 
@@ -24,12 +25,36 @@ export default class SignIn extends Component {
 
     handleSubmitClick(event) {
         axios
-            .post("http://localhost:5000/usuario", {
-                usuario: this.state.usuario,
+            .post("http://localhost:5000/user", {
+                user: this.state.user,
                 email: this.state.email,
-                contraseña: this.state.contraseña,
+                password: this.state.password,
             })
-            .then((response) => console.log(response))
+            .then((response) => {
+                console.log(response);
+                axios
+                    .post(
+                        "http://localhost:5000/login",
+                        {
+                            email: this.state.email,
+                            password: this.state.password,
+                        },
+                        { withCredentials: true }
+                    )
+                    .then((response) => {
+                        this.setState({
+                            user: "",
+                            email: "",
+                            password: "",
+                        });
+                        this.props.handleSuccessfullLogin(response.data);
+                        console.log(response, "success");
+                        this.props.navigation("/");
+                    })
+                    .catch((error) => {
+                        console.log(error.response.data.msg, "error");
+                    });
+            })
             .catch((error) => console.log(error));
         event.preventDefault();
     }
@@ -47,10 +72,10 @@ export default class SignIn extends Component {
                     >
                         <div className="form-group">
                             <input
-                                type="usuario"
-                                name="usuario"
+                                type="text"
+                                name="user"
                                 placeholder="Usuario"
-                                value={this.state.usuario}
+                                value={this.state.user}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             />
@@ -65,10 +90,10 @@ export default class SignIn extends Component {
                             />
 
                             <input
-                                type="contraseña"
-                                name="contraseña"
+                                type="password"
+                                name="password"
                                 placeholder="Constraseña"
-                                value={this.state.contraseña}
+                                value={this.state.password}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             />
@@ -88,3 +113,4 @@ export default class SignIn extends Component {
         );
     }
 }
+export default withNavigation(SignIn);

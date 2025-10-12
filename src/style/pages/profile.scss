@@ -13,26 +13,26 @@
                 }
             }
         }
-        .pedidos-info-container {
-            .pedidos-title {
+        .orders-reservations-info-container {
+            .orders-reservations-title {
                 @include titulo-general;
             }
-            .pedidos-content {
+            .orders-reservations-content {
                 .single-order-container,
                 .single-user-reservations-container {
                     padding: 15px;
-                    border: 2px solid $shade-five;
+                    border: 2px solid $content-borders;
                     margin: 10px 0px;
                     .single-order-title {
                         cursor: pointer;
-                        color: $shade-one;
+                        color: $lighter-title;
                         font-weight: 600;
                         font-size: 1em;
                         margin-bottom: 10px;
                         transition: ease-in-out 0.5s;
 
                         &:hover {
-                            color: $shade-three;
+                            color: $main-dark;
                         }
                     }
                     .single-order-content {
@@ -42,7 +42,7 @@
                     }
                 }
                 .single-user-reservations-title {
-                    color: $shade-one;
+                    color: $lighter-title;
                     font-weight: 600;
                     font-size: 1em;
                     margin-bottom: 10px;

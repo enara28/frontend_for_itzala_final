@@ -6,7 +6,7 @@ export default class Reservation extends Component {
         super();
 
         this.state = {
-            día: "Lunes",
+            day: "Lunes",
             cantidad: "",
             comentario: "",
             madeReservation: false,
@@ -27,10 +27,10 @@ export default class Reservation extends Component {
             .post(
                 "http://localhost:5000/reserva",
                 {
-                    día: this.state.día,
+                    day: this.state.day,
                     cantidad: this.state.cantidad,
                     comentario: this.state.comentario,
-                    usuario: this.props.usuarioId,
+                    user: this.props.userId,
                 },
                 { withCredentials: true }
             )
@@ -60,8 +60,8 @@ export default class Reservation extends Component {
                             <select
                                 className="day-selecction"
                                 type="text"
-                                name="día"
-                                value={this.state.día}
+                                name="day"
+                                value={this.state.day}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             >
@@ -101,14 +101,13 @@ export default class Reservation extends Component {
                         </div>
                         <div className="reservation-success-message-content">
                             <div>
-                                <b>Día:</b> {this.state.día}
+                                <b>Día:</b> {this.state.day}
                             </div>
                             <div>
                                 <b>Grupo:</b> {this.state.cantidad} personas
                             </div>
                             <div>
-                                <b>Comentarios:</b>
-                                {this.state.comentario}
+                                <b>Comentarios:</b> {this.state.comentario}
                             </div>
                         </div>
                     </div>

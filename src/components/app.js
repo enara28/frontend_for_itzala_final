@@ -20,7 +20,7 @@ export default class App extends Component {
 
         this.state = {
             errorText: "",
-            usuarioId: "",
+            userId: "",
             status: "",
             loggedIn: "NO_LOGGED_IN",
         };
@@ -34,18 +34,18 @@ export default class App extends Component {
             .then((response) => {
                 this.setState({
                     status: response.data.status,
-                    usuarioId: response.data.usuario_id,
+                    userId: response.data.usuario_id,
                     loggedIn: response.data.logged_in,
                 });
                 console.log(response);
             })
-            .catch((err) => console.log(err));
+            .catch((error) => console.log(error));
     }
 
     handleSuccessfullLogin(data) {
         const { usuario_id, status, logged_in } = data;
         this.setState({
-            usuarioId: usuario_id,
+            userId: usuario_id,
             status: status,
             loggedIn: logged_in,
         });
@@ -79,7 +79,7 @@ export default class App extends Component {
                             <Home
                                 status={this.state.status}
                                 loggedIn={this.state.loggedIn}
-                                usuarioId={this.state.usuarioId}
+                                userId={this.state.userId}
                             />
                         }
                     />
@@ -100,7 +100,14 @@ export default class App extends Component {
                     />
                     <Route
                         path="/sign-in"
-                        element={<SignIn loggedIn={this.state.loggedIn} />}
+                        element={
+                            <SignIn
+                                loggedIn={this.state.loggedIn}
+                                handleSuccessfullLogin={
+                                    this.handleSuccessfullLogin
+                                }
+                            />
+                        }
                     />
                     {this.state.status == "admin" ? (
                         <Route
@@ -117,22 +124,31 @@ export default class App extends Component {
                             path="/perfil-usuario"
                             element={
                                 <PerfilUsuario
-                                    usuarioId={this.state.usuarioId}
+                                    userId={this.state.userId}
                                     status={this.state.status}
                                     loggedIn={this.state.loggedIn}
                                 />
                             }
                         />
-                    ) : (
-                        "error"
-                    )}
+                    ) : null}
+
                     <Route
                         path="/order"
                         element={
                             <Order
-                                usuarioId={this.state.usuarioId}
+                                userId={this.state.userId}
                                 status={this.state.status}
                                 loggedIn={this.state.loggedIn}
+                            />
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <Home
+                                status={this.state.status}
+                                loggedIn={this.state.loggedIn}
+                                userId={this.state.userId}
                             />
                         }
                     />
