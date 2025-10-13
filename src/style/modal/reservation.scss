@@ -1,37 +1,58 @@
 // revisado
 .reservation-container {
     width: 100%;
-    .reservation-title {
-        @include titulo-general;
-
-        justify-self: center;
-    }
-    .reservation-inputs {
-        display: grid;
-        justify-items: center;
-        align-items: center;
-        input,
-        textarea,
-        select {
-            @include input-general;
-            margin: 5px 10px;
-            width: 40%;
-        }
-        .btn {
-            @include btn;
-            width: 40%;
-        }
-    }
-
-    .reservation-success-message {
-        justify-items: center;
-        .reservation-success-message-title {
+    .reservation-modal {
+        .reservation-title {
             @include titulo-general;
             margin-top: 0px;
+
+            justify-self: center;
         }
-        .reservation-success-message-content {
-            font-family: $main-font;
-            font-size: 1em;
+        .reservation-inputs {
+            display: grid;
+            gap: 5px;
+            justify-items: center;
+            align-items: center;
+            height: 100%;
+            .date-picker {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-family: $main-font;
+                input {
+                    width: 90%;
+                }
+            }
+            input,
+            select {
+                @include input-general;
+                margin: 5px 10px;
+                width: 50%;
+            }
+            textarea {
+                @include input-general;
+                width: 50%;
+                min-height: 80px;
+                field-sizing: content;
+            }
+            .btn {
+                @include btn;
+                margin-top: 20px;
+                margin-bottom: 50px;
+            }
+        }
+
+        .reservation-success-message {
+            justify-items: center;
+            .reservation-success-message-title {
+                @include titulo-general;
+                margin-top: 0px;
+            }
+            .reservation-success-message-content {
+                font-family: $main-font;
+                font-size: 1em;
+            }
         }
     }
 }

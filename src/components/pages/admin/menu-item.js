@@ -14,10 +14,11 @@ export default class MenuItem extends Component {
             editTiempo: "",
             editPrecio: "",
             editId: "",
+            successMessage: "",
         };
 
         this.deleteProduct = this.deleteProduct.bind(this);
-        this.editProduct = this.editProduct.bind(this);
+        this.productToEdit = this.productToEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,7 +34,7 @@ export default class MenuItem extends Component {
             )
             .catch((err) => console.log(err));
     }
-    editProduct(id) {
+    productToEdit(id) {
         axios
             .get(`http://localhost:5000/menu-item/${id}`, {
                 withCredentials: true,
@@ -65,16 +66,19 @@ export default class MenuItem extends Component {
                 },
                 { withCredentials: true }
             )
-            .then(
-                (response) => console.log(response),
-                this.setState({
-                    editMode: false,
-                    editProducto: "",
-                    editPrecio: "",
-                    editTiempo: "",
-                    editId: "",
-                })
-            )
+            .then((response) => {
+                console.log(response),
+                    this.setState({
+                        item: response.data,
+                        editMode: false,
+                        editProducto: "",
+                        editPrecio: "",
+                        editTiempo: "",
+                        editId: "",
+                        successMessage:
+                            "El producto se ha actualizado de forma correcta",
+                    });
+            })
             .catch((err) => console.log(err));
         event.preventDefault();
     }
@@ -107,9 +111,10 @@ export default class MenuItem extends Component {
                                     />
                                     <FontAwesomeIcon
                                         icon={faPenToSquare}
-                                        onClick={() => this.editProduct(id)}
+                                        onClick={() => this.productToEdit(id)}
                                     />
                                 </div>
+                                <div>{this.state.successMessage}</div>
                             </div>
                         )}
                     </div>

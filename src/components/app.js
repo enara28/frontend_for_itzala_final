@@ -13,6 +13,8 @@ import Header from "./header";
 import Footer from "./footer";
 
 // Añadir lógica que te lleve a Log in
+// TODOs => revisar los post axios para evitar mandar elementos que rompan la app
+// Añadir ciclo de vida que refresque la página al actualizar elementos del menú
 
 export default class App extends Component {
     constructor(props) {

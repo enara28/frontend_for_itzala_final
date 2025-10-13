@@ -8,6 +8,7 @@ import {
     faArrowRightFromBracket,
     faUser,
     faHammer,
+    faHandshake,
 } from "@fortawesome/free-solid-svg-icons";
 
 import withNavigation from "./helpers/withNavigation";
@@ -40,7 +41,18 @@ class Header extends Component {
                         <img src={logo} />
                     </Link>
                 </div>
+
                 <div className="header-links-container">
+                    <div className="header-about-link">
+                        <Link to="/about">
+                            <div className="header-buttons">
+                                <div className="big-screen">Conócenos</div>
+                                <div className="small-screen">
+                                    <FontAwesomeIcon icon={faHandshake} />
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
                     <div className="header-profile-admin-link">
                         {this.props.loggedIn == "LOGGED_IN" &&
                         this.props.status &&

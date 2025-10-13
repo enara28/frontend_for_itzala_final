@@ -11,7 +11,7 @@ export default function () {
                 <img src={logo} />
             </div>
             <div className="footer-contact">
-                <Link to="/about" title="Info">
+                <Link to="/about" title="Conócenos">
                     <div className="correo">correo@correo.eus</div>
                     <div className="telefono">+34-000-000-000</div>
                 </Link>

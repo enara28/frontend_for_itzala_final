@@ -20,10 +20,14 @@ export default class Admin extends Component {
             menu: [],
             newMenuItem: "",
             reservations: [],
+            displayUsers: "admin-users-reservations-info-content-hidden",
+            displayMenu: "admin-menu-item-container-hidden",
+            displayReservations: "admin-reservations-info-content-hidden",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.changeClass = this.changeClass.bind(this);
     }
 
     handleChange(event) {
@@ -122,83 +126,148 @@ export default class Admin extends Component {
         });
     }
 
+    changeClass(title) {
+        if (
+            this.state.displayUsers ==
+                "admin-users-reservations-info-content-hidden" &&
+            title == "users"
+        ) {
+            this.setState({
+                displayUsers: "admin-users-reservations-info-content-displayed",
+            });
+        } else {
+            this.setState({
+                displayUsers: "admin-users-reservations-info-content-hidden",
+            });
+        }
+        if (
+            this.state.displayMenu == "admin-menu-item-container-hidden" &&
+            title == "menu"
+        ) {
+            this.setState({
+                displayMenu: "admin-menu-item-container-displayed",
+            });
+        } else {
+            this.setState({
+                displayMenu: "admin-menu-item-container-hidden",
+            });
+        }
+        if (
+            this.state.displayReservations ==
+                "admin-reservations-info-content-hidden" &&
+            title == "reservations"
+        ) {
+            this.setState({
+                displayReservations:
+                    "admin-reservations-info-content-displayed",
+            });
+        } else {
+            this.setState({
+                displayReservations: "admin-reservations-info-content-hidden",
+            });
+        }
+    }
+
     render() {
         return (
             <div className="admin-container-wrapper">
                 <div className="admin-container">
                     <div className="admin-users-reservations-info">
-                        <div className="admin-users-reservations-info-title">
+                        <div
+                            className="admin-users-reservations-info-title"
+                            onClick={(title) => this.changeClass("users")}
+                        >
                             Usuarios registrados:
                         </div>
-                        {this.usersInfo()}
+                        <div className={this.state.displayUsers}>
+                            {this.usersInfo()}
+                        </div>
                     </div>
                     <div className="admin-menu">
-                        <div className="admin-menu-title">Menú</div>
-                        {this.menuItems()}
-                        {this.state.newMenuItem != "" ? (
-                            <div className="admin-menu-item-container">
-                                <div className="admin-menu-item">
-                                    <div className="menu-item-info">
-                                        <div>
-                                            <b>Producto:</b>{" "}
-                                            {this.state.newMenuItem.producto}
-                                        </div>
-                                        <div>
-                                            <b>Precio:</b>{" "}
-                                            {this.state.newMenuItem.precio}
-                                        </div>
-                                        <div>
-                                            <b>Tiempo:</b>{" "}
-                                            {this.state.newMenuItem.tiempo}
-                                        </div>
-                                    </div>
-                                    <div>Nuevo producto creado</div>
-                                </div>
-                            </div>
-                        ) : null}
-                    </div>
-                    <div className="create-new-product-container">
-                        <div className="create-new-product-title">
-                            Añadir nuevo plato al menú
-                        </div>
-                        <form
-                            className="create-new-product-form"
-                            onSubmit={this.handleSubmit}
+                        <div
+                            className="admin-menu-title"
+                            onClick={(title) => this.changeClass("menu")}
                         >
-                            <input
-                                type="text"
-                                name="producto"
-                                placeholder="Producto"
-                                value={this.state.producto}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <input
-                                type="number"
-                                name="tiempo"
-                                placeholder="Tiempo (1, 2 o 3)"
-                                value={this.state.tiempo}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <input
-                                type="number"
-                                name="precio"
-                                placeholder="Precio"
-                                value={this.state.precio}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            />
-                            <button className="btn" type="submit">
-                                Guardar
-                            </button>
-                        </form>
+                            Menú
+                        </div>
+                        <div className={this.state.displayMenu}>
+                            {this.menuItems()}
+                            {this.state.newMenuItem != "" ? (
+                                <div>
+                                    <div className="admin-menu-item">
+                                        <div className="menu-item-info">
+                                            <div>
+                                                <b>Producto:</b>{" "}
+                                                {
+                                                    this.state.newMenuItem
+                                                        .producto
+                                                }
+                                            </div>
+                                            <div>
+                                                <b>Precio:</b>{" "}
+                                                {this.state.newMenuItem.precio}
+                                            </div>
+                                            <div>
+                                                <b>Tiempo:</b>{" "}
+                                                {this.state.newMenuItem.tiempo}
+                                            </div>
+                                        </div>
+                                        <div>Nuevo producto creado</div>
+                                    </div>
+                                </div>
+                            ) : null}
+
+                            <div className="create-new-product-container">
+                                <div className="create-new-product-title">
+                                    Añadir nuevo plato al menú
+                                </div>
+                                <form
+                                    className="create-new-product-form"
+                                    onSubmit={this.handleSubmit}
+                                >
+                                    <input
+                                        type="text"
+                                        name="producto"
+                                        placeholder="Producto"
+                                        value={this.state.producto}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <input
+                                        type="number"
+                                        name="tiempo"
+                                        placeholder="Tiempo (1, 2 o 3)"
+                                        value={this.state.tiempo}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <input
+                                        type="number"
+                                        name="precio"
+                                        placeholder="Precio"
+                                        value={this.state.precio}
+                                        onChange={this.handleChange}
+                                        autoComplete="on"
+                                    />
+                                    <button className="btn" type="submit">
+                                        Guardar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div className="admin-users-reservations-info">
-                        <div className="admin-users-reservations-info-title">
+                        <div
+                            className="admin-users-reservations-info-title"
+                            onClick={(title) =>
+                                this.changeClass("reservations")
+                            }
+                        >
                             Reservas:
                         </div>
-                        {this.reservations()}
+                        <div className={this.state.displayReservations}>
+                            {this.reservations()}
+                        </div>
                     </div>
                 </div>
             </div>

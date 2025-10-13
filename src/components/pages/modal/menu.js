@@ -83,8 +83,14 @@ class Menu extends Component {
                 .then((response) => {
                     console.log(response);
                     this.props.navigation("/");
+                    alert("Tu pedido se ha procesado con éxito");
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    console.log(error),
+                        alert(
+                            "Ha habido un error con el pedido, vuelve a intentarlo o llama al número de contacto"
+                        );
+                });
         }
     }
 

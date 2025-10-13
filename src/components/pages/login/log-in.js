@@ -53,7 +53,6 @@ class LogIn extends Component {
                 this.setState({
                     errorText: error.response.data.msg,
                 });
-                // console.log(error.response.data.msg, "error");
             });
         event.preventDefault();
     }

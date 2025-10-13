@@ -11,7 +11,17 @@
         .admin-users-reservations-info {
             .admin-users-reservations-info-title {
                 @include titulo-general;
+                cursor: pointer;
             }
+
+            .admin-users-reservations-info-content-hidden {
+                display: none;
+            }
+
+            .admin-users-reservations-info-content-displayed {
+                display: block;
+            }
+
             .single-user-reservations-container {
                 .single-user-reservations-title {
                     font-weight: 600;
@@ -26,9 +36,18 @@
             }
         }
 
+        .admin-menu-item-container-hidden {
+            display: none;
+        }
+
+        .admin-menu-item-container-displayed {
+            display: block;
+        }
+
         .admin-menu {
             .admin-menu-title {
                 @include titulo-general;
+                cursor: pointer;
             }
             .admin-menu-item-container {
                 width: 92%;
@@ -90,6 +109,14 @@
                     @include btn;
                 }
             }
+        }
+
+        .admin-reservations-info-content-hidden {
+            display: none;
+        }
+
+        .admin-reservations-info-content-displayed {
+            display: block;
         }
     }
 }

@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 778px) {
     // footer.scss
     .footer-container-wrapper {
         padding: 24px 0px;
@@ -12,7 +12,8 @@
 
     // header.scss
     .header-profile-admin-link,
-    .header-log-in-out-wrapper {
+    .header-log-in-out-wrapper,
+    .header-about-link {
         a {
             .big-screen {
                 display: none;
