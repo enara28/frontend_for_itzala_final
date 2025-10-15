@@ -57,6 +57,7 @@ class Menu extends Component {
         if (event.target.value > 0 || event.target.value === "") {
             this.setState({
                 [event.target.name]: event.target.value,
+                errorMessage: "",
             });
         }
     }
@@ -72,7 +73,8 @@ class Menu extends Component {
                 el !== "desserts" &&
                 el !== "loading" &&
                 el !== "quantity" &&
-                el !== "errorMessage"
+                el !== "errorMessage" &&
+                this.state[el] != ""
             ) {
                 return el;
             }
@@ -87,27 +89,32 @@ class Menu extends Component {
                 return `${el}: ${this.state[el]}`;
             });
 
-            if (confirm("¿Está tu pedido listo?")) {
-                axios
-                    .post(
-                        "http://localhost:5000/order",
-                        {
-                            user: this.props.userId,
-                            order: newOrder.toString(),
-                        },
-                        { withCredentials: true }
-                    )
-                    .then((response) => {
-                        console.log(response);
-                        this.props.navigation("/");
-                        alert("Tu pedido se ha procesado con éxito");
-                    })
-                    .catch((error) => {
-                        console.log("menu handleSubmit error", error),
-                            alert(
-                                "Ha habido un error con el pedido, vuelve a intentarlo o llama al número de contacto"
-                            );
-                    });
+            if (newOrder != "") {
+                confirm("¿Está tu pedido listo?"),
+                    axios
+                        .post(
+                            "http://localhost:5000/order",
+                            {
+                                user: this.props.userId,
+                                order: newOrder.toString(),
+                            },
+                            { withCredentials: true }
+                        )
+                        .then((response) => {
+                            console.log(response);
+                            this.props.navigation("/");
+                            alert("Tu pedido se ha procesado con éxito");
+                        })
+                        .catch((error) => {
+                            console.log("menu handleSubmit error", error),
+                                alert(
+                                    "Ha habido un error con el pedido, vuelve a intentarlo o llama al número de contacto"
+                                );
+                        });
+            } else {
+                this.setState({
+                    errorMessage: "No has elegido ningún producto",
+                });
             }
         }
     }

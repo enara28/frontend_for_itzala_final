@@ -16,6 +16,7 @@ export default class MenuItem extends Component {
             editId: "",
             successMessage: "",
             deleteMessage: "",
+            errorMessage: "",
         };
 
         this.deleteProduct = this.deleteProduct.bind(this);
@@ -62,14 +63,29 @@ export default class MenuItem extends Component {
     }
 
     handleSubmit(event) {
+        let checkPrice = () => {
+            if (this.state.editPrice < 1) {
+                return null;
+            } else {
+                return this.state.editPrice;
+            }
+        };
+        let checkCourse = () => {
+            if (this.state.editCourse > 0 && this.state.editCourse < 4) {
+                return this.state.editCourse;
+            } else {
+                return null;
+            }
+        };
+
         confirm("¿Estás segura de querer actualizar este producto?");
         axios
             .patch(
                 `http://localhost:5000/menu-item/${this.state.editId}`,
                 {
                     product: this.state.editProduct,
-                    course: this.state.editCourse,
-                    price: this.state.editPrice,
+                    course: checkCourse(),
+                    price: checkPrice(),
                 },
                 { withCredentials: true }
             )
@@ -82,10 +98,14 @@ export default class MenuItem extends Component {
                     editCourse: "",
                     editId: "",
                     successMessage: "Actualizado",
+                    errorMessage: "",
                 });
             })
-            .catch((error) =>
-                console.log("menu-item handleSubmit error", error)
+            .catch(
+                (error) => console.log("menu-item handleSubmit error", error),
+                this.setState({
+                    errorMessage: "Ha habido un error, revisa los datos",
+                })
             );
         event.preventDefault();
     }
@@ -96,9 +116,6 @@ export default class MenuItem extends Component {
             <div>
                 {this.state.editMode == false ? (
                     <div className="admin-menu-item-container">
-                        {this.state.deleteMessage ? (
-                            <div>{this.state.deleteMessage}</div>
-                        ) : null}
                         <div className="admin-menu-item">
                             <div className="menu-item-info">
                                 <div>
@@ -124,10 +141,16 @@ export default class MenuItem extends Component {
                             {this.state.successMessage ? (
                                 <div>{this.state.successMessage}</div>
                             ) : null}
+                            {this.state.deleteMessage ? (
+                                <div>{this.state.deleteMessage}</div>
+                            ) : null}
                         </div>
                     </div>
                 ) : (
                     <form onSubmit={this.handleSubmit} className="edit-item">
+                        {this.state.errorMessage ? (
+                            <div>{this.state.errorMessage}</div>
+                        ) : null}
                         <input
                             type="text"
                             name="editProduct"

@@ -41,13 +41,27 @@ export default class Admin extends Component {
     }
 
     handleSubmit(event) {
+        let checkPrice = () => {
+            if (this.state.price < 1) {
+                return null;
+            } else {
+                return this.state.price;
+            }
+        };
+        let checkCourse = () => {
+            if (this.state.course > 0 && this.state.course < 4) {
+                return this.state.course;
+            } else {
+                return null;
+            }
+        };
         axios
             .post(
                 "http://localhost:5000/menu-item",
                 {
                     product: this.state.product,
-                    course: this.state.course,
-                    price: this.state.price,
+                    course: checkCourse(),
+                    price: checkPrice(),
                 },
                 { withCredentials: true }
             )
@@ -59,7 +73,12 @@ export default class Admin extends Component {
                     price: "",
                 });
             })
-            .catch((error) => console.log("admin handleSubmit error", error));
+            .catch((error) => {
+                console.log("admin handleSubmit error", error),
+                    this.setState({
+                        errorMessage: "Ha habido un error, revisa los datos",
+                    });
+            });
         event.preventDefault();
     }
 
@@ -195,6 +214,9 @@ export default class Admin extends Component {
                                 <div className="create-new-product-title">
                                     Añadir nuevo plato al menú
                                 </div>
+                                {this.state.errorMessage ? (
+                                    <div>{this.state.errorMessage}</div>
+                                ) : null}
                                 <form
                                     className="create-new-product-form"
                                     onSubmit={this.handleSubmit}

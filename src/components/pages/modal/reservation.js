@@ -29,7 +29,7 @@ export default class Reservation extends Component {
 
     handleSubmit(event) {
         let quantityChecked = () => {
-            if (this.state.quantity == "") {
+            if (this.state.quantity == "" || this.state.quantity <= 0) {
                 return null;
             } else {
                 return this.state.quantity;
