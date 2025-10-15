@@ -46,6 +46,7 @@ export default class SingleOrder extends Component {
                 >
                     Pedido nº {this.props.order.id}:
                 </div>
+                <div>Usuario nº {this.props.order.order_user_id}</div>
                 <div className="single-order-content">
                     {this.state.desplegado == true ? this.trimOrders() : null}
                 </div>
