@@ -15,39 +15,50 @@ class Menu extends Component {
             desserts: [],
             loading: true,
             quantity: [],
+            errorMessage: "",
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getMenu() {
-        axios.get("http://localhost:5000/menu-item").then((response) => {
-            console.log(response.data);
-            let entree = [];
-            let main = [];
-            let dessert = [];
-            response.data.forEach((element) => {
-                if (element.tiempo == 1) {
-                    return entree.push(element);
-                } else if (element.tiempo == 2) {
-                    return main.push(element);
-                } else {
-                    return dessert.push(element);
-                }
+        axios
+            .get("http://localhost:5000/menu-item")
+            .then((response) => {
+                let entree = [];
+                let main = [];
+                let dessert = [];
+                response.data.forEach((element) => {
+                    if (element.course == 1) {
+                        return entree.push(element);
+                    } else if (element.course == 2) {
+                        return main.push(element);
+                    } else {
+                        return dessert.push(element);
+                    }
+                });
+                this.setState({
+                    fullMenu: response.data,
+                    entrees: entree,
+                    mains: main,
+                    desserts: dessert,
+                    loading: false,
+                });
+            })
+            .catch((error) => {
+                console.log("menu getMenu error", error);
+                this.setState({
+                    errorMessage: "Ha habido un error por nuestra parte",
+                });
             });
-            this.setState({
-                fullMenu: response.data,
-                entrees: entree,
-                mains: main,
-                desserts: dessert,
-                loading: false,
-            });
-        });
     }
+
     handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
+        if (event.target.value > 0 || event.target.value === "") {
+            this.setState({
+                [event.target.name]: event.target.value,
+            });
+        }
     }
 
     handleSubmit(event) {
@@ -60,37 +71,44 @@ class Menu extends Component {
                 el !== "mains" &&
                 el !== "desserts" &&
                 el !== "loading" &&
-                el !== "quantity"
+                el !== "quantity" &&
+                el !== "errorMessage"
             ) {
                 return el;
             }
         });
 
-        let newOrder = getSelecction.map((el) => {
-            return `${el}: ${this.state[el]}`;
-        });
+        if (getSelecction == false) {
+            this.setState({
+                errorMessage: "No has elegido ningún producto",
+            });
+        } else {
+            let newOrder = getSelecction.map((el) => {
+                return `${el}: ${this.state[el]}`;
+            });
 
-        if (confirm("¿Está tu pedido listo?")) {
-            axios
-                .post(
-                    "http://localhost:5000/order",
-                    {
-                        user: this.props.userId,
-                        order: newOrder.toString(),
-                    },
-                    { withCredentials: true }
-                )
-                .then((response) => {
-                    console.log(response);
-                    this.props.navigation("/");
-                    alert("Tu pedido se ha procesado con éxito");
-                })
-                .catch((error) => {
-                    console.log(error),
-                        alert(
-                            "Ha habido un error con el pedido, vuelve a intentarlo o llama al número de contacto"
-                        );
-                });
+            if (confirm("¿Está tu pedido listo?")) {
+                axios
+                    .post(
+                        "http://localhost:5000/order",
+                        {
+                            user: this.props.userId,
+                            order: newOrder.toString(),
+                        },
+                        { withCredentials: true }
+                    )
+                    .then((response) => {
+                        console.log(response);
+                        this.props.navigation("/");
+                        alert("Tu pedido se ha procesado con éxito");
+                    })
+                    .catch((error) => {
+                        console.log("menu handleSubmit error", error),
+                            alert(
+                                "Ha habido un error con el pedido, vuelve a intentarlo o llama al número de contacto"
+                            );
+                    });
+            }
         }
     }
 
@@ -103,19 +121,19 @@ class Menu extends Component {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                     </li>
                 );
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                         <input
                             placeholder="Cantidad"
-                            name={item.producto}
+                            name={item.product}
                             type="number"
-                            form="formulario"
-                            value={this.state.quantity[item.producto]}
+                            form="formulario" // ??
+                            value={this.state.quantity[item.product]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -126,19 +144,19 @@ class Menu extends Component {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                     </li>
                 );
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                         <input
                             placeholder="Cantidad"
-                            name={item.producto}
+                            name={item.product}
                             type="number"
                             form="formulario"
-                            value={this.state.quantity[item.producto]}
+                            value={this.state.quantity[item.product]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -149,19 +167,19 @@ class Menu extends Component {
             if (this.props.location == "modal") {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                     </li>
                 );
             } else {
                 return (
                     <li key={item.id}>
-                        {item.producto}: {item.precio} €
+                        {item.product}: {item.price} €
                         <input
                             placeholder="Cantidad"
-                            name={item.producto}
+                            name={item.product}
                             type="number"
                             form="formulario"
-                            value={this.state.quantity[item.producto]}
+                            value={this.state.quantity[item.product]}
                             onChange={this.handleChange}
                         />
                     </li>
@@ -170,12 +188,19 @@ class Menu extends Component {
         });
         return (
             <div className="menu-container">
-                {this.state.loading == true ? (
+                {this.state.loading == true && this.state.errorMessage == "" ? (
                     <div className="loading-icon">
                         <FontAwesomeIcon icon={faSpinner} spin />
                     </div>
+                ) : this.state.loading == true &&
+                  this.state.errorMessage != "" ? (
+                    <div>{this.state.errorMessage}</div>
                 ) : (
                     <div className="menu-wrapper">
+                        {this.state.loading == false &&
+                        this.state.errorMessage == "" ? null : (
+                            <div>{this.state.errorMessage}</div> //estilos
+                        )}
                         <div className="entrees">
                             <div className="menu-title">Entrantes</div>
                             <ul>{entrada}</ul>

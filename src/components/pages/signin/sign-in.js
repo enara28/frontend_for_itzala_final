@@ -11,6 +11,7 @@ class SignIn extends Component {
             user: "",
             password: "",
             email: "",
+            errorMessage: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,43 +21,65 @@ class SignIn extends Component {
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
+            errorMessage: "",
         });
     }
 
     handleSubmitClick(event) {
-        axios
-            .post("http://localhost:5000/user", {
-                user: this.state.user,
-                email: this.state.email,
-                password: this.state.password,
-            })
-            .then((response) => {
-                console.log(response);
-                axios
-                    .post(
-                        "http://localhost:5000/login",
-                        {
-                            email: this.state.email,
-                            password: this.state.password,
-                        },
-                        { withCredentials: true }
-                    )
-                    .then((response) => {
-                        this.setState({
-                            user: "",
-                            email: "",
-                            password: "",
-                        });
-                        this.props.handleSuccessfullLogin(response.data);
-                        console.log(response, "success");
-                        this.props.navigation("/");
-                    })
-                    .catch((error) => {
-                        console.log(error.response.data.msg, "error");
-                    });
-            })
-            .catch((error) => console.log(error));
         event.preventDefault();
+        if (
+            this.state.user === "" ||
+            this.state.email === "" ||
+            this.state.password === ""
+        ) {
+            this.setState({
+                errorMessage: "Rellena los compos vacíos",
+            });
+        } else {
+            axios
+                .post("http://localhost:5000/user", {
+                    user: this.state.user,
+                    email: this.state.email,
+                    password: this.state.password,
+                })
+                .then((response) => {
+                    axios
+                        .post(
+                            "http://localhost:5000/login",
+                            {
+                                email: this.state.email,
+                                password: this.state.password,
+                            },
+                            { withCredentials: true }
+                        )
+                        .then((response) => {
+                            this.setState({
+                                user: "",
+                                email: "",
+                                password: "",
+                            });
+                            this.props.handleSuccessfullLogin(response.data);
+                            alert("Tu cuenta se ha creado con éxito");
+                            this.props.navigation("/");
+                        })
+                        .catch((error) => {
+                            console.log(
+                                "sign-in handleSubmitClick response error",
+                                error
+                            ),
+                                this.setState({
+                                    errorMessage: error.response.data.msg,
+                                });
+                        });
+                    return response;
+                })
+                .catch((error) => {
+                    console.log("sign-in handleSubmitClick error", error),
+                        this.setState({
+                            errorMessage: error.response.data.msg,
+                        });
+                });
+        }
     }
 
     render() {
@@ -64,8 +87,11 @@ class SignIn extends Component {
             <div className="log-sign-in-container-wrapper">
                 <div className="log-sign-in-container">
                     <div className="log-sign-in-title">
-                        Enter a username, an email and a password
+                        Introduce nombre de usuario, email y contraseña
                     </div>
+                    {this.state.errorMessage ? (
+                        <div>{this.state.errorMessage}</div>
+                    ) : null}
                     <form
                         onSubmit={this.handleSubmitClick}
                         className="form-group-wrapper"
@@ -106,7 +132,7 @@ class SignIn extends Component {
                         </div>
                     </form>
                     <div className="log-sign-in-link">
-                        <Link to="/log-in">Log-in to an existing account</Link>
+                        <Link to="/log-in">Iniciar sesión con otra cuenta</Link>
                     </div>
                 </div>
             </div>

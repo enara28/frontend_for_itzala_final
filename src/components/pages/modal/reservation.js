@@ -8,11 +8,12 @@ export default class Reservation extends Component {
         super();
 
         this.state = {
-            cantidad: "",
-            comentario: "",
+            quantity: "",
+            comment: "",
             madeReservation: false,
             today: new Date(),
             date: new Date(),
+            errorMessage: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,47 +21,42 @@ export default class Reservation extends Component {
     }
 
     handleChange(event) {
-        if (event.target.value == "") {
-            this.setState({
-                [event.target.name]: null,
-            });
-        } else {
-            this.setState({
-                [event.target.name]: event.target.value,
-            });
-        }
+        this.setState({
+            [event.target.name]: event.target.value,
+            errorMessage: "",
+        });
     }
 
     handleSubmit(event) {
-        let cantidadChecked = () => {
-            if (this.state.cantidad == "") {
+        let quantityChecked = () => {
+            if (this.state.quantity == "") {
                 return null;
             } else {
-                return this.state.cantidad;
+                return this.state.quantity;
             }
         };
         axios
             .post(
-                "http://localhost:5000/reserva",
+                "http://localhost:5000/reservation",
                 {
                     day: this.state.date.toLocaleDateString("es"),
-                    cantidad: cantidadChecked(),
-                    comentario: this.state.comentario,
+                    quantity: quantityChecked(),
+                    comment: this.state.comment,
                     user: this.props.userId,
                 },
                 { withCredentials: true }
             )
             .then((response) => {
-                console.log(response),
-                    this.setState({
-                        madeReservation: true,
-                    });
+                this.setState({
+                    madeReservation: true,
+                });
+                return response;
             })
             .catch((error) => {
-                console.log(error),
-                    alert(
-                        "Se ha producido un error en la reserva, intentalo de nuevo o llama al número de contacto"
-                    );
+                console.log("reservation handleSubmit error", error),
+                    this.setState({
+                        errorMessage: error.response.data.msg,
+                    });
             });
         event.preventDefault();
     }
@@ -71,15 +67,20 @@ export default class Reservation extends Component {
                 {this.state.madeReservation === false ? (
                     <div className="reservation-modal">
                         <div className="reservation-title">
-                            Selecciona el día de la reserva y indica cuántos
+                            Selecciona el día de la reserva e indica cuántos
                             seréis
                         </div>
+                        {this.state.errorMessage ? (
+                            <div className="error-message">
+                                {this.state.errorMessage}
+                            </div>
+                        ) : null}
                         <form
                             className="reservation-inputs"
                             onSubmit={this.handleSubmit}
                         >
                             <div className="date-picker">
-                                <div>Selecciona un día</div>
+                                <div>Selecciona un día:</div>
                                 <DatePicker
                                     selected={this.state.date}
                                     onChange={(newDate) =>
@@ -92,35 +93,19 @@ export default class Reservation extends Component {
                                     )}
                                 />
                             </div>
-                            {/* <select
-                                className="day-selecction"
-                                type="text"
-                                name="day"
-                                value={this.state.day}
-                                onChange={this.handleChange}
-                                autoComplete="on"
-                            >
-                                <option>Lunes</option>
-                                <option>Martes</option>
-                                <option>Miércoles</option>
-                                <option>Jueves</option>
-                                <option>Viernes</option>
-                                <option>Sábado</option>
-                                <option>Domingo</option>
-                            </select> */}
                             <input
                                 type="number"
-                                name="cantidad"
+                                name="quantity"
                                 placeholder="¿Cuántas personas seréis?"
-                                value={this.state.cantidad}
+                                value={this.state.quantity}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             />
                             <textarea
                                 type="text"
-                                name="comentario"
+                                name="comment"
                                 placeholder="Añade alergias u otros comentarios"
-                                value={this.state.comentario}
+                                value={this.state.comment}
                                 onChange={this.handleChange}
                                 autoComplete="on"
                             />
@@ -140,10 +125,10 @@ export default class Reservation extends Component {
                                 {this.state.date.toLocaleDateString("es")}
                             </div>
                             <div>
-                                <b>Grupo:</b> {this.state.cantidad} personas
+                                <b>Grupo:</b> {this.state.quantity} personas
                             </div>
                             <div>
-                                <b>Comentarios:</b> {this.state.comentario}
+                                <b>Comentarios:</b> {this.state.comment}
                             </div>
                         </div>
                     </div>

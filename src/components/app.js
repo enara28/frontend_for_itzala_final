@@ -4,13 +4,13 @@ import axios from "axios";
 
 import Home from "./pages/home/home";
 import About from "./pages/about/about";
-import PerfilUsuario from "./pages/userProfile/perfil-usuario";
+import Profile from "./pages/admin-profile/profile";
 import LogIn from "./pages/login/log-in";
 import Order from "./pages/order/order";
 import SignIn from "./pages/signin/sign-in";
-import Admin from "./pages/admin/admin";
-import Header from "./header";
-import Footer from "./footer";
+import Admin from "./pages/admin-profile/admin";
+import Header from "./general/header";
+import Footer from "./general/footer";
 
 // Añadir lógica que te lleve a Log in
 // TODOs => revisar los post axios para evitar mandar elementos que rompan la app
@@ -21,7 +21,7 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            errorText: "",
+            errorMessage: "", // revisar si se está usando
             userId: "",
             status: "",
             loggedIn: "NO_LOGGED_IN",
@@ -36,18 +36,22 @@ export default class App extends Component {
             .then((response) => {
                 this.setState({
                     status: response.data.status,
-                    userId: response.data.usuario_id,
+                    userId: response.data.user_id,
                     loggedIn: response.data.logged_in,
                 });
-                console.log(response);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log("app verifyUser error", error);
+                this.setState({
+                    errorMessage: "Ha habido un error por nuestra parte",
+                });
+            });
     }
 
     handleSuccessfullLogin(data) {
-        const { usuario_id, status, logged_in } = data;
+        const { user_id, status, logged_in } = data;
         this.setState({
-            userId: usuario_id,
+            userId: user_id,
             status: status,
             loggedIn: logged_in,
         });
@@ -73,6 +77,9 @@ export default class App extends Component {
                         this.handleSuccessfullLogout()
                     }
                 />
+                {this.state.errorMessage ? (
+                    <div>{this.state.errorMessage}</div>
+                ) : null}
                 <Routes>
                     <Route
                         exact
@@ -121,11 +128,11 @@ export default class App extends Component {
                                 />
                             }
                         />
-                    ) : this.state.status == "usuario" ? (
+                    ) : this.state.status == "user" ? (
                         <Route
-                            path="/perfil-usuario"
+                            path="/profile"
                             element={
-                                <PerfilUsuario
+                                <Profile
                                     userId={this.state.userId}
                                     status={this.state.status}
                                     loggedIn={this.state.loggedIn}

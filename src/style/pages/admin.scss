@@ -8,17 +8,62 @@
         width: 50%;
         margin-bottom: 50px;
 
+        .single-order-container,
+        .single-user-reservations-container {
+            padding: 15px;
+            border: 2px solid $content-borders;
+            margin: 10px 0px;
+            .single-order-title {
+                cursor: pointer;
+                color: $lighter-title;
+                font-weight: 600;
+                font-size: 1em;
+                margin-bottom: 10px;
+                transition: ease-in-out 0.5s;
+
+                &:hover {
+                    color: $main-dark;
+                }
+            }
+            .single-order-content {
+                .single-order-element {
+                    padding: 3px 0px;
+                }
+            }
+        }
+
         .admin-users-reservations-info {
             .admin-users-reservations-info-title {
                 @include titulo-general;
+                border-bottom: 3px solid transparent;
+                border-radius: 4px;
+                justify-self: center;
                 cursor: pointer;
+                transition: ease-in-out 0.5s;
+                padding: 5px;
+                margin-top: 30px;
+
+                &:hover {
+                    border-bottom: 3px solid $main-dark;
+                    border-radius: 4px;
+                }
+                cursor: pointer;
+                justify-self: center;
             }
 
-            .admin-users-reservations-info-content-hidden {
+            .admin-users-info-content-hidden {
                 display: none;
             }
 
-            .admin-users-reservations-info-content-displayed {
+            .admin-users-info-content-displayed {
+                display: block;
+            }
+
+            .admin-orders-info-content-hidden {
+                display: none;
+            }
+
+            .admin-orders-info-content-displayed {
                 display: block;
             }
 
@@ -36,18 +81,29 @@
             }
         }
 
-        .admin-menu-item-container-hidden {
+        .admin-menu-info-content-hidden {
             display: none;
         }
 
-        .admin-menu-item-container-displayed {
+        .admin-menu-info-content-displayed {
             display: block;
         }
 
         .admin-menu {
             .admin-menu-title {
                 @include titulo-general;
+                border-bottom: 3px solid transparent;
+                border-radius: 4px;
+                justify-self: center;
                 cursor: pointer;
+                transition: ease-in-out 0.5s;
+                padding: 5px;
+                margin-top: 30px;
+
+                &:hover {
+                    border-bottom: 3px solid $main-dark;
+                    border-radius: 4px;
+                }
             }
             .admin-menu-item-container {
                 width: 92%;
@@ -62,10 +118,12 @@
                     margin-left: 0px;
 
                     .menu-item-icons {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 10px;
                         svg {
                             color: black;
                             font-size: 1.2em;
-                            margin-right: 10px;
                             cursor: pointer;
                             transition: ease-in-out 0.5s;
 

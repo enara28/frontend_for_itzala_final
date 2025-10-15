@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "../assets/logo/logo-512x512.png";
+import logo from "../../assets/logo/logo-512x512.png";
 import { Link } from "react-router";
 
 export default function () {

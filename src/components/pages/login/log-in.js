@@ -10,7 +10,7 @@ class LogIn extends Component {
         this.state = {
             email: "",
             password: "",
-            errorText: "",
+            errorMessage: "",
             userId: "",
             status: "",
             loggedIn: "NO_LOGGED_IN",
@@ -23,7 +23,7 @@ class LogIn extends Component {
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
-            errorText: "",
+            errorMessage: "",
         });
     }
 
@@ -39,20 +39,20 @@ class LogIn extends Component {
             )
             .then((response) => {
                 this.setState({
-                    userId: response.data.usuario_id,
+                    userId: response.data.user_id,
                     status: response.data.status,
                     loggedIn: response.data.logged_in,
                     email: "",
                     password: "",
                 });
                 this.props.handleSuccessfullLogin(response.data);
-                console.log(response, "success");
                 this.props.navigation("/");
             })
             .catch((error) => {
                 this.setState({
-                    errorText: error.response.data.msg,
+                    errorMessage: error.response.data.msg,
                 });
+                console.log("log-in handleSubmit error", error);
             });
         event.preventDefault();
     }
@@ -64,8 +64,8 @@ class LogIn extends Component {
                     <div className="log-sign-in-title">
                         Introduce tu email y tu contraseña
                     </div>
-                    {this.state.errorText != "" ? (
-                        <div>{this.state.errorText}</div>
+                    {this.state.errorMessage != "" ? (
+                        <div>{this.state.errorMessage}</div>
                     ) : null}
                     <form
                         onSubmit={this.handleSubmit}
@@ -98,7 +98,7 @@ class LogIn extends Component {
                         </div>
                     </form>
                     <div className="log-sign-in-link">
-                        <Link to="/sign-in">Create an account</Link>
+                        <Link to="/sign-in">Crea una cuenta nueva</Link>
                     </div>
                 </div>
             </div>

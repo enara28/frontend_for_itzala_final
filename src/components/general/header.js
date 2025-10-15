@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
-import logo from "../assets/logo/logo-512x512.png";
+import logo from "../../assets/logo/logo-512x512.png";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,7 +11,7 @@ import {
     faHandshake,
 } from "@fortawesome/free-solid-svg-icons";
 
-import withNavigation from "./helpers/withNavigation";
+import withNavigation from "../helpers/withNavigation";
 
 class Header extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class Header extends Component {
                 (response) => console.log(response),
                 this.props.navigation("/")
             )
-            .catch((error) => console.log(error));
+            .catch((error) => console.log("header logOut error", error));
         this.props.handleSuccessfullLogout();
     }
 
@@ -56,8 +56,8 @@ class Header extends Component {
                     <div className="header-profile-admin-link">
                         {this.props.loggedIn == "LOGGED_IN" &&
                         this.props.status &&
-                        this.props.status == "usuario" ? (
-                            <Link to="/perfil-usuario">
+                        this.props.status == "user" ? (
+                            <Link to="/profile">
                                 <div className="header-buttons">
                                     <div className="big-screen">Perfil</div>
                                     <div className="small-screen">

@@ -3,26 +3,29 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import User from "./user";
+import SingleUser from "./single-user";
 import MenuItem from "./menu-item";
 import SingleReservation from "./single-reservation";
+import SingleOrder from "./single-order";
 
 export default class Admin extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            producto: "",
-            tiempo: "",
-            precio: "",
-            errorText: "",
+            product: "",
+            course: "",
+            price: "",
+            errorMessage: "",
             users: [],
             menu: [],
-            newMenuItem: "",
+            orders: [],
+            newMenuItem: {},
             reservations: [],
-            displayUsers: "admin-users-reservations-info-content-hidden",
-            displayMenu: "admin-menu-item-container-hidden",
-            displayReservations: "admin-reservations-info-content-hidden",
+            ["displayusers"]: "admin-users-info-content-hidden",
+            ["displaymenu"]: "admin-menu-info-content-hidden",
+            ["displayreservations"]: "admin-reservations-info-content-hidden",
+            ["displayorders"]: "admin-orders-info-content-hidden",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +36,7 @@ export default class Admin extends Component {
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value,
-            errorText: "",
+            errorMessage: "",
         });
     }
 
@@ -42,34 +45,33 @@ export default class Admin extends Component {
             .post(
                 "http://localhost:5000/menu-item",
                 {
-                    producto: this.state.producto,
-                    tiempo: this.state.tiempo,
-                    precio: this.state.precio,
+                    product: this.state.product,
+                    course: this.state.course,
+                    price: this.state.price,
                 },
                 { withCredentials: true }
             )
             .then((response) => {
-                console.log(response),
-                    this.setState({
-                        newMenuItem: response.data,
-                        producto: "",
-                        tiempo: "",
-                        precio: "",
-                    });
+                this.setState({
+                    newMenuItem: response.data,
+                    product: "",
+                    course: "",
+                    price: "",
+                });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log("admin handleSubmit error", error));
         event.preventDefault();
     }
 
     getAllUsers() {
         axios
-            .get(`http://localhost:5000/usuarios`, { withCredentials: true })
+            .get(`http://localhost:5000/users`, { withCredentials: true })
             .then((response) => {
                 this.setState({
                     users: response.data.result,
                 });
             })
-            .catch((err) => console.log("error mio", err));
+            .catch((err) => console.log("admin getAllUsers error", err));
     }
 
     getMenuItems() {
@@ -79,7 +81,8 @@ export default class Admin extends Component {
                 this.setState({
                     menu: response.data,
                 });
-            });
+            })
+            .catch((error) => console.log("admin getMenuItems error", error));
     }
 
     getReservation() {
@@ -89,15 +92,19 @@ export default class Admin extends Component {
                 this.setState({
                     reservations: response.data,
                 });
-                console.log(response);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log("admin getReservation error", error));
     }
 
-    reservations() {
-        return this.state.reservations.map((reservation) => (
-            <SingleReservation key={reservation.id} reservation={reservation} />
-        ));
+    getOrders() {
+        axios
+            .get("http://localhost:5000/orders")
+            .then((response) => {
+                this.setState({
+                    orders: response.data,
+                });
+            })
+            .catch((error) => console.log("admin getOrders error", error));
     }
 
     componentDidMount() {
@@ -105,7 +112,20 @@ export default class Admin extends Component {
             this.getAllUsers();
             this.getMenuItems();
             this.getReservation();
+            this.getOrders();
         }
+    }
+
+    componentDidUpdate() {
+        if (this.state.newMenuItem !== "") {
+            this.getMenuItems();
+        }
+    }
+
+    usersInfo() {
+        return this.state.users.map((user) => {
+            return <SingleUser key={user.id} user={user} />;
+        });
     }
 
     menuItems() {
@@ -120,50 +140,29 @@ export default class Admin extends Component {
         });
     }
 
-    usersInfo() {
-        return this.state.users.map((user) => {
-            return <User key={user.id} user={user} />;
+    reservations() {
+        return this.state.reservations.map((reservation) => (
+            <SingleReservation key={reservation.id} reservation={reservation} />
+        ));
+    }
+
+    orders() {
+        return this.state.orders.map((order) => {
+            return <SingleOrder key={order.id} order={order} />;
         });
     }
 
     changeClass(title) {
         if (
-            this.state.displayUsers ==
-                "admin-users-reservations-info-content-hidden" &&
-            title == "users"
+            this.state[`display${title}`] ===
+            `admin-${title}-info-content-hidden`
         ) {
             this.setState({
-                displayUsers: "admin-users-reservations-info-content-displayed",
+                [`display${title}`]: `admin-${title}-info-content-displayed`,
             });
         } else {
             this.setState({
-                displayUsers: "admin-users-reservations-info-content-hidden",
-            });
-        }
-        if (
-            this.state.displayMenu == "admin-menu-item-container-hidden" &&
-            title == "menu"
-        ) {
-            this.setState({
-                displayMenu: "admin-menu-item-container-displayed",
-            });
-        } else {
-            this.setState({
-                displayMenu: "admin-menu-item-container-hidden",
-            });
-        }
-        if (
-            this.state.displayReservations ==
-                "admin-reservations-info-content-hidden" &&
-            title == "reservations"
-        ) {
-            this.setState({
-                displayReservations:
-                    "admin-reservations-info-content-displayed",
-            });
-        } else {
-            this.setState({
-                displayReservations: "admin-reservations-info-content-hidden",
+                [`display${title}`]: `admin-${title}-info-content-hidden`,
             });
         }
     }
@@ -177,9 +176,9 @@ export default class Admin extends Component {
                             className="admin-users-reservations-info-title"
                             onClick={(title) => this.changeClass("users")}
                         >
-                            Usuarios registrados:
+                            Usuarios registrados
                         </div>
-                        <div className={this.state.displayUsers}>
+                        <div className={this.state["displayusers"]}>
                             {this.usersInfo()}
                         </div>
                     </div>
@@ -190,33 +189,8 @@ export default class Admin extends Component {
                         >
                             Menú
                         </div>
-                        <div className={this.state.displayMenu}>
+                        <div className={this.state["displaymenu"]}>
                             {this.menuItems()}
-                            {this.state.newMenuItem != "" ? (
-                                <div>
-                                    <div className="admin-menu-item">
-                                        <div className="menu-item-info">
-                                            <div>
-                                                <b>Producto:</b>{" "}
-                                                {
-                                                    this.state.newMenuItem
-                                                        .producto
-                                                }
-                                            </div>
-                                            <div>
-                                                <b>Precio:</b>{" "}
-                                                {this.state.newMenuItem.precio}
-                                            </div>
-                                            <div>
-                                                <b>Tiempo:</b>{" "}
-                                                {this.state.newMenuItem.tiempo}
-                                            </div>
-                                        </div>
-                                        <div>Nuevo producto creado</div>
-                                    </div>
-                                </div>
-                            ) : null}
-
                             <div className="create-new-product-container">
                                 <div className="create-new-product-title">
                                     Añadir nuevo plato al menú
@@ -227,25 +201,25 @@ export default class Admin extends Component {
                                 >
                                     <input
                                         type="text"
-                                        name="producto"
+                                        name="product"
                                         placeholder="Producto"
-                                        value={this.state.producto}
+                                        value={this.state.product}
                                         onChange={this.handleChange}
                                         autoComplete="on"
                                     />
                                     <input
                                         type="number"
-                                        name="tiempo"
+                                        name="course"
                                         placeholder="Tiempo (1, 2 o 3)"
-                                        value={this.state.tiempo}
+                                        value={this.state.course}
                                         onChange={this.handleChange}
                                         autoComplete="on"
                                     />
                                     <input
                                         type="number"
-                                        name="precio"
+                                        name="price"
                                         placeholder="Precio"
-                                        value={this.state.precio}
+                                        value={this.state.price}
                                         onChange={this.handleChange}
                                         autoComplete="on"
                                     />
@@ -263,10 +237,21 @@ export default class Admin extends Component {
                                 this.changeClass("reservations")
                             }
                         >
-                            Reservas:
+                            Reservas
                         </div>
-                        <div className={this.state.displayReservations}>
+                        <div className={this.state["displayreservations"]}>
                             {this.reservations()}
+                        </div>
+                    </div>
+                    <div className="admin-users-reservations-info">
+                        <div
+                            className="admin-users-reservations-info-title"
+                            onClick={(title) => this.changeClass("orders")}
+                        >
+                            Pedidos
+                        </div>
+                        <div className={this.state["displayorders"]}>
+                            {this.orders()}
                         </div>
                     </div>
                 </div>

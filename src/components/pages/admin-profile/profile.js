@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import User from "../admin/user";
-import PedidoUsuario from "./pedido-usuario";
-import SingleReservation from "../admin/single-reservation";
+import SingleUser from "./single-user";
+import SingleOrder from "./single-order";
+import SingleReservation from "./single-reservation";
 
-export default class PerfilUsuario extends Component {
+export default class Perofile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,28 +17,26 @@ export default class PerfilUsuario extends Component {
 
     getProfile() {
         axios
-            .get(`http://localhost:5000/usuario/${this.props.userId}`, {
+            .get(`http://localhost:5000/user/${this.props.userId}`, {
                 withCredentials: true,
             })
             .then((response) => {
                 this.setState({
                     singleUser: response.data,
-                }),
-                    console.log(response.data);
+                });
             })
-            .catch((err) => console.log("error mio", err));
+            .catch((error) => console.log("profile getProfile error", error));
     }
 
     getOrders() {
         axios
-            .get(`http://localhost:5000/pedido/${this.props.userId}`)
+            .get(`http://localhost:5000/order/${this.props.userId}`)
             .then((response) => {
                 this.setState({
                     orders: response.data,
-                }),
-                    console.log(response.data);
+                });
             })
-            .catch((err) => console.log("error mio", err));
+            .catch((error) => console.log("profile getOrders error", error));
     }
 
     getReservations() {
@@ -47,14 +45,15 @@ export default class PerfilUsuario extends Component {
             .then((response) => {
                 this.setState({
                     reservations: response.data,
-                }),
-                    console.log(response.data);
+                });
             })
-            .catch((err) => console.log("error mio", err));
+            .catch((error) =>
+                console.log("profile getReservations error", error)
+            );
     }
 
     componentDidMount() {
-        if (this.props.status == "usuario") {
+        if (this.props.status == "user") {
             this.getProfile();
             this.getOrders();
             this.getReservations();
@@ -62,8 +61,8 @@ export default class PerfilUsuario extends Component {
     }
 
     showOrders() {
-        return this.state.orders.map((pedido) => {
-            return <PedidoUsuario key={pedido.id} pedido={pedido} />;
+        return this.state.orders.map((order) => {
+            return <SingleOrder key={order.id} order={order} />;
         });
     }
 
@@ -83,7 +82,7 @@ export default class PerfilUsuario extends Component {
             <div className="profile-container-wrapper">
                 <div className="profile-container">
                     <div className="user-info-container">
-                        <User user={this.state.singleUser} />
+                        <SingleUser user={this.state.singleUser} />
                     </div>
                     <div className="orders-reservations-info-container">
                         <div className="orders-reservations-title">

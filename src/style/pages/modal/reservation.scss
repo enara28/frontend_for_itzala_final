@@ -22,6 +22,7 @@
                 font-family: $main-font;
                 input {
                     width: 90%;
+                    margin: 0px;
                 }
             }
             input,
@@ -42,17 +43,24 @@
                 margin-bottom: 50px;
             }
         }
-
-        .reservation-success-message {
-            justify-items: center;
-            .reservation-success-message-title {
-                @include titulo-general;
-                margin-top: 0px;
-            }
-            .reservation-success-message-content {
-                font-family: $main-font;
-                font-size: 1em;
-            }
+    }
+    .error-message {
+        font-family: $main-font;
+        justify-self: center;
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: darkred;
+    }
+    .reservation-success-message {
+        justify-items: center;
+        .reservation-success-message-title {
+            @include titulo-general;
+            margin-top: 0px;
+        }
+        .reservation-success-message-content {
+            font-family: $main-font;
+            font-size: 1em;
         }
     }
 }

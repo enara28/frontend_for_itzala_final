@@ -63,7 +63,7 @@ export default class Home extends Component {
                         />
                     </div>
                     {this.props.loggedIn == "LOGGED_IN" &&
-                    this.props.status == "usuario" ? (
+                    this.props.status == "user" ? (
                         <div className="order-book-buttons">
                             <div className="book-table-link">
                                 <a onClick={this.handleModalReservation}>

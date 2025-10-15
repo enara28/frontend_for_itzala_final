@@ -24,6 +24,7 @@ export default class ModalBase extends Component {
         const customStyles = {
             content: {
                 width: "80%",
+                maxHeight: "90vh",
                 top: "50%",
                 left: "50%",
                 right: "auto",

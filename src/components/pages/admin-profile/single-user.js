@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-export default class User extends Component {
+export default class SingleUser extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const { usuario, email, id } = this.props.user;
+        const { user, email, id } = this.props.user;
 
         return (
             <div className="single-user-reservations-container">
@@ -15,7 +15,7 @@ export default class User extends Component {
                 </div>
                 <div className="single-user-reservations-content">
                     <div className="username">
-                        <b>Usuario:</b> {usuario}
+                        <b>Usuario:</b> {user}
                     </div>
                     <div className="email">
                         <b>Email:</b> {email}

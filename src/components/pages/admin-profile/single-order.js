@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class PedidoUsuario extends Component {
+export default class SingleOrder extends Component {
     constructor(props) {
         super(props);
 
@@ -13,8 +13,8 @@ export default class PedidoUsuario extends Component {
     }
 
     trimOrders() {
-        let pedido_recortado = this.props.pedido.pedido.split(",");
-        return pedido_recortado.map((el, idx) => (
+        let trimed_order = this.props.order.order.split(",");
+        return trimed_order.map((el, idx) => (
             <div key={idx} className="single-order-element">
                 {el}
             </div>
@@ -44,7 +44,7 @@ export default class PedidoUsuario extends Component {
                             : () => this.closeDropDown()
                     }
                 >
-                    Pedido nº {this.props.pedido.id}:
+                    Pedido nº {this.props.order.id}:
                 </div>
                 <div className="single-order-content">
                     {this.state.desplegado == true ? this.trimOrders() : null}

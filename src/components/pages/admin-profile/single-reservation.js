@@ -6,7 +6,7 @@ export default class SingleReservation extends Component {
     }
 
     render() {
-        const { id, día, cantidad, comentario, reserva_usuario_id } =
+        const { id, date, quantity, comment, reservation_user_id } =
             this.props.reservation;
 
         return (
@@ -16,16 +16,16 @@ export default class SingleReservation extends Component {
                 </div>
                 <div className="single-user-reservations-content">
                     <div>
-                        <b>Usuario:</b> {reserva_usuario_id}
+                        <b>Usuario:</b> {reservation_user_id}
                     </div>
                     <div className="username">
-                        <b>Día:</b> {día}
+                        <b>Día:</b> {date}
                     </div>
                     <div className="email">
-                        <b>Grupo:</b> {cantidad} personas
+                        <b>Grupo:</b> {quantity} personas
                     </div>
                     <div className="email">
-                        <b>Comentarios:</b> {comentario}
+                        <b>Comentarios:</b> {comment}
                     </div>
                 </div>
             </div>
