@@ -23,7 +23,7 @@ class Menu extends Component {
 
     getMenu() {
         axios
-            .get("http://localhost:5000/menu-item")
+            .get("https://enara28.pythonanywhere.com/menu-item")
             .then((response) => {
                 let entree = [];
                 let main = [];
@@ -93,7 +93,7 @@ class Menu extends Component {
                 confirm("¿Está tu pedido listo?"),
                     axios
                         .post(
-                            "http://localhost:5000/order",
+                            "https://enara28.pythonanywhere.com/order",
                             {
                                 user: this.props.userId,
                                 order: newOrder.toString(),

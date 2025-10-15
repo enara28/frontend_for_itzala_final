@@ -37,7 +37,7 @@ export default class Reservation extends Component {
         };
         axios
             .post(
-                "http://localhost:5000/reservation",
+                "https://enara28.pythonanywhere.com/reservation",
                 {
                     day: this.state.date.toLocaleDateString("es"),
                     quantity: quantityChecked(),

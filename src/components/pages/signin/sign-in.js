@@ -37,7 +37,7 @@ class SignIn extends Component {
             });
         } else {
             axios
-                .post("http://localhost:5000/user", {
+                .post("https://enara28.pythonanywhere.com/user", {
                     user: this.state.user,
                     email: this.state.email,
                     password: this.state.password,
@@ -45,7 +45,7 @@ class SignIn extends Component {
                 .then((response) => {
                     axios
                         .post(
-                            "http://localhost:5000/login",
+                            "https://enara28.pythonanywhere.com/login",
                             {
                                 email: this.state.email,
                                 password: this.state.password,

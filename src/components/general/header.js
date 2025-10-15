@@ -24,7 +24,11 @@ class Header extends Component {
 
     logOut() {
         axios
-            .post("http://localhost:5000/logout", {}, { withCredentials: true })
+            .post(
+                "https://enara28.pythonanywhere.com/logout",
+                {},
+                { withCredentials: true }
+            )
             .then(
                 (response) => console.log(response),
                 this.props.navigation("/")

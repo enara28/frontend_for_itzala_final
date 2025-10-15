@@ -28,7 +28,7 @@ export default class MenuItem extends Component {
     deleteProduct(id) {
         confirm("¿Estás segura de querer eliminar este producto?");
         axios
-            .delete(`http://localhost:5000/menu-item/${id}`, {
+            .delete(`https://enara28.pythonanywhere.com/menu-item/${id}`, {
                 withCredentials: true,
             })
             .then(this.setState({ deleteMessage: "Porducto eliminado" }))
@@ -39,7 +39,7 @@ export default class MenuItem extends Component {
 
     productToEdit(id) {
         axios
-            .get(`http://localhost:5000/menu-item/${id}`, {
+            .get(`https://enara28.pythonanywhere.com/menu-item/${id}`, {
                 withCredentials: true,
             })
             .then((response) => {
@@ -81,7 +81,7 @@ export default class MenuItem extends Component {
         confirm("¿Estás segura de querer actualizar este producto?");
         axios
             .patch(
-                `http://localhost:5000/menu-item/${this.state.editId}`,
+                `https://enara28.pythonanywhere.com/menu-item/${this.state.editId}`,
                 {
                     product: this.state.editProduct,
                     course: checkCourse(),

@@ -57,7 +57,7 @@ export default class Admin extends Component {
         };
         axios
             .post(
-                "http://localhost:5000/menu-item",
+                "https://enara28.pythonanywhere.com/menu-item",
                 {
                     product: this.state.product,
                     course: checkCourse(),
@@ -84,7 +84,9 @@ export default class Admin extends Component {
 
     getAllUsers() {
         axios
-            .get(`http://localhost:5000/users`, { withCredentials: true })
+            .get(`https://enara28.pythonanywhere.com/users`, {
+                withCredentials: true,
+            })
             .then((response) => {
                 this.setState({
                     users: response.data.result,
@@ -95,7 +97,9 @@ export default class Admin extends Component {
 
     getMenuItems() {
         axios
-            .get(`http://localhost:5000/menu-item`, { withCredentials: true })
+            .get(`https://enara28.pythonanywhere.com/menu-item`, {
+                withCredentials: true,
+            })
             .then((response) => {
                 this.setState({
                     menu: response.data,
@@ -106,7 +110,7 @@ export default class Admin extends Component {
 
     getReservation() {
         axios
-            .get("http://localhost:5000/reservation")
+            .get("https://enara28.pythonanywhere.com/reservation")
             .then((response) => {
                 this.setState({
                     reservations: response.data,
@@ -117,7 +121,7 @@ export default class Admin extends Component {
 
     getOrders() {
         axios
-            .get("http://localhost:5000/orders")
+            .get("https://enara28.pythonanywhere.com/orders")
             .then((response) => {
                 this.setState({
                     orders: response.data,

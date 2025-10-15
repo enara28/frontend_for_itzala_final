@@ -32,7 +32,9 @@ export default class App extends Component {
 
     verifyUser() {
         axios
-            .get("http://localhost:5000/verify", { withCredentials: true })
+            .get("https://enara28.pythonanywhere.com/verify", {
+                withCredentials: true,
+            })
             .then((response) => {
                 this.setState({
                     status: response.data.status,
