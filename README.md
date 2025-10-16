@@ -5,6 +5,8 @@ This app provides the basic management sistem of a restaurant. The admin has the
 The user can create an account, place an order and make a reservation. It can also see its user info, its orders and reservations. Same as the admin can navigate to the menu modal and the about page.
 Here it is a basic use case diagram:
 
+<img width="744" height="500" alt="Image" src="https://github.com/user-attachments/assets/7c7b9b54-a1f9-4f61-a807-8ad4173580e1" />
+
 I will present every element on the src folder:
 
 ## main.js
