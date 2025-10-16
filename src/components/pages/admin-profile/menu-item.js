@@ -77,13 +77,20 @@ export default class MenuItem extends Component {
                 return null;
             }
         };
+        let checkProduct = () => {
+            if (this.state.editProduct == "") {
+                return null;
+            } else {
+                return this.state.editProduct;
+            }
+        };
 
         confirm("¿Estás segura de querer actualizar este producto?");
         axios
             .patch(
                 `https://enara28.pythonanywhere.com/menu-item/${this.state.editId}`,
                 {
-                    product: this.state.editProduct,
+                    product: checkProduct(),
                     course: checkCourse(),
                     price: checkPrice(),
                 },

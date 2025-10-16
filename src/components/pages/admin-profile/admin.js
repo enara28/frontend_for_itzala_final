@@ -55,11 +55,18 @@ export default class Admin extends Component {
                 return null;
             }
         };
+        let checkProduct = () => {
+            if (this.state.product == "") {
+                return null;
+            } else {
+                return this.state.product;
+            }
+        };
         axios
             .post(
                 "https://enara28.pythonanywhere.com/menu-item",
                 {
-                    product: this.state.product,
+                    product: checkProduct(),
                     course: checkCourse(),
                     price: checkPrice(),
                 },
