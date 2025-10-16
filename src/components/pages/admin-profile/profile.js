@@ -34,7 +34,8 @@ export default class Perofile extends Component {
     getOrders() {
         axios
             .get(
-                `https://enara28.pythonanywhere.com/order/${this.props.userId}`
+                `https://enara28.pythonanywhere.com/order/${this.props.userId}`,
+                { withCredentials: true }
             )
             .then((response) => {
                 this.setState({
@@ -47,7 +48,8 @@ export default class Perofile extends Component {
     getReservations() {
         axios
             .get(
-                `https://enara28.pythonanywhere.com/reservation/${this.props.userId}`
+                `https://enara28.pythonanywhere.com/reservation/${this.props.userId}`,
+                { withCredentials: true }
             )
             .then((response) => {
                 this.setState({

@@ -117,7 +117,9 @@ export default class Admin extends Component {
 
     getReservation() {
         axios
-            .get("https://enara28.pythonanywhere.com/reservation")
+            .get("https://enara28.pythonanywhere.com/reservation", {
+                withCredentials: true,
+            })
             .then((response) => {
                 this.setState({
                     reservations: response.data,
@@ -128,7 +130,9 @@ export default class Admin extends Component {
 
     getOrders() {
         axios
-            .get("https://enara28.pythonanywhere.com/orders")
+            .get("https://enara28.pythonanywhere.com/orders", {
+                withCredentials: true,
+            })
             .then((response) => {
                 this.setState({
                     orders: response.data,
