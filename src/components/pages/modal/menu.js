@@ -101,9 +101,9 @@ class Menu extends Component {
                             { withCredentials: true }
                         )
                         .then((response) => {
-                            console.log(response);
                             this.props.navigation("/");
                             alert("Tu pedido se ha procesado con éxito");
+                            return response;
                         })
                         .catch((error) => {
                             console.log("menu handleSubmit error", error),

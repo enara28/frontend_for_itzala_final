@@ -29,10 +29,7 @@ class Header extends Component {
                 {},
                 { withCredentials: true }
             )
-            .then(
-                (response) => console.log(response),
-                this.props.navigation("/")
-            )
+            .then(this.props.navigation("/"))
             .catch((error) => console.log("header logOut error", error));
         this.props.handleSuccessfullLogout();
     }

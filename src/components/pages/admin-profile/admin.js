@@ -92,7 +92,7 @@ export default class Admin extends Component {
                     users: response.data.result,
                 });
             })
-            .catch((err) => console.log("admin getAllUsers error", err));
+            .catch((error) => console.log("admin getAllUsers error", error));
     }
 
     getMenuItems() {
